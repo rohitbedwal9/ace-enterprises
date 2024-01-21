@@ -15,31 +15,31 @@ const data = [
     },
     {
         id: 3,
-        image: "https://cdn.pixabay.com/photo/2016/04/28/15/50/construction-site-1359136_640.jpg",
+        image: "https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg",
         title: "Project 3",
         desc: "Buiding"
     },
     {
         id: 4,
-        image: "https://cdn.pixabay.com/photo/2016/04/28/15/50/construction-site-1359136_640.jpg",
+        image: "https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg",
         title: "Project 4",
         desc: "Buiding"
     },
     {
         id: 5,
-        image: "https://cdn.pixabay.com/photo/2016/04/28/15/50/construction-site-1359136_640.jpg",
+        image: "https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg",
         title: "Project 5",
         desc: "Buiding"
     },
     {
         id: 6,
-        image: "https://cdn.pixabay.com/photo/2016/04/28/15/50/construction-site-1359136_640.jpg",
+        image: "https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg",
         title: "Project 6",
         desc: "Buiding"
     },
     {
         id: 7,
-        image: "https://cdn.pixabay.com/photo/2016/04/28/15/50/construction-site-1359136_640.jpg",
+        image: "https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg",
         title: "Project 7",
         desc: "Buiding"
     },
