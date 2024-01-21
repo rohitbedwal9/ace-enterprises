@@ -47,7 +47,7 @@ const data = [
 ]
 
 
-export default function Projects() {
+export const Projects=() =>{
     return (
         <div className='sm:m-10'>
             <div className='mb-10  text-center '>

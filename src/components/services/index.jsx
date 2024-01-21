@@ -3,7 +3,7 @@ import { FaHome } from "react-icons/fa";
 import { RiGovernmentFill } from "react-icons/ri";
 import { FaBuilding } from "react-icons/fa";
 
-export default function Services() {
+export const Services=() =>{
     return (
         <div>
             <div className=' mb-10  text-center '>

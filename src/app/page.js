@@ -1,7 +1,4 @@
-import Image from "next/image";
-import { Navbar } from "@/components";
-import Projects from "@/components/projects";
-import Services from "@/components/services";
+import { Navbar, Projects, Services, Footer } from "@/components";
 
 export default function Home() {
   return (
@@ -9,6 +6,7 @@ export default function Home() {
       <Navbar />
       <Projects />
       <Services />
+      <Footer />
     </main>
   );
 }
