@@ -109,11 +109,11 @@ export const google = async () => {
     console.log('userData :>> ', userData);
     const data = userData.user
 
-    await set(ref(database, 'users/' + data.uid), {
-        username: data.displayName,
-        email: data.email,
-        profile_picture: data.photoURL
-    });
+    // await set(ref(database, 'users/' + data.uid), {
+    //     username: data.displayName,
+    //     email: data.email,
+    //     profile_picture: data.photoURL
+    // });
 
 }
 export const facebook = async () => {
