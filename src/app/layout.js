@@ -5,8 +5,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Ace-Enterprises",
-  description: "Created by Binary-Bridge",
+  title: "Ace Enterprises",
+  description: "created by binary bridge",
 };
 
 export default function RootLayout({ children }) {

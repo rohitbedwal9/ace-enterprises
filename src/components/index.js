@@ -1,4 +1,5 @@
 export {Navbar} from "./navbar"
 export {Projects} from "./projects"
 export {Services} from "./services"
+export {Contact} from "./contact"
 export {Footer} from "./footer"
