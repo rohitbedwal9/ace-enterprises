@@ -5,15 +5,15 @@ import { FaBuilding } from "react-icons/fa";
 
 export const Services=() =>{
     return (
-        <div>
-            <div className=' mb-10  text-center '>
-                <h1 className='mt-10 text-2xl sm:text-4xl text-gray-900  underline	decoration-yellow-400 decoration-42 underline-offset-[15px]'>
+        <div className='my-4'>
+            <div className='flex justify-center align-center'>
+                <h1 className='uppercase text-xl sm:text-3xl tracking-tight font-bold text-center text-gray-900 dark:text-white  border-b-4 border-yellow-500 w-max'>
                     Services
                 </h1>
             </div>
 
-            <div className='sm:m-10 mb-10   bg-[url("https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNvbnN0cnVjdGlvbnxlbnwwfHwwfHx8MA%3D%3D")] bg-center bg-cover bg-no-repeat '>
-                <div className=' bg-gradient-to-t p-5 from-[#243c5a] text-center '>
+            <div className='m-5 sm:m-10 mb-10   bg-[url("https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNvbnN0cnVjdGlvbnxlbnwwfHwwfHx8MA%3D%3D")] bg-center bg-cover bg-no-repeat '>
+                <div className=' bg-gradient-to-t p-5 from-[#243c5a] text-center backdrop-blur-md  '>
 
 
 
@@ -23,7 +23,7 @@ export const Services=() =>{
                         <div className=''>
                             <div className='flex justify-center'>
                                 <div className='  bg-white  p-3 rounded-full '>
-                                    <div className='  p-7 bg-gradient-to-b from-yellow-400 to-yellow-500 rounded-full'>
+                                    <div className='  p-7 bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-full'>
                                         <FaHome size={100} color='white' />
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@ export const Services=() =>{
                         <div className=''>
                             <div className='flex justify-center'>
                                 <div className='  bg-white  p-3 rounded-full '>
-                                    <div className='  p-7 bg-gradient-to-b from-yellow-400 to-yellow-500 rounded-full'>
+                                    <div className='  p-7 bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-full'>
                                         <FaBuilding size={100} color='white' />
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@ export const Services=() =>{
                         <div className=''>
                             <div className='flex justify-center'>
                                 <div className='  bg-white  p-3 rounded-full '>
-                                    <div className='  p-7 bg-gradient-to-b from-yellow-400 to-yellow-500 rounded-full'>
+                                    <div className='  p-7 bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-full'>
                                         <RiGovernmentFill size={100} color='white' />
                                     </div>
                                 </div>

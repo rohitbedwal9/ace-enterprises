@@ -10,7 +10,7 @@ export const Footer = () => {
     <main className="pt-4 sm:pt-14 h-50 bg-gray-900 text-white shadow-lg w-full flex flex-col gap-2 sm:gap-0 pb-10">
       <div className="flex flex-col sm:flex-row sm:justify-evenly gap-6 px-10 sm:0">
         <div className="flex flex-col justify-center gap-2 self-start">
-          <div className="logo text-xl sm:text-3xl font-semibold text-yellow-300">Ace-Enterprises</div>
+          <div className="logo text-xl sm:text-3xl font-semibold text-yellow-500">Ace-Enterprises</div>
           <div className="address sm:text-md w-[12em]">
             803, padfrw, 240932, Uttar Pradesh
           </div>
@@ -27,7 +27,7 @@ export const Footer = () => {
           </div>
         </div>
         <div>
-          <div className="text-xl sm:text-2xl font-bold text-yellow-300">Menu</div>
+          <div className="text-xl sm:text-2xl font-bold text-yellow-500">Menu</div>
           <div className="flex flex-col mt-2 gap-2">
             <Link href="/">Home</Link>
             <Link href="/products">Projects</Link>
@@ -37,7 +37,7 @@ export const Footer = () => {
           </div>
         </div>
         <div>
-          <div className="text-xl sm:text-2xl font-bold text-yellow-300">Projects</div>
+          <div className="text-xl sm:text-2xl font-bold text-yellow-500">Projects</div>
           <div className="flex flex-col mt-2 gap-2">
             <Link href="/">Home</Link>
             <Link href="/products">Projects</Link>
