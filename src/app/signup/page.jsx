@@ -1,6 +1,6 @@
 "use client"
 
-import { EmailVerify, register } from '@/utils/firebaseMethods';
+import { EmailVerify, register, google } from '@/utils/firebaseMethods';
 import React, { useState } from 'react';
 
 const SignUp = () => {
@@ -14,10 +14,9 @@ const SignUp = () => {
         console.log(email, password, name)
 
         await EmailVerify()
-        const msg = await register(email, password, name,number)
+        const msg = await register(email, password, name, number)
         console.log(msg)
     }
-
 
     return (
         <>
@@ -128,11 +127,19 @@ const SignUp = () => {
                                 >
                                     Create an account
                                 </button>
+                                <button
+                                    onClick={() => google()}
+                                    className="w-full text-white bg-green-400 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-400 dark:hover:bg-orange-500 dark:focus:ring-primary-800"
+                                >
+                                    Google
+                                </button>
+
                                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                     Already have an account?{' '}
                                     <a href="/login" className="font-medium text-orange-400 hover:underline dark:text-orange-400">
                                         Login
                                     </a>
+
                                 </p>
                             </form>
                         </div>
