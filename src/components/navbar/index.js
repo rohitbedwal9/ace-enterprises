@@ -47,7 +47,7 @@ export const Navbar = () => {
                     <Link href="/faq" className="bg-transparent hover:bg-white hover:dark:bg-gray-600 px-2 rounded-md focus:opacity-70">FAQ</Link>
                 </div>
                 <div>
-                    <Link href="/login" className="flex gap-2 items-center bg-white dark:text-black hover:opacity-80 p-2 rounded-lg text-lg shadow-lg ">
+                    <Link href="/signup" className="flex gap-2 items-center bg-white dark:text-black hover:opacity-80 p-2 rounded-lg text-lg shadow-lg ">
                         <span>Get Started</span>
                     </Link>  
                 </div>
