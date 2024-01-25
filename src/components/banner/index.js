@@ -1,22 +1,35 @@
 import { Navbar } from "../navbar";
 import Image from "next/image";
-
+import { Statics } from "../statics";
 
 export const Banner = () => {
-    return (
-    <div className="bg-[url('/images/construction-background.jpeg')] backdrop-blur-sm bg-cover bg-no-repeat  w-screen ">
-            <div className="backdrop-blur-md w-full  flex flex-col gap-12">
-                <Navbar />
-                <div className="banner flex flex-col-reverse md:flex-row items-center sm:justify-center my-12 pb-10 gap-10 md:gap-28  ">
-                    <div className="content  flex flex-col gap-5 justify-center items-center md:items-start">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white flex flex-col gap-2 justify-center items-center md:items-start"><span ><span className="text-yellow-500">Building </span><span className="">Dreams</span></span> <span className="">Into <span className="text-yellow-500">Reality</span></span></h1>
-                        <div className=""><button className="bg-yellow-500 text-black font-bold px-5 py-3 rounded-lg flex gap-2 items-center"><span>Get Started</span></button></div>
-                    </div>
-                    <div className="image justify-center items-center">
-                        <Image src="/images/Vector-Construction.jpg" className="rounded-2xl w-[300px] h-[300px]  md:w-[420px] md:h-[420px]" width={420} height={420} alt="Banner" />
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="w-full md:h-screen gap-2 bg-white">
+      <div className=" bg-yellow-300 text-black h-[70%] flex flex-col  ">
+        <Navbar />
+        <div className="content ml-20 md:ml-40 mb-20  mt-20 md:mt-24 flex flex-col gap-5 justify-center items-start">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold  flex flex-col gap-2 justify-center items-start">
+            <span>Building Dreams</span> <span className="">Into Reality</span>
+          </h1>
+          <div className="flex gap-2">
+            <button className="bg-black hover:bg-gray-900 text-white font-bold px-5 py-3 rounded-3xl flex gap-2 items-start">
+              <span>Register</span>
+            </button>
+            <button className="bg-transparent border-2 text-black border-black hover:text-white hover:bg-gray-900  font-bold px-5 py-3 rounded-3xl flex gap-2 items-center">
+              <span>Contact</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="image flex md:absolute relative bottom-10 md:top-48 md:right-16 justify-center md:justify-end w-full">
+        <Image
+          src="/images/construction-worker.jpg"
+          className=" w-[250px] h-[300px] rounded-xl md:w-[400px] md:h-[500px] "
+          width={400}
+          height={500}
+          alt="Banner"
+        />
+      </div>
     </div>
-    );
-}
+  );
+};
