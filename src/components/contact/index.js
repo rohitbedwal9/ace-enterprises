@@ -5,7 +5,7 @@ import { FaWhatsapp } from "react-icons/fa";
 export const Contact = () => {
   return (
 
-    <div className='w-full p-5 lg:p-10  '>
+    <div className='w-full p-5 lg:p-10' id="contact">
       
       <div className='w-[100%] h-full  lg:flex '>
 
