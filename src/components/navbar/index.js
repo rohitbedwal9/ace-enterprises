@@ -15,7 +15,7 @@ export const Navbar = () => {
         setIsLogin(!isLogin);
     }
     return (
-        < div className="flex flex-col  w-full">
+        < div className="flex flex-col w-full">
             <div className="navbar flex bg-transparent justify-between items-center w-full pt-5 px-10 sm:py-6  " >
                 <div className="md:hidden">
                     <button style={{'display':showMe?'none':'block'}} title='Toggle Menu' onClick={toggle}>
@@ -25,7 +25,7 @@ export const Navbar = () => {
                         <CgClose size={25} />
                     </button>
                 </div>
-                <div className="logo hidden md:block text-xl sm:text-3xl  font-bold select-none">
+                <div className="logo hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold select-none">
                     Ace-Enterprises
                 </div>
                 <div className="hidden md:flex text-lg w-[30%] justify-between bg-gray-900 p-2 rounded-3xl text-white">
@@ -45,9 +45,9 @@ export const Navbar = () => {
                 
             </div>
             <div style={{display:showMe?"block":"none",
-            }} className="bg-gray-900 text-white w-max  rounded-xl p-10 z-10 fixed top-20 left-10" >
+            }} className="bg-gray-900 text-white w-max  rounded-xl p-10 z-10 fixed top-20 left-1" >
                 <div className='flex flex-col     gap-6 text-lg font-semibold'>
-                    <div className='w-max  text-xl     text-yellow-300'>
+                    <div className='w-max  text-xl  text-yellow-300'>
                         Ace-Enterprises
                     </div>
                     <Link href='/' className=' border-b-2 border-white  w-max hover:text-gray-300'>Home</Link>
