@@ -1,4 +1,4 @@
-import {Banner ,Projects, Services, Contact, Footer, Statics} from "@/components";
+import { Banner, Statics, Projects, Services, Contact, Footer} from '@/components';
 
 export default function Home() {
   return (
