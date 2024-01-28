@@ -1,5 +1,22 @@
+"use client";
+
+import { login } from '@/utils/firebaseMethods';
+import React, { useState } from 'react';
 
 export default function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    async function signIn (e) {
+        e.preventDefault();
+        const res = await login(email, password);
+        if (res == 'success') {
+           alert("you signed in as " + email);
+        }else{
+            alert(error);
+        }
+    }
+
     return (
         <>
             <section className="bg-white h-screen">
@@ -9,7 +26,7 @@ export default function Login() {
                             <h1 className="text-center text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl ">
                                 Login
                             </h1>
-                            <form className="space-y-4 md:space-y-6" action="#">
+                            <form className="space-y-4 md:space-y-6" onSubmit={ (e)=> signIn(e) } action="#">
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">
                                         Your email
@@ -18,8 +35,8 @@ export default function Login() {
                                         type="email"
                                         name="email"
                                         id="email"
-                                      
-                                        
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         className=" bg-gray-700 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                                         placeholder="name@company.com"
                                         required
@@ -38,6 +55,8 @@ export default function Login() {
                                         type="password"
                                         name="password"
                                         id="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                         placeholder="••••••••"
                                         className="mt-2 bg-gray-700 border border-gray-300 text-white sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                                         required
