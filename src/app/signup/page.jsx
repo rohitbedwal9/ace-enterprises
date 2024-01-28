@@ -13,9 +13,13 @@ const SignUp = () => {
         e.preventDefault()
         console.log(email, password, name)
 
-        await EmailVerify()
-        const msg = await register(email, password, name, number)
-        console.log(msg)
+        const res= await EmailVerify()
+        const res2 = await register(email, password, name, number)
+        if (res2 == 'success' && res == 'success') {
+            alert("you are registered as " + email);
+        }else{
+            alert(res2 +" "+ res);
+        }
 
     }
 

@@ -5,8 +5,8 @@ export default function Home() {
     <main className="flex flex-col items-center">
       <Banner />
       <Statics />
-      <Projects />
       <Services />
+      <Projects />
       <Contact/>
       <Footer />
     </main>
