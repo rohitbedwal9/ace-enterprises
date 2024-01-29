@@ -11,7 +11,7 @@ export default function TempPage(){
               <span className='bg-green-500 rounded-full w-4 h-4'></span>
             </div>
             <div className='flex flex-col items-center '>
-            <h1 className="text-xl sm:text-3xl flex flex-row gap-[1px] items-center font-bold"><span>Comming Soon</span><Image src="/images/sand-timer.png" width={50} height={50} alt='sand-timer'/></h1>
+            <h1 className="text-xl sm:text-3xl flex flex-row gap-[1px] items-center font-bold"><span>Coming Soon</span><Image src="/images/sand-timer.png" width={50} height={50} alt='sand-timer'/></h1>
             <p className="text-md sm:text-lg text-gray-300 rounded-lg text-center">We are working hard to launch this site soon.</p>
         </div>
         </div>

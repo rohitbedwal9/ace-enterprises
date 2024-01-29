@@ -13,7 +13,6 @@ export const register = async (email, pwd, name, number) => {
         await set(ref(database, 'users/' + data.uid), {
             name: name,
             email: email,
-            password: pwd,
             number: number,
             profile_picture: defaultImg
         });
