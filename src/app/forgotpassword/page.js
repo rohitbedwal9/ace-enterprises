@@ -27,7 +27,6 @@ export default function ForgotPassword() {
 
                                 <button
                                     type="submit"
-                                    
                                     className="w-full text-black bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                                 >
                                     Submit

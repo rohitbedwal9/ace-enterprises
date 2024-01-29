@@ -1,4 +1,4 @@
-import React from 'react'
+
 const data = [
     {
         id: 1,
@@ -16,42 +16,44 @@ const data = [
         id: 3,
         image: 'https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg',
         title: 'Project 3',
-        desc: 'Buiding'
+        desc: 'Building'
     },
     {
         id: 4,
         image: 'https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg',
         title: 'Project 4',
-        desc: 'Buiding'
+        desc: 'Building'
     },
     {
         id: 5,
         image: 'https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg',
         title: 'Project 5',
-        desc: 'Buiding'
+        desc: 'Building'
     },
     {
         id: 6,
         image: 'https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg',
         title: 'Project 6',
-        desc: 'Buiding'
+        desc: 'Building'
     },
     {
         id: 7,
         image: 'https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg',
         title: 'Project 7',
-        desc: 'Buiding'
+        desc: 'Building'
     },
 
 ]
 
 
-export const Projects=() =>{
+
+export const Projects = () => {
+  
     return (
         <div className='mx-3 sm:mx-10 my-4 dark:bg-gray-900 py-10'>
             <div className='mb-10 w-full'>
                 <h1 className='text-xl sm:text-3xl tracking-tight font-bold text-center text-gray-900 dark:text-white flex gap-2 justify-center '>
-                  <span className=' border-b-4 border-yellow-500'>RECENT</span><span className='text-yellow-500 border-b-4 border-yellow-500'>PROJECTS</span>
+                    <span className=' border-b-4 border-yellow-500'>RECENT</span><span className='text-yellow-500 border-b-4 border-yellow-500'>PROJECTS</span>
                 </h1>
             </div>
 
@@ -69,8 +71,8 @@ export const Projects=() =>{
                     </div>
 
                 ))}
+              
             </div>
-
         </div>
     )
 }

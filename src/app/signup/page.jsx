@@ -2,23 +2,34 @@
 import { FcGoogle } from 'react-icons/fc';
 import { EmailVerify, register, google } from '@/utils/firebaseMethods';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setpassword] = useState('')
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
+    const router = useRouter()
 
     async function Register(e) {
         e.preventDefault()
         console.log(email, password, name)
 
-        const res= await EmailVerify()
+        // const res = await EmailVerify()
         const res2 = await register(email, password, name, number)
-        if (res2 == 'success' && res == 'success') {
+        if (res2 == 'success') {
             alert("you are registered as " + email);
-        }else{
-            alert(res2 +" "+ res);
+        } else {
+            alert(res2);
+        }
+    }
+    const handleGoogle = async() => {
+        try {
+            await google()
+            router.push("/home")
+        }
+        catch (e) {
+            console.log(e)
         }
 
     }
@@ -95,7 +106,7 @@ const SignUp = () => {
                                         required
                                     />
                                 </div>
-                                
+
                                 <div className="flex items-start">
                                     <div className="flex items-center h-5">
                                         <input
@@ -122,10 +133,10 @@ const SignUp = () => {
                                     Create an account
                                 </button>
                                 <button
-                                    onClick={() => google()}
+                                    onClick={handleGoogle}
                                     className="w-full text-black  bg-white focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm py-2.5 text-center  flex gap-2 justify-center items-center"
                                 >
-                                   SignUp With <FcGoogle size={20} />
+                                    SignUp With <FcGoogle size={20} />
                                 </button>
 
                                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">

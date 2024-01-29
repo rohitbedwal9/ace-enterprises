@@ -53,14 +53,14 @@ export const Contact = () => {
             <form action="#" className="space-y-5 ">
               <div className="flex flex-wrap -mx-3 ">
                 <div className="w-full md:w-1/2 px-3 md:mt-1">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" for="grid-first-name">
+                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" >
                     First Name<span className='ml-1 text-red-500'>*</span>
                   </label>
                   <input className=" block w-full  text-gray-700 border  rounded py-2 px-3 focus:bg-white " id="grid-first-name" type="text" placeholder="Jane" />
                   {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
                 </div>
                 <div className="w-full md:w-1/2 px-3 md:mt-1 mt-5">
-                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1 " for="grid-last-name">
+                  <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1 " >
                     Last Name<span className='ml-1 text-red-500'>*</span>
                   </label>
                   <input className="block w-full  text-gray-700 border  rounded py-2 px-3 focus:bg-white" id="grid-last-name" type="text" placeholder="Doe" />
@@ -68,7 +68,7 @@ export const Contact = () => {
               </div>
 
               <div>
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" for="grid-last-name">Email<span className='ml-1 text-red-500'>*</span> </label>
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" >Email<span className='ml-1 text-red-500'>*</span> </label>
                 <input className="block w-full  text-gray-700 border  rounded py-2 px-3 focus:bg-white" id="grid-last-name" type="email" placeholder="Name@ace.com" />
               </div>
 
@@ -78,11 +78,11 @@ export const Contact = () => {
               </div>
 
               <div>
-                <label for="subject" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1">Subject<span className='ml-1 text-red-500'>*</span></label>
+                <label  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1">Subject<span className='ml-1 text-red-500'>*</span></label>
                 <input type="text" id="subject" className="block w-full  text-gray-700 border  rounded py-2 px-3 focus:bg-white" placeholder="Let us know how we can help you" required />
               </div>
-              <div class="sm:col-span-2">
-                <label for="message" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1">Your message<span className='ml-1 text-red-500'>*</span></label>
+              <div className="sm:col-span-2">
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1">Your message<span className='ml-1 text-red-500'>*</span></label>
                 <textarea id="message" rows="6" className="block w-full  text-gray-700 border  rounded py-2 px-3 focus:bg-white" placeholder="Leave a comment..."></textarea>
               </div>
             
