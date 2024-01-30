@@ -4,12 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../utils/firebase';
+import { EmailVerify } from '@/utils/firebaseMethods';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [show, setShow] = useState(true)
     const [error, setError] = useState('')
+    const [msg, setMsg] = useState('')
     const router = useRouter()
 
     useEffect(() => {
@@ -26,13 +28,19 @@ export default function Login() {
         });
     }, [auth])
 
-
+const handleEmailVerify = ()=>{
+    setMsg('Email verification send successfully')
+    setError('')
+    EmailVerify()
+}
 
     async function signIn(e) {
         e.preventDefault();
         try {
             const res = await login(email, password);
-
+            if (!auth.currentUser.emailVerified) {
+                setError("Please verify the email ")
+            }
         } catch (error) {
             console.log(error)
             setError(error)
@@ -50,8 +58,13 @@ export default function Login() {
                                 <h1 className="text-center text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl ">
                                     Login
                                 </h1>
-                                <p className='text-center text-red-400'>{error ? 'Error: ' + error : ''}</p>
+                                <p className='text-center text-green-400'>{msg ? msg : ''}</p>
 
+                                <p className='text-center text-red-400'>{error ? 'Error: ' + error : ''}
+                                    {error === 'Please verify the email ' && !auth.currentUser.emailVerified ? (
+                                        <span className='cursor-pointer text-center text-green-400 underline' onClick={handleEmailVerify}>verify</span>
+                                    ) : ''}
+                                </p>
                                 <form className="space-y-4 md:space-y-6" onSubmit={(e) => signIn(e)} action="#">
                                     <div>
                                         <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">

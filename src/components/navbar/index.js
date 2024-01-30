@@ -19,7 +19,7 @@ export const Navbar = () => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
+            if (currentUser && currentUser.emailVerified) {
                 setIsLogin(true)
                 setData(currentUser.providerData[0])
 
