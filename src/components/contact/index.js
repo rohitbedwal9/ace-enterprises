@@ -7,7 +7,7 @@ export const Contact = () => {
 
     <div className='w-full p-5 lg:p-10' id="contact">
       
-      <div className='w-[100%] h-full  lg:flex '>
+      <div className='w-[100%] h-full  lg:flex justify-center'>
 
         <div className='relative  lg:w-[40%] lg:h-[820px] h-[300px]  bg-[url("https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y29udGFjdCUyMHVzfGVufDB8MXwwfHx8MA%3D%3D")] bg-center bg-cover bg-no-repeat'>
           <div className='w-full  lg:h-[800px]  h-[300px]  bg-gradient-to-b  from-[#243c5a] '>
