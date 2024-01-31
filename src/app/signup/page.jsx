@@ -40,6 +40,9 @@ const SignUp = () => {
             if (res2 === 'success') {
                 setMsg('Email verification send successfully')
             }
+            else {
+                setError('')
+            }
             // router.push("/home")
         } catch (error) {
             setError(error)
