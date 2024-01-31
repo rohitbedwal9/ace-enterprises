@@ -88,7 +88,7 @@ export const Navbar = () => {
                 </div>
             </div>
 
-            <div style={{display: showMe ? "block" : "none"}} className="bg-gray-900 text-white w-max  rounded-xl p-10 z-10 fixed top-20 left-1" >
+            <div style={{ display: showMe ? "block" : "none" }} className="bg-gray-900 text-white w-max  rounded-xl p-10 z-10 fixed top-20 left-1" >
                 <div className='flex flex-col gap-6 text-lg font-semibold'>
                     <div className='w-max  text-xl  text-yellow-300'>
                         Ace-Enterprises

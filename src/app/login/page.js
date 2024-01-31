@@ -28,11 +28,11 @@ export default function Login() {
         });
     }, [auth])
 
-const handleEmailVerify = ()=>{
-    setMsg('Email verification send successfully')
-    setError('')
-    EmailVerify()
-}
+    const handleEmailVerify = () => {
+        setMsg('Email verification send successfully')
+        setError('')
+        EmailVerify()
+    }
 
     async function signIn(e) {
         e.preventDefault();

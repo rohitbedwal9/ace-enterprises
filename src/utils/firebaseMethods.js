@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { child, get, onValue, ref, set, update, getDatabase } from "firebase/database";
 import { ref as sRef, listAll } from "firebase/storage";
-import { auth, database, storage } from "../utils/firebase";
+import { auth, database, storage } from "./firebase";
 
 const defaultImg = 'https://e7.pngegg.com/pngimages/1004/160/png-clipart-computer-icons-user-profile-social-web-others-blue-social-media.png'
 
@@ -86,8 +86,8 @@ export const google = async () => {
     const userData = await signInWithPopup(auth, provider)
     // console.log('userData :>> ', userData);
     const data = userData.user
-   
-    
+
+
 
     await set(ref(database, 'users/' + data.uid), {
         username: data.displayName,
