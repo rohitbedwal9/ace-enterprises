@@ -1,17 +1,18 @@
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAZ0ZWeMszDg7BpgTOdokWm2-4QbhOhdXM",
-    authDomain: "ace-enterprises-af30e.firebaseapp.com",
-    databaseURL: "https://ace-enterprises-af30e-default-rtdb.asia-southeast1.firebasedatabase.app/",
-    projectId: "ace-enterprises-af30e",
-    storageBucket: "ace-enterprises-af30e.appspot.com",
-    messagingSenderId: "786180729683",
-    appId: "1:786180729683:web:d7476db935e125479a4fa6",
-    measurementId: "G-RXZV5MYNZ9"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
+    measurementId: process.env.MEASUREMENT_ID,
 };
 
 

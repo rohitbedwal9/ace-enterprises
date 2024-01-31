@@ -38,7 +38,7 @@ const SignUp = () => {
             console.log(res2)
             setError('')
             if (res2 === 'success') {
-                setMsg('Email verification send successfully')
+                setMsg('Please Check your Email to verify your email')
             }
             else {
                 setError('')

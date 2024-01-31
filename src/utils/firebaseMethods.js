@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvide
 import { child, get, onValue, ref, set, update, getDatabase } from "firebase/database";
 import { ref as sRef, listAll } from "firebase/storage";
 import { auth, database, storage } from "../utils/firebase";
-import { fetchSignInMethodsForEmail } from "firebase/auth";
+
 const defaultImg = 'https://e7.pngegg.com/pngimages/1004/160/png-clipart-computer-icons-user-profile-social-web-others-blue-social-media.png'
 
 export const register = async (email, pwd, name, number) => {
@@ -10,9 +10,6 @@ export const register = async (email, pwd, name, number) => {
         const userData = await createUserWithEmailAndPassword(auth, email, pwd)
         await sendEmailVerification(auth.currentUser)
         const data = userData.user
-        const isexist = await fetchSignInMethodsForEmail(auth, userData.user.email)
-
-        console.log(isexist)
 
         await set(ref(database, 'users/' + data.uid), {
             name: name,
@@ -87,13 +84,10 @@ export const EmailVerify = async () => {
 export const google = async () => {
     const provider = new GoogleAuthProvider()
     const userData = await signInWithPopup(auth, provider)
-    console.log('userData :>> ', userData);
+    // console.log('userData :>> ', userData);
     const data = userData.user
-    console.log(data.email)
-    const isexist = await fetchSignInMethodsForEmail(auth, 'taranjeets120@gmail.com')
-
-    console.log(isexist)
-
+   
+    
 
     await set(ref(database, 'users/' + data.uid), {
         username: data.displayName,
