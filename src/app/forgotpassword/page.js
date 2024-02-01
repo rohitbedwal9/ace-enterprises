@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function ForgotPassword() {
     return (
         <>
@@ -33,9 +35,9 @@ export default function ForgotPassword() {
                                 </button>
                                 <p className="text-sm text-center font-light text-gray-500 ">
                                     go back to login{' '}
-                                    <a href="/login" className="font-medium text-yellow-300 hover:underline ">
+                                    <Link href="/login" className="font-medium text-yellow-300 hover:underline ">
                                         Login
-                                    </a>
+                                    </Link>
                                 </p>
                             </form>
                         </div>

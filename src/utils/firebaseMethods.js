@@ -8,7 +8,8 @@ const defaultImg = 'https://e7.pngegg.com/pngimages/1004/160/png-clipart-compute
 export const register = async (email, pwd, name, number) => {
     try {
         const userData = await createUserWithEmailAndPassword(auth, email, pwd)
-        await sendEmailVerification(auth.currentUser)
+     
+        await sendEmailVerification(userData.user)
         const data = userData.user
 
         await set(ref(database, 'users/' + data.uid), {
@@ -69,6 +70,7 @@ export const logout = async () => {
 
 }
 export const EmailVerify = async () => {
+    console.log(auth.currentUser)
     try {
         await sendEmailVerification(auth.currentUser)
         return 'success'

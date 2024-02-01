@@ -82,7 +82,7 @@ export const Navbar = () => {
                         </div>
                     ) : (
                         <Link href="/signup">
-                            <button className="flex   items-center border-2 border-black  hover:bg-gray-900 hover:text-white p-2 rounded-2xl sm:text-lg shadow-lg " >Login</button>
+                            <button className="flex   items-center border-2 border-black  hover:bg-gray-900 hover:text-white p-2 rounded-2xl sm:text-lg shadow-lg " >Signup</button>
                         </Link>
                     )}
                 </div>
