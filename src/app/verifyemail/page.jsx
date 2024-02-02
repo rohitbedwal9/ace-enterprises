@@ -49,13 +49,13 @@ const Verify = () => {
                                             Please verify your email
                                         </h1>
                                         <div className="text-white text-md">
-                                            <p>You're almost there! We sent to email to</p>
+                                            <p>You&apos;re almost there! We sent to email to</p>
                                             <p className="text-yellow-200">{email}</p>
                                             <div className="my-3">
-                                                <p>Just click on the link in that email to complete your signup. If you don't see it, you may need to <span className="font-bold text-yellow-200">check you spam</span> folder.</p>
+                                                <p>Just click on the link in that email to complete your signup. If you don&apos;t see it, you may need to <span className="font-bold text-yellow-200">check you spam</span> folder.</p>
                                             </div>
                                             <div className="my-3">
-                                                <p>Still can't find the email? No problem</p>
+                                                <p>Still can&apos;t find the email? No problem</p>
                                             </div>
                                         </div>
                                         <button
