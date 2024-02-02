@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
-        console.log(currentUser)
+        console.log('currentUser', currentUser)
       }
     });
   }, [auth])

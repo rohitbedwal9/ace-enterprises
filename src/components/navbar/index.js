@@ -6,6 +6,7 @@ import { CgClose } from "react-icons/cg";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../utils/firebase';
 import { logout } from '../../utils/firebaseMethods';
+import Image from 'next/image'
 
 export const Navbar = () => {
     const [showMe, setShowMe] = useState(false);
@@ -30,11 +31,15 @@ export const Navbar = () => {
         });
     }, [])
 
+    const myLoader = ({ src }) => {
+        return `${data.photoURL ? data.photoURL : '/images/default.jpg'}`;
+    }
+
 
 
     return (
-        <div className="flex flex-col w-full">
-            <div className="navbar flex bg-transparent justify-between items-center w-full pt-5 px-10 sm:py-6  " >
+        <div className="flex flex-col w-full  ">
+            <div className=" navbar flex  bg-transparent justify-between items-center w-full pt-5 px-10 sm:py-6  " >
                 <div className="md:hidden">
                     <button style={{ 'display': showMe ? 'none' : 'block' }} title='Toggle Menu' onClick={toggle}>
                         <GiHamburgerMenu size={25} />
@@ -43,31 +48,36 @@ export const Navbar = () => {
                         <CgClose size={25} />
                     </button>
                 </div>
-                <div className="logo hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold select-none">
+                <div className="logo  hidden md:block text-xl sm:text-2xl text-yellow-300 font-bold select-none">
                     Ace-Enterprises
                 </div>
-                <div className="hidden md:flex text-lg w-[30%] justify-between bg-gray-900 p-2 rounded-3xl text-white">
-                    <Link href="/" className="  hover:bg-gray-400 font-semibold px-2 rounded-3xl focus:opacity-70">Home</Link>
-                    <Link href="/products" className="  hover:bg-gray-400 font-semibold px-2 rounded-3xl focus:opacity-70">Projects</Link>
-                    <Link href="/about" className="  hover:bg-gray-400 px-2 font-semibold rounded-3xl focus:opacity-70">About</Link>
-                    <Link href="#contact" className="  hover:bg-gray-400 px-2 font-semibold rounded-3xl focus:opacity-70">Contact</Link>
-                    <Link href="/faq" className="  hover:bg-gray-400 px-2  font-semibold rounded-3xl focus:opacity-70">FAQ</Link>
+                <div className="w-[50%]">
+                    <div className=" hidden md:flex text-lg  justify-around items-center bg-gray-900 p-2 rounded-3xl text-white">
+                        <Link href="/home" className="  hover:bg-gray-400 font-semibold px-2 rounded-3xl focus:opacity-70">Home</Link>
+                        <Link href="/projects" className="  hover:bg-gray-400 font-semibold px-2 rounded-3xl focus:opacity-70">Projects</Link>
+                        <Link href="/about" className="  hover:bg-gray-400 px-2 font-semibold rounded-3xl focus:opacity-70">About</Link>
+                        <Link href="/contact" className="  hover:bg-gray-400 px-2 font-semibold rounded-3xl focus:opacity-70">Contact</Link>
+                        <Link href="/faq" className="  hover:bg-gray-400 px-2  font-semibold rounded-3xl focus:opacity-70">FAQ</Link>
+                    </div>
                 </div>
-                <div>
+                <div >
                     {isLogin ? (
                         <div className="inline-flex  rounded-md">
 
                             <div className="relative">
-                                <img
+                                <Image
                                     onClick={() => setDropdownOn(!dropdownOn)}
                                     type="button"
-                                    src={data.photoURL ? data.photoURL : 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg'}
-                                    className="w-10 h-10 rounded-full"
+                                    width={40}
+                                    height={40}
+                                    loader={myLoader}
+                                    src={`${data.photoURL ? data.photoURL : '/images/default.jpg'}`}
+                                    className="rounded-full"
                                 />
 
 
 
-                                <div style={{ display: dropdownOn ? 'block' : 'none' }} className="absolute right-0 z-10 w-56 mt-4 origin-top-right bg-white border border-gray-100 rounded-md shadow-lg">
+                                <div style={{ display: dropdownOn ? 'block' : 'none' }} className="absolute right-0 z-10  mt-4 origin-top-right bg-white border border-gray-100 rounded-md shadow-lg">
                                     <div className="p-2">
                                         <div className="block px-4 py-2 text-sm text-gray-500 rounded-lg hover:bg-gray-50 hover:text-gray-700">
                                             {data.email}
@@ -82,7 +92,7 @@ export const Navbar = () => {
                         </div>
                     ) : (
                         <Link href="/signup">
-                            <button className="flex   items-center border-2 border-black  hover:bg-gray-900 hover:text-white p-2 rounded-2xl sm:text-lg shadow-lg " >Signup</button>
+                            <button className="flex   items-center border-2 border-black  hover:bg-gray-900 hover:text-white p-2 rounded-2xl sm:text-lg shadow-lg " >Sign up</button>
                         </Link>
                     )}
                 </div>

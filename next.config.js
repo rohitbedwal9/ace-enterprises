@@ -1,5 +1,5 @@
 module.exports = {
-    env: {
-       
+    images: {
+        domains: ['localhost','theacehub.co.in'],
     },
 }
