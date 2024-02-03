@@ -2,7 +2,6 @@ import Image from 'next/image'
 export default function TempPage(){
     return(
       <div className="bg-[url('/images/temp-bg.jpeg')] sm:bg-no-repeat bg-cover">
-        
         <div className=" w-full h-screen gap-2 flex justify-center items-center sm:backdrop-blur-sm backdrop-blur-sm text-white font-bold">
           <div className='flex flex-col gap-12 sm:gap-24 bg-transparent shadow-black shadow-sm py-4 rounded-lg  w-[80%] sm:w-[35%] h-[40%] sm:h-[50%] px-2'>
             <div className='icons self-start  pl-2 flex flex-row gap-2 items-center justify-center'>

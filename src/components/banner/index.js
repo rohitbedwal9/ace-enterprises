@@ -1,9 +1,8 @@
 import { Navbar } from "../navbar";
-import Image from "next/image";
 
 export const Banner = () => {
   return (
-    <div className="w-full">
+    <div className="w-full select-none">
       <div className="w-full h-screen md:h-screen bg-[url('/images/construction-background2.jpeg')] bg-no-repeat bg-cover">
         <div className="backdrop-blur-sm h-full">
           <Navbar />
@@ -28,14 +27,7 @@ export const Banner = () => {
                 </button>
               </div>
             </div>
-            <div id="wrk" className="image flex  justify-center md:ml-28   w-max">
-              <Image
-                src="/images/construction-worker.jpg"
-                className=" w-[240px] h-[300px] md:w-[400px] md:h-[500px] rounded-lg"
-                width={400}
-                height={500}
-                alt="Banner" 
-              />
+            <div id="wrk"  className="image flex bg-[url(/images/construction-worker.jpg)] bg-cover bg-no-repeat justify-center md:ml-28  w-[240px] h-[300px] md:w-[400px] md:h-[500px] rounded-lg"> 
             </div>
           </div>
         </div>
