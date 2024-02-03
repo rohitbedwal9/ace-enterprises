@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function ForgotPassword() {
     return (
         <>
@@ -27,16 +29,15 @@ export default function ForgotPassword() {
 
                                 <button
                                     type="submit"
-                                    
                                     className="w-full text-black bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                                 >
                                     Submit
                                 </button>
                                 <p className="text-sm text-center font-light text-gray-500 ">
                                     go back to login{' '}
-                                    <a href="/login" className="font-medium text-yellow-300 hover:underline ">
+                                    <Link href="/login" className="font-medium text-yellow-300 hover:underline ">
                                         Login
-                                    </a>
+                                    </Link>
                                 </p>
                             </form>
                         </div>

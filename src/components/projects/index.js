@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+
 const data = [
   {
     id: 1,
@@ -91,7 +92,6 @@ export const Projects = () => {
               width={300}
               height={300}
             />
-
             <div className="p-4 sm:px-6 sm:py-4 text-center">
               <div className="font-semibold text-black sm:font-bold text-lg sm:text-xl mb-2">
                 {project.title}
