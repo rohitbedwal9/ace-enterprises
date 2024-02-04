@@ -18,7 +18,7 @@ const SignUp = () => {
         password: "",
         number: "",
     });
-    const [error, setError] = useState('cvb')
+    const [error, setError] = useState('')
     const [show, setShow] = useState(true)
     const router = useRouter()
 
@@ -118,9 +118,9 @@ const SignUp = () => {
     return (
         <>
             {show ? "" : (
-                <div className="w-full">
-                    <div className="w-full h-full  bg-gray-500">
-                        <div className="backdrop-blur-sm h-full">
+                <div className="w-full 2xl:h-full sm:h-full lg:h-screen bg-gray-500 ">
+                    <div className="w-full   ">
+                        <div className="backdrop-blur-sm">
                             <Navbar />
 
                             <div className="flex flex-col items-center justify-center px-2 py-4 mt-5  mx-auto lg:py-0 w-fll">
@@ -130,15 +130,15 @@ const SignUp = () => {
                                             <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-blue-800 dark:text-blue-200">
                                                 <MdErrorOutline />
                                             </div>
-                                            <div className="ms-3 text-md font-bold text-red-400">{error}</div>
-                                            <button onClick={() => setError('')} type="button" className="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-default" aria-label="Close">
+                                            <div className="mx-3 text-md font-bold text-red-400">{error}</div>
+                                            <button onClick={() => setError('')} type="button" className="bg-red-300 -mx-1.5 -my-1.5   hover:text-red-400 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-red-400 inline-flex items-center justify-center h-8 w-8 " data-dismiss-target="#toast-default" aria-label="Close">
                                                 <span className="sr-only">Close</span>
-                                                <IoIosClose />
+                                                <IoIosClose size={25} color='white' />
                                             </button>
                                         </div>
                                     )}
                                 </div>
-                                <div className="w-full  rounded-lg shadow bg-gray-900 md:mt-0 sm:max-w-md xl:p-0">
+                                <div className="w-full m-10 rounded-lg shadow bg-gray-900 md:mt-0 sm:max-w-md xl:p-0">
                                     <div className="p-6  sm:px-8">
 
                                         <h1 className="text-center text-2xl font-bold leading-tight tracking-tight text-yellow-300 md:text-3xl ">
@@ -194,7 +194,7 @@ const SignUp = () => {
                                         </form>
                                         <button onClick={handleGoogle} className=" w-full text-sm  px-5 py-2.5 bg-white border flex justify-center gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
                                             <FcGoogle size={20} />
-                                            <span>Continue with Google</span>
+                                            <p>Continue with Google</p>
                                         </button>
 
 
