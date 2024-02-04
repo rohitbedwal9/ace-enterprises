@@ -53,10 +53,10 @@ export const Navbar = () => {
             <CgClose size={25} />
           </button>
         </div>
-        <div className="logo hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold select-none">
+        <div className="logo flex flex-1 hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold select-none">
           Ace-Enterprises
         </div>
-        <div className="hidden md:flex text-lg w-[30%] justify-between bg-gray-900 p-2 rounded-3xl text-white">
+        <div className="hidden flex flex-1 md:flex text-lg justify-between bg-gray-900 p-2 rounded-3xl text-white">
           <Link
             href="/"
             className="  hover:bg-gray-400 font-semibold px-2 rounded-3xl focus:opacity-70"
@@ -88,9 +88,9 @@ export const Navbar = () => {
             FAQ
           </Link>
         </div>
-        <div>
+        <div className='flex flex-1 justify-end'>
           {isLogin ? (
-            <div className="inline-flex  rounded-md">
+            <div className=" rounded-md">
               <div className="relative">
                 <Image
                   onClick={() => setDropdownOn(!dropdownOn)}

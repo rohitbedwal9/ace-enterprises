@@ -3,6 +3,8 @@ import { MdEmail } from "react-icons/md";
 import { EmailVerify, register, google, logout } from '@/utils/firebaseMethods';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link'
+import { auth } from '../../utils/firebase';
+import { onAuthStateChanged } from "firebase/auth";
 
 const Verify = () => {
 
@@ -12,8 +14,18 @@ const Verify = () => {
 
 
     useEffect(() => {
-        setEmail(localStorage.getItem("mail") ? JSON.parse(localStorage.getItem("mail")) : 'wrongEmail')
-    }, [])
+        onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser) {
+                console.log(currentUser)
+                setEmail(currentUser.email)
+            }
+            else {
+                setShow(false)
+            }
+
+        });
+    }, [auth])
+
 
     async function sendEmail() {
 
