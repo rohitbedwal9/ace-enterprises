@@ -8,17 +8,16 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../utils/firebase';
 import Link from 'next/link'
 import { Navbar } from '@/components';
-import { IoIosClose } from "react-icons/io";
-import { MdErrorOutline } from "react-icons/md";
 
-const SignUp = () => {
+
+const Signin = () => {
     const [values, setValues] = useState({
         username: "",
         email: "",
         password: "",
         number: "",
     });
-    const [error, setError] = useState('cvb')
+    const [error, setError] = useState('')
     const [show, setShow] = useState(true)
     const router = useRouter()
 
@@ -91,12 +90,12 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('')
+
 
         try {
             const res2 = await register(values)
             console.log(res2)
-
+            setError('')
             if (res2 === 'success') {
                 router.push(`/verifyemail`)
             }
@@ -122,29 +121,14 @@ const SignUp = () => {
                     <div className="w-full h-full  bg-gray-500">
                         <div className="backdrop-blur-sm h-full">
                             <Navbar />
-
                             <div className="flex flex-col items-center justify-center px-2 py-4 mt-5  mx-auto lg:py-0 w-fll">
-                                <div className="mb-4">
-                                    {error === '' ? '' : (
-                                        <div id="toast-default" className="flex items-center  max-w-xs px-4 py-3 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                                            <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-blue-800 dark:text-blue-200">
-                                                <MdErrorOutline />
-                                            </div>
-                                            <div className="ms-3 text-md font-bold text-red-400">{error}</div>
-                                            <button onClick={() => setError('')} type="button" className="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-default" aria-label="Close">
-                                                <span className="sr-only">Close</span>
-                                                <IoIosClose />
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
                                 <div className="w-full  rounded-lg shadow bg-gray-900 md:mt-0 sm:max-w-md xl:p-0">
                                     <div className="p-6  sm:px-8">
 
                                         <h1 className="text-center text-2xl font-bold leading-tight tracking-tight text-yellow-300 md:text-3xl ">
                                             Create an account
                                         </h1>
-
+                                        <p className='text-center text-red-400 '>{error ? 'Error: ' + error : ''}</p>
 
                                         <form onSubmit={handleSubmit}>
 
@@ -218,4 +202,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Signin;

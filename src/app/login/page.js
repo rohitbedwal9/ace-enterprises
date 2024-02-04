@@ -114,15 +114,15 @@ export default function Login() {
                                                 Login
                                             </button>
 
-                                            <div class="inline-flex items-center justify-center w-full my-2">
-                                                <hr class="w-full h-0.5 my-4 bg-gray-200 border-0 rounded dark:bg-gray-700" />
-                                                <div class="px-2 text-xs text-white ">
+                                            <div className="inline-flex items-center justify-center w-full my-2">
+                                                <hr className="w-full h-0.5 my-4 bg-gray-200 border-0 rounded dark:bg-gray-700" />
+                                                <div className="px-2 text-xs text-white ">
                                                     OR
                                                 </div>
-                                                <hr class="w-full h-0.5 my-4 bg-gray-200 border-0 rounded dark:bg-gray-700" />
+                                                <hr className="w-full h-0.5 my-4 bg-gray-200 border-0 rounded dark:bg-gray-700" />
                                             </div>
 
-                                           
+
                                         </form>
                                         <button onClick={handleGoogle} className=" w-full  px-4 py-2 bg-white border flex justify-center gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
                                             <FcGoogle size={24} />

@@ -5,18 +5,21 @@ import { auth, database, storage } from "./firebase";
 
 const defaultImg = 'https://e7.pngegg.com/pngimages/1004/160/png-clipart-computer-icons-user-profile-social-web-others-blue-social-media.png'
 
-export const register = async (email, pwd, name, number) => {
+export const register = async (form) => {
     try {
-        const userData = await createUserWithEmailAndPassword(auth, email, pwd)
-     
+        const userData = await createUserWithEmailAndPassword(auth, form.email, form.password)
+
         await sendEmailVerification(userData.user)
         const data = userData.user
 
+        let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
+
         await set(ref(database, 'users/' + data.uid), {
-            name: name,
-            email: email,
-            number: number,
-            profile_picture: defaultImg
+            name: form.username,
+            email: form.email,
+            number: form.number,
+            profile_picture: defaultImg,
+            last_login: time
         });
 
 
@@ -34,6 +37,9 @@ export const register = async (email, pwd, name, number) => {
         else if (error.message === 'Firebase: Error (auth/invalid-email).') {
             throw "invalid-email"
         }
+        else if (error.message === 'Firebase: Password should be at least 6 characters (auth/weak-password).') {
+            throw "Password should be at least 6 characters (weak-password)"
+        }
         else {
             throw error.message
         }
@@ -45,8 +51,10 @@ export const login = async (email, pwd) => {
         const userData = await signInWithEmailAndPassword(auth, email, pwd)
         const data = userData.user
 
+        let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
+
         await update(ref(database, 'users/' + data.uid), {
-            last_login: userData.user.metadata.lastSignInTime
+            last_login: time
         });
         return 'success'
 
@@ -89,12 +97,15 @@ export const google = async () => {
     // console.log('userData :>> ', userData);
     const data = userData.user
 
-
+    let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
 
     await set(ref(database, 'users/' + data.uid), {
         username: data.displayName,
         email: data.email,
         profile_picture: data.photoURL
+    });
+    await update(ref(database, 'users/' + data.uid), {
+        last_login: time
     });
 
 }
