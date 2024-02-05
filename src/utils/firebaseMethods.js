@@ -32,10 +32,10 @@ export const register = async (form) => {
     } catch (error) {
         console.log(error.message)
         if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
-            throw "email-already-in-use"
+            throw "Email already in use"
         }
         else if (error.message === 'Firebase: Error (auth/invalid-email).') {
-            throw "invalid-email"
+            throw "Invalid email"
         }
         else if (error.message === 'Firebase: Password should be at least 6 characters (auth/weak-password).') {
             throw "Password should be at least 6 characters (weak-password)"
@@ -46,9 +46,9 @@ export const register = async (form) => {
     }
 
 }
-export const login = async (email, pwd) => {
+export const login = async (form) => {
     try {
-        const userData = await signInWithEmailAndPassword(auth, email, pwd)
+        const userData = await signInWithEmailAndPassword(auth, form.email, form.password)
         const data = userData.user
 
         let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
@@ -60,7 +60,7 @@ export const login = async (email, pwd) => {
 
     } catch (error) {
         if (error.message === 'Firebase: Error (auth/invalid-credential).')
-            throw 'invalid-credential'
+            throw 'Incorrect email or password'
         else {
             throw error.message
         }
