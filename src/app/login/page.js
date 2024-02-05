@@ -18,6 +18,7 @@ const Login = () => {
     });
     const [error, setError] = useState('')
     const [show, setShow] = useState(true)
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     useEffect(() => {
@@ -69,7 +70,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('')
-
+        setLoading(true)
         try {
             const res2 = await login(values)
             console.log(res2)
@@ -78,7 +79,7 @@ const Login = () => {
             setError(error)
 
         }
-
+        setLoading(false)
     };
 
     const onChange = (e) => {
@@ -94,20 +95,7 @@ const Login = () => {
                             <Navbar />
 
                             <div className="flex flex-col items-center justify-center px-2 py-4 mt-5  mx-auto lg:py-0 w-fll">
-                                <div className="mb-4">
-                                    {error === '' ? '' : (
-                                        <div id="toast-default" className="flex items-center  max-w-xs px-4 py-3 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                                            <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-blue-800 dark:text-blue-200">
-                                                <MdErrorOutline />
-                                            </div>
-                                            <div className="mx-3 text-md font-bold text-red-400">{error}</div>
-                                            <button onClick={() => setError('')} type="button" className="bg-red-300 -mx-1.5 -my-1.5   hover:text-red-400 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-red-400 inline-flex items-center justify-center h-8 w-8 " data-dismiss-target="#toast-default" aria-label="Close">
-                                                <span className="sr-only">Close</span>
-                                                <IoIosClose size={25} color='white' />
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
+
                                 <div className="w-full m-10 rounded-lg shadow bg-gray-900 md:mt-0 sm:max-w-md xl:p-0">
                                     <div className="p-6  sm:px-8">
 
@@ -126,12 +114,16 @@ const Login = () => {
                                                 />
                                             ))}
 
-
+                                            <div className="m-1 flex justify-end text-yellow-400 hover:text-yellow-500 text-sm">
+                                                <Link href="forgotpassword">Forgot Password?</Link>
+                                            </div>
                                             <button
                                                 type="submit"
                                                 className="w-full mt-5 text-slate-700 bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-primary-800"
+                                                disabled={loading ? true : false}
                                             >
-                                                Login
+                                                {loading ? "Logging in..." : "Login"}
+
                                             </button>
 
                                             <div className="inline-flex items-center justify-center w-full ">
@@ -145,7 +137,7 @@ const Login = () => {
                                         </form>
                                         <button onClick={handleGoogle} className=" w-full text-sm  px-5 py-2.5 bg-white border flex justify-center gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
                                             <FcGoogle size={20} />
-                                            <p>Continue with Google</p>
+                                            <p className="text-gray-500">Continue with Google</p>
                                         </button>
 
 
@@ -158,6 +150,20 @@ const Login = () => {
                                                 </Link>
                                             </p>
                                         </div>
+                                    </div>
+                                    <div className="mb-4 flex justify-center">
+                                        {error === '' ? '' : (
+                                            <div id="toast-default" className="flex items-center  max-w-xs px-4 py-3  bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
+                                                <div className="flex items-center  max-w-xs px-4 py-3 text-white bg-red-400  rounded-lg shadow dark:text-white dark:bg-red-400">
+                                                    <MdErrorOutline />
+                                                </div>
+                                                <div className="mx-3 text-sm font-bold text-red-400">{error}</div>
+                                                <button onClick={() => setError('')} type="button" className="bg-red-400 -mx-1.5 -my-1.5   hover:bg-red-500 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-red-400 inline-flex items-center justify-center h-8 w-8 " data-dismiss-target="#toast-default" aria-label="Close">
+                                                    <span className="sr-only">Close</span>
+                                                    <IoIosClose size={25} color='white' />
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
