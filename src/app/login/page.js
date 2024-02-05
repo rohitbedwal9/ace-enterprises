@@ -18,6 +18,7 @@ const Login = () => {
     });
     const [error, setError] = useState('')
     const [show, setShow] = useState(true)
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     useEffect(() => {
@@ -69,7 +70,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('')
-
+        setLoading(true)
         try {
             const res2 = await login(values)
             console.log(res2)
@@ -78,7 +79,7 @@ const Login = () => {
             setError(error)
 
         }
-
+        setLoading(false)
     };
 
     const onChange = (e) => {
@@ -94,7 +95,7 @@ const Login = () => {
                             <Navbar />
 
                             <div className="flex flex-col items-center justify-center px-2 py-4 mt-5  mx-auto lg:py-0 w-fll">
-                               
+
                                 <div className="w-full m-10 rounded-lg shadow bg-gray-900 md:mt-0 sm:max-w-md xl:p-0">
                                     <div className="p-6  sm:px-8">
 
@@ -113,12 +114,16 @@ const Login = () => {
                                                 />
                                             ))}
 
-
+                                            <div className="m-1 flex justify-end text-yellow-400 hover:text-yellow-500 text-sm">
+                                                <Link href="forgotpassword">Forgot Password?</Link>
+                                            </div>
                                             <button
                                                 type="submit"
                                                 className="w-full mt-5 text-slate-700 bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-primary-800"
+                                                disabled={loading ? true : false}
                                             >
-                                                Login
+                                                {loading ? "Logging in..." : "Login"}
+
                                             </button>
 
                                             <div className="inline-flex items-center justify-center w-full ">

@@ -20,6 +20,7 @@ const SignUp = () => {
     });
     const [error, setError] = useState('')
     const [show, setShow] = useState(true)
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     useEffect(() => {
@@ -92,6 +93,7 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('')
+        setLoading(true)
 
         try {
             const res2 = await register(values)
@@ -108,7 +110,7 @@ const SignUp = () => {
             setError(error)
 
         }
-
+        setLoading(false)
     };
 
     const onChange = (e) => {
@@ -119,12 +121,13 @@ const SignUp = () => {
         <>
             {show ? "" : (
                 <div className="w-full  md:h-screen  sm:h-full  bg-gray-500 ">
+
                     <div className="w-full   ">
                         <div className="backdrop-blur-sm">
                             <Navbar />
 
                             <div className="flex flex-col items-center justify-center px-2 py-4 mt-5  mx-auto lg:py-0 w-fll">
-                                
+
                                 <div className="w-full m-10 rounded-lg shadow bg-gray-900 md:mt-0 sm:max-w-md xl:p-0">
                                     <div className="p-6  sm:px-8">
 
@@ -166,8 +169,9 @@ const SignUp = () => {
                                             <button
                                                 type="submit"
                                                 className="w-full text-slate-700 bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-primary-800"
+                                                disabled={loading ? true : false}
                                             >
-                                                Create an account
+                                                {loading ? "Creating Account..." : "Create an account"}
                                             </button>
 
                                             <div className="inline-flex items-center justify-center w-full ">
