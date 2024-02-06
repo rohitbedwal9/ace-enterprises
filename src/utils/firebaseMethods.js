@@ -1,5 +1,5 @@
-import { createUserWithEmailAndPassword, FacebookAuthProvider, GoogleAuthProvider, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
-import { child, get, onValue, ref, set, update, getDatabase } from "firebase/database";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import {  ref, set, update } from "firebase/database";
 import { ref as sRef, listAll } from "firebase/storage";
 import { auth, database, storage } from "./firebase";
 
@@ -46,6 +46,7 @@ export const register = async (form) => {
     }
 
 }
+
 export const login = async (form) => {
     try {
         const userData = await signInWithEmailAndPassword(auth, form.email, form.password)
@@ -67,6 +68,7 @@ export const login = async (form) => {
     }
 
 }
+
 export const logout = async () => {
     try {
         await signOut(auth)
@@ -77,6 +79,7 @@ export const logout = async () => {
     }
 
 }
+
 export const EmailVerify = async () => {
     console.log(auth.currentUser)
     try {
@@ -89,7 +92,6 @@ export const EmailVerify = async () => {
     }
 
 }
-
 
 export const google = async () => {
     const provider = new GoogleAuthProvider()
@@ -145,17 +147,4 @@ export const google = async () => {
 //         }).catch((error) => {
 //             console.log(error.message)
 //         });
-// }
-
-// export const facebook = async () => {
-//     const provider = new FacebookAuthProvider()
-//     const userData = await signInWithPopup(auth, provider)
-//     console.log('userData :>> ', userData);
-//     const data = userData.user
-
-//     await set(ref(database, 'users/' + data.uid), {
-//         username: data.displayName,
-//         email: data.email,
-//         profile_picture: data.photoURL
-//     });
 // }

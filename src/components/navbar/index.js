@@ -64,7 +64,7 @@ export const Navbar = () => {
             Home
           </Link>
           <Link
-            href="/products"
+            href="/projects"
             className="  hover:bg-gray-400 font-semibold px-2 rounded-3xl focus:opacity-70"
           >
             Projects
@@ -148,7 +148,7 @@ export const Navbar = () => {
             Home
           </Link>
           <Link
-            href="/products"
+            href="/projects"
             className=" border-b-2 border-white  w-max hover:text-gray-300"
           >
             Projects
