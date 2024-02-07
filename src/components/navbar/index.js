@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 export const Navbar = () => {
   const [showMe, setShowMe] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [dropdownOn, setDropdownOn] = useState(false);
   const [data, setData] = useState({});
 
@@ -20,7 +20,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser && currentUser.emailVerified) {
+      if (currentUser) {
         setIsLogin(true);
         setData(currentUser.providerData[0]);
       } else {
@@ -64,7 +64,7 @@ export const Navbar = () => {
             Home
           </Link>
           <Link
-            href="/products"
+            href="/projects"
             className="  hover:bg-gray-400 font-semibold px-2 rounded-3xl focus:opacity-70"
           >
             Projects
@@ -148,7 +148,7 @@ export const Navbar = () => {
             Home
           </Link>
           <Link
-            href="/products"
+            href="/projects"
             className=" border-b-2 border-white  w-max hover:text-gray-300"
           >
             Projects

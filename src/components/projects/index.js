@@ -1,6 +1,12 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Card from '../card';
+import useDownloader from 'react-use-downloader';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from '../../utils/firebase';
+import { storage } from "../../utils/firebase";
+import { ref as sRef, getDownloadURL } from "firebase/storage";
 
 const data = [
   {
@@ -55,6 +61,59 @@ const data = [
 ];
 
 export const Projects = () => {
+  const { download } = useDownloader();
+  const [isUser, setIsUser] = useState(null)
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      console.log(currentUser)
+      if (currentUser) {
+        setIsUser(currentUser)
+      }
+      else {
+        setIsUser(null)
+      }
+    });
+  }, [auth])
+  console.log("user:", isUser)
+  const onhandleClick = async (title) => {
+    const user = Object.getPrototypeOf = isUser
+    if (user && user.emailVerified) {
+      if (user.providerData[0].providerId == "google.com") {
+
+        let foo = prompt('Type here');
+      
+        if (foo) {
+          const fileReference = sRef(storage, `files/${title}.pdf`);
+          await getDownloadURL(fileReference)
+            .then((url) => {
+              download(url, `${title}.pdf`)
+            })
+            .catch((error) => {
+              console.log(error.message)
+            })
+        }
+      }
+      else {
+        const fileReference = sRef(storage, `files/${title}.pdf`);
+        await getDownloadURL(fileReference)
+          .then((url) => {
+            download(url, `${title}.pdf`)
+          })
+          .catch((error) => {
+            console.log(error.message)
+          })
+      }
+
+    }
+    else if (user) {
+
+      alert("please verify first!!")
+    }
+    else {
+      alert("please login first!!")
+    }
+  }
   return (
     <div className="py-5 md:px-20">
       <div className="flex md:flex-row gap-4 flex-col m-4 md:m-10 items-center">
@@ -67,7 +126,7 @@ export const Projects = () => {
           </h1>
           <p className="text-xl font-semibold">
             We design curated residential spaces that are a beautiful reflection
-            of what’s most important to you. Our portfolio spans all style
+            of what&apos;s most important to you. Our portfolio spans all style
             disciplines, from traditional to contemporary and everything in
             between.
           </p>
@@ -81,26 +140,11 @@ export const Projects = () => {
           </Link>
         </div>
       </div>
+
+
       <div className="w-full flex-wrap h-100 flex md:flex-row flex-col  justify-center items-center">
         {data.map((project) => (
-          <div key={project.id} className=" m-5 rounded-lg shadow-lg bg-white">
-            <Image
-              className="object-cover w-90 h-72 sm:w-64 rounded-lg"
-              src={project.imgUrl}
-              alt={project.desc}
-              width={300}
-              height={300}
-            />
-
-            <div className="p-4 sm:px-6 sm:py-4 text-center">
-              <div className="font-semibold text-black sm:font-bold text-lg sm:text-xl mb-2">
-                {project.title}
-              </div>
-              <p className="text-gray-700 text-lg font-semibold">
-                {project.desc}
-              </p>
-            </div>
-          </div>
+          <Card key={project.id} project={project} onhandleClick={onhandleClick} />
         ))}
       </div>
     </div>

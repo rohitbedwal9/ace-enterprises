@@ -13,6 +13,29 @@ const Verify = () => {
     const [email, setEmail] = useState('')
 
 
+    const [timer, setTimer] = useState(30);
+
+
+    useEffect(() => {
+        var timerID = setInterval(() => tick(), 1000);
+
+        return function cleanup() {
+            clearInterval(timerID);
+        };
+    });
+
+    function tick() {
+        setTimer(timer - 1);
+    }
+
+    const handleKeypress = (e) => {
+        //it triggers by pressing the enter key
+        if (e.keyCode === 13) {
+            handleSubmit(e);
+        }
+    };
+
+
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
@@ -28,7 +51,7 @@ const Verify = () => {
 
 
     async function sendEmail() {
-
+        setTimer(30)
         try {
             const isverify = await EmailVerify()
             console.log(isverify) // too many request error 
@@ -39,6 +62,9 @@ const Verify = () => {
         }
 
     }
+
+
+
 
 
     return (
@@ -69,13 +95,15 @@ const Verify = () => {
                                             <div className="my-3">
                                                 <p>Still can&apos;t find the email? No problem</p>
                                             </div>
+
                                         </div>
                                         <button
                                             type="submit"
-                                            className="w-full text-black bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-yellow-800"
+                                            className={`w-full text-black bg-yellow-300 ${timer === 0 ? 'hover:bg-yellow-400 ' : ''} focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-yellow-800`}
                                             onClick={sendEmail}
+                                            disabled={timer <= 0 ? false : true}
                                         >
-                                            Resend Verification Email
+                                            {timer > 0 ? ' Resend(' + timer + ')' : 'Resend'}
                                         </button>
                                         <div className="mt-5">
                                             <Link
@@ -83,7 +111,7 @@ const Verify = () => {
                                                 className="w-full text-black bg-green-300 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-green-800"
 
                                             >
-                                                Login
+                                              Please login after verifification
                                             </Link>
                                         </div>
                                     </div>
@@ -91,7 +119,7 @@ const Verify = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
             )}
         </>
     );

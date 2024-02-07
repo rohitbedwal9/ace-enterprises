@@ -23,7 +23,7 @@ const Login = () => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser && currentUser.emailVerified) {
+            if (currentUser) {
                 console.log(currentUser)
                 router.push("/home")
             }
@@ -73,6 +73,7 @@ const Login = () => {
         setLoading(true)
         try {
             const res2 = await login(values)
+            router.push("/home")
             console.log(res2)
 
         } catch (error) {

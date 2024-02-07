@@ -22,7 +22,7 @@ export default function ForgotPassword() {
             type: "email",
             placeholder: "Enter your email address",
             errorMessage: "It should be a valid email address!",
-            label: "Enter your email address and we will send you a ink to reset your password",
+            label: "Enter your email address and we will send you a link to reset your password",
             required: true,
         },
 

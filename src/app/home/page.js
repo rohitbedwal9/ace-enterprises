@@ -6,7 +6,7 @@ import { auth } from '../../utils/firebase';
 
 
 export default function Home() {
-  console.log(process.env.AUTH_DOMAIN)
+  
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
