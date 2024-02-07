@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 export const Navbar = () => {
   const [showMe, setShowMe] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [dropdownOn, setDropdownOn] = useState(false);
   const [data, setData] = useState({});
 
@@ -20,7 +20,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser && currentUser.emailVerified) {
+      if (currentUser) {
         setIsLogin(true);
         setData(currentUser.providerData[0]);
       } else {

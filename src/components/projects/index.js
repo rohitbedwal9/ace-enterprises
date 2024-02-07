@@ -1,10 +1,12 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Card from '../card';
 import useDownloader from 'react-use-downloader';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from '../../utils/firebase';
 import { storage } from "../../utils/firebase";
-import { ref as sRef, listAll, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { ref as sRef, getDownloadURL } from "firebase/storage";
 
 const data = [
   {
@@ -60,18 +62,57 @@ const data = [
 
 export const Projects = () => {
   const { download } = useDownloader();
+  const [isUser, setIsUser] = useState(null)
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      console.log(currentUser)
+      if (currentUser) {
+        setIsUser(currentUser)
+      }
+      else {
+        setIsUser(null)
+      }
+    });
+  }, [auth])
+  console.log("user:", isUser)
   const onhandleClick = async (title) => {
+    const user = Object.getPrototypeOf = isUser
+    if (user && user.emailVerified) {
+      if (user.providerData[0].providerId == "google.com") {
 
-    const fileReference = sRef(storage, `files/${title}.pdf`);
-    await getDownloadURL(fileReference)
-      .then((url) => {
-        download(url, `${title}.pdf`)
-      })
-      .catch((error) => {
-        console.log(error.message)
-      })
+        let foo = prompt('Type here');
+      
+        if (foo) {
+          const fileReference = sRef(storage, `files/${title}.pdf`);
+          await getDownloadURL(fileReference)
+            .then((url) => {
+              download(url, `${title}.pdf`)
+            })
+            .catch((error) => {
+              console.log(error.message)
+            })
+        }
+      }
+      else {
+        const fileReference = sRef(storage, `files/${title}.pdf`);
+        await getDownloadURL(fileReference)
+          .then((url) => {
+            download(url, `${title}.pdf`)
+          })
+          .catch((error) => {
+            console.log(error.message)
+          })
+      }
 
+    }
+    else if (user) {
+
+      alert("please verify first!!")
+    }
+    else {
+      alert("please login first!!")
+    }
   }
   return (
     <div className="py-5 md:px-20">
