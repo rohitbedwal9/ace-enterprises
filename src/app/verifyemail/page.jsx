@@ -38,7 +38,7 @@ const Verify = () => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
+            if (currentUser && !currentUser.emailVerified) {
                 console.log(currentUser)
                 setEmail(currentUser.email)
             }
@@ -71,7 +71,7 @@ const Verify = () => {
         <>
             {!email ? "Something wrong" : (
                 <div className="w-full">
-                    <div className="w-full h-screen md:h-screen bg-[url('/images/construction-background2.jpeg')] bg-no-repeat bg-cover">
+                    <div className="w-full h-screen md:h-screen bg-gray-500">
                         <div className="backdrop-blur-sm h-full">
                             <div className="flex flex-col items-center justify-center px-2 py-4 mx-auto md:h-screen lg:py-0 w-fll">
                                 <div className="w-full  rounded-lg shadow bg-gray-900 md:mt-0 sm:max-w-md xl:p-0">
@@ -99,7 +99,7 @@ const Verify = () => {
                                         </div>
                                         <button
                                             type="submit"
-                                            className={`w-full text-black bg-yellow-300 ${timer === 0 ? 'hover:bg-yellow-400 ' : ''} focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-yellow-800`}
+                                            className={`w-full text-black ${timer <= 0 ? 'hover:bg-yellow-500   bg-yellow-400' : ' bg-yellow-200'} focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-yellow-800`}
                                             onClick={sendEmail}
                                             disabled={timer <= 0 ? false : true}
                                         >
@@ -111,7 +111,7 @@ const Verify = () => {
                                                 className="w-full text-black bg-green-300 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-green-800"
 
                                             >
-                                              Please login after verifification
+                                                Please login after verifification
                                             </Link>
                                         </div>
                                     </div>

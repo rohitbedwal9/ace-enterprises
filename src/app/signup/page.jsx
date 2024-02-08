@@ -10,6 +10,51 @@ import Link from 'next/link'
 import { Navbar } from '@/components';
 import { IoIosClose } from "react-icons/io";
 import { MdErrorOutline } from "react-icons/md";
+import { ToastContainer, toast } from 'react-toastify';
+
+
+const inputs = [
+    {
+        id: 1,
+        name: "username",
+        type: "text",
+        placeholder: "Username",
+        errorMessage: "Username should be 3-16 characters and shouldn't include any special character!",
+        label: "Username",
+        pattern: `^[A-Za-z0-9]{3,16}$`,
+        required: true,
+    },
+    {
+        id: 2,
+        name: "email",
+        type: "email",
+        placeholder: "Email",
+        errorMessage: "It should be a valid email address!",
+        label: "Email",
+        required: true,
+    },
+    {
+        id: 3,
+        name: "password",
+        type: "password",
+        placeholder: "Password",
+        errorMessage:
+            "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
+        label: "Password",
+        pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+        required: true,
+    },
+    {
+        id: 4,
+        name: "number",
+        type: "tel",
+        placeholder: "Phone Number",
+        errorMessage: "Not a valid Phone Number",
+        label: "Phone Number",
+        pattern: `[0-9]{10}`,
+        required: true,
+    },
+];
 
 const SignUp = () => {
     const [values, setValues] = useState({
@@ -18,10 +63,10 @@ const SignUp = () => {
         password: "",
         number: "",
     });
-    const [error, setError] = useState('')
     const [show, setShow] = useState(true)
     const [loading, setLoading] = useState(false)
     const router = useRouter()
+    const notify = (text) => toast.error(text)
 
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
@@ -37,52 +82,12 @@ const SignUp = () => {
     }, [auth])
 
 
-    const inputs = [
-        {
-            id: 1,
-            name: "username",
-            type: "text",
-            placeholder: "Username",
-            errorMessage: "Username should be 3-16 characters and shouldn't include any special character!",
-            label: "Username",
-            pattern: `^[A-Za-z0-9]{3,16}$`,
-            required: true,
-        },
-        {
-            id: 2,
-            name: "email",
-            type: "email",
-            placeholder: "Email",
-            errorMessage: "It should be a valid email address!",
-            label: "Email",
-            required: true,
-        },
-        {
-            id: 3,
-            name: "password",
-            type: "password",
-            placeholder: "Password",
-            errorMessage:
-                "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
-            label: "Password",
-            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
-            required: true,
-        },
-        {
-            id: 4,
-            name: "number",
-            type: "tel",
-            placeholder: "Phone Number",
-            errorMessage: "Not a valid Phone Number",
-            label: "Phone Number",
-            pattern: `[0-9]{10}`,
-            required: true,
-        },
-    ];
+
 
     const handleGoogle = async () => {
         try {
             await google()
+            toast.success("You are successfully logged in")
             router.push("/home")
         }
         catch (e) {
@@ -92,7 +97,6 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('')
         setLoading(true)
 
         try {
@@ -100,15 +104,12 @@ const SignUp = () => {
             console.log(res2)
 
             if (res2 === 'success') {
+                toast.success("You account are successfully created")
                 router.push(`/verifyemail`)
-            }
-            else {
-                setError('')
             }
 
         } catch (error) {
-            setError(error)
-
+            notify(error)
         }
         setLoading(false)
     };
@@ -121,7 +122,18 @@ const SignUp = () => {
         <>
             {show ? "" : (
                 <div className="w-full  md:h-screen  sm:h-full  bg-gray-500 ">
-
+                    <ToastContainer
+                        position="top-center"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
                     <div className="w-full   ">
                         <div className="backdrop-blur-sm">
                             <Navbar />
@@ -168,7 +180,7 @@ const SignUp = () => {
                                             </div>
                                             <button
                                                 type="submit"
-                                                className="w-full text-slate-700 bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-primary-800"
+                                                className={`w-full text-slate-700  ${loading ? 'bg-yellow-200 ' :'bg-yellow-400 hover:bg-yellow-500 '} focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-primary-800`}
                                                 disabled={loading ? true : false}
                                             >
                                                 {loading ? "Creating Account..." : "Create an account"}
@@ -188,8 +200,6 @@ const SignUp = () => {
                                             <p className="text-gray-500">Continue with Google</p>
                                         </button>
 
-
-
                                         <div >
                                             <p className="text-center mt-3 text-sm font-light text-gray-500 dark:text-gray-400">
                                                 Already have an account?{' '}
@@ -198,20 +208,6 @@ const SignUp = () => {
                                                 </Link>
                                             </p>
                                         </div>
-                                    </div>
-                                    <div className="mb-4 flex justify-center">
-                                        {error === '' ? '' : (
-                                            <div id="toast-default" className="flex items-center  max-w-xs px-4 py-3  bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                                                <div className="flex items-center  max-w-xs px-4 py-3 text-white bg-red-400  rounded-lg shadow dark:text-white dark:bg-red-400">
-                                                    <MdErrorOutline />
-                                                </div>
-                                                <div className="mx-3 text-sm font-bold text-red-400">{error}</div>
-                                                <button onClick={() => setError('')} type="button" className="bg-red-400 -mx-1.5 -my-1.5   hover:bg-red-500 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-red-400 inline-flex items-center justify-center h-8 w-8 " data-dismiss-target="#toast-default" aria-label="Close">
-                                                    <span className="sr-only">Close</span>
-                                                    <IoIosClose size={25} color='white' />
-                                                </button>
-                                            </div>
-                                        )}
                                     </div>
                                 </div>
                             </div>

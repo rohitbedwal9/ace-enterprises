@@ -8,22 +8,44 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../utils/firebase';
 import Link from 'next/link'
 import { Navbar } from '@/components';
-import { IoIosClose } from "react-icons/io";
-import { MdErrorOutline } from "react-icons/md";
+import { ToastContainer, toast } from 'react-toastify';
+
+const inputs = [
+
+    {
+        id: 1,
+        name: "email",
+        type: "email",
+        placeholder: "Email",
+        errorMessage: "It should be a valid email address!",
+        label: "Email",
+        required: true,
+    },
+    {
+        id: 2,
+        name: "password",
+        type: "password",
+        placeholder: "Password",
+        label: "Password",
+        required: true,
+    },
+
+];
+
 
 const Login = () => {
     const [values, setValues] = useState({
         email: "",
         password: "",
     });
-    const [error, setError] = useState('')
     const [show, setShow] = useState(true)
     const [loading, setLoading] = useState(false)
     const router = useRouter()
+    const notify = (text) => toast.error(text)
 
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
+            if (currentUser && currentUser.emailVerified) {
                 console.log(currentUser)
                 router.push("/home")
             }
@@ -35,49 +57,28 @@ const Login = () => {
     }, [auth])
 
 
-    const inputs = [
-
-        {
-            id: 1,
-            name: "email",
-            type: "email",
-            placeholder: "Email",
-            errorMessage: "It should be a valid email address!",
-            label: "Email",
-            required: true,
-        },
-        {
-            id: 2,
-            name: "password",
-            type: "password",
-            placeholder: "Password",
-            label: "Password",
-            required: true,
-        },
-
-    ];
-
     const handleGoogle = async () => {
         try {
             await google()
+            toast.success("You are successfully logged in")
             router.push("/home")
         }
         catch (e) {
-            console.log(e)
+            notify(e.message)
         }
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('')
         setLoading(true)
         try {
             const res2 = await login(values)
+            toast.success("You are successfully logged in")
             router.push("/home")
             console.log(res2)
 
         } catch (error) {
-            setError(error)
+            notify(error)
 
         }
         setLoading(false)
@@ -94,7 +95,18 @@ const Login = () => {
                     <div className="w-full h-screen  bg-gray-500">
                         <div className="backdrop-blur-sm h-full">
                             <Navbar />
-
+                            <ToastContainer
+                                position="top-center"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover
+                                theme="light"
+                            />
                             <div className="flex flex-col items-center justify-center px-2 py-4 mt-5  mx-auto lg:py-0 w-fll">
 
                                 <div className="w-full m-10 rounded-lg shadow bg-gray-900 md:mt-0 sm:max-w-md xl:p-0">
@@ -120,7 +132,7 @@ const Login = () => {
                                             </div>
                                             <button
                                                 type="submit"
-                                                className="w-full mt-5 text-slate-700 bg-yellow-300 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-primary-800"
+                                                className={`w-full mt-5 text-slate-700  ${loading ? 'bg-yellow-200 ' : 'bg-yellow-400 hover:bg-yellow-500 '}  focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-primary-800`}
                                                 disabled={loading ? true : false}
                                             >
                                                 {loading ? "Logging in..." : "Login"}
@@ -151,20 +163,6 @@ const Login = () => {
                                                 </Link>
                                             </p>
                                         </div>
-                                    </div>
-                                    <div className="mb-4 flex justify-center">
-                                        {error === '' ? '' : (
-                                            <div id="toast-default" className="flex items-center  max-w-xs px-4 py-3  bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
-                                                <div className="flex items-center  max-w-xs px-4 py-3 text-white bg-red-400  rounded-lg shadow dark:text-white dark:bg-red-400">
-                                                    <MdErrorOutline />
-                                                </div>
-                                                <div className="mx-3 text-sm font-bold text-red-400">{error}</div>
-                                                <button onClick={() => setError('')} type="button" className="bg-red-400 -mx-1.5 -my-1.5   hover:bg-red-500 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-red-400 inline-flex items-center justify-center h-8 w-8 " data-dismiss-target="#toast-default" aria-label="Close">
-                                                    <span className="sr-only">Close</span>
-                                                    <IoIosClose size={25} color='white' />
-                                                </button>
-                                            </div>
-                                        )}
                                     </div>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../utils/firebase';
 import { storage } from "../../utils/firebase";
 import { ref as sRef, getDownloadURL } from "firebase/storage";
+import { ToastContainer, toast } from 'react-toastify';
 
 const data = [
   {
@@ -63,11 +64,26 @@ const data = [
 export const Projects = () => {
   const { download } = useDownloader();
   const [isUser, setIsUser] = useState(null)
+  const loginWarning = () => (
+    <div>
+      You must
+      <Link className='underline text-blue-400' href="/login"> login </Link>
+      first.
+    </div>
+  );
+  const verifyWarning = () => (
+    <div>
+      You must
+      <Link className='underline text-blue-400' href="/verifyemail"> verify your email </Link>
+      first.
+    </div>
+  );
+  const notify = (text) => text === "login" ? toast.warning(loginWarning) : toast.warning(verifyWarning);
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser)
-      if (currentUser) {
+      if (currentUser && currentUser.emailVerified) {
         setIsUser(currentUser)
       }
       else {
@@ -82,7 +98,7 @@ export const Projects = () => {
       if (user.providerData[0].providerId == "google.com") {
 
         let foo = prompt('Type here');
-      
+
         if (foo) {
           const fileReference = sRef(storage, `files/${title}.pdf`);
           await getDownloadURL(fileReference)
@@ -108,14 +124,26 @@ export const Projects = () => {
     }
     else if (user) {
 
-      alert("please verify first!!")
+      notify("verify")
     }
     else {
-      alert("please login first!!")
+      notify("login")
     }
   }
   return (
     <div className="py-5 md:px-20">
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="flex md:flex-row gap-4 flex-col m-4 md:m-10 items-center">
         <div className="flex flex-col gap-4 p-4 md:p-10 align-center md:w-[70%]">
           <p className="text-xl md:text-2xl font-bold text-gray-800 ">
@@ -140,6 +168,8 @@ export const Projects = () => {
           </Link>
         </div>
       </div>
+
+
 
 
       <div className="w-full flex-wrap h-100 flex md:flex-row flex-col  justify-center items-center">
