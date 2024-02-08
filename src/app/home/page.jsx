@@ -1,6 +1,6 @@
 "use client"
 import { useEffect } from 'react';
-import { Banner, Statics, Projects, Services, Contact, Footer } from '@/components';
+import { Banner, Statics, Projects, Services, Contact, Footer, Testimonials } from '@/components';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../utils/firebase';
 
@@ -21,6 +21,7 @@ export default function Home() {
       <Services />
       <Projects />
       <Contact />
+      <Testimonials />
       <Footer />
     </main>
   );
