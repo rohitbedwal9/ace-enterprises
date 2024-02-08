@@ -20,7 +20,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
+      if (currentUser && currentUser.emailVerified) {
         setIsLogin(true);
         setData(currentUser.providerData[0]);
       } else {
@@ -99,9 +99,8 @@ export const Navbar = () => {
                   height={40}
                   alt="Profile Picture"
                   loader={myLoader}
-                  src={`${
-                    data.photoURL ? data.photoURL : '/images/default.jpg'
-                  }`}
+                  src={`${data.photoURL ? data.photoURL : '/images/default.jpg'
+                    }`}
                   className="rounded-full"
                 />
 
