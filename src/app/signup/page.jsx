@@ -21,6 +21,7 @@ const inputs = [
         placeholder: "Username",
         errorMessage: "Username should be 3-16 characters and shouldn't include any special character!",
         label: "Username",
+        disabled: true,
         pattern: `^[A-Za-z0-9]{3,16}$`,
         required: true,
     },
@@ -28,6 +29,7 @@ const inputs = [
         id: 2,
         name: "email",
         type: "email",
+        disabled: true,
         placeholder: "Email",
         errorMessage: "It should be a valid email address!",
         label: "Email",
@@ -38,6 +40,7 @@ const inputs = [
         name: "password",
         type: "password",
         placeholder: "Password",
+        disabled: false,
         errorMessage:
             "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
         label: "Password",
@@ -48,6 +51,7 @@ const inputs = [
         id: 4,
         name: "number",
         type: "tel",
+        disabled: false,
         placeholder: "Phone Number",
         errorMessage: "Not a valid Phone Number",
         label: "Phone Number",
@@ -72,7 +76,7 @@ const SignUp = () => {
         onAuthStateChanged(auth, (currentUser) => {
             if (currentUser && currentUser.emailVerified) {
                 console.log(currentUser)
-                router.push("/home")
+                setShow(false)
             }
             else {
                 setShow(false)
@@ -87,8 +91,8 @@ const SignUp = () => {
     const handleGoogle = async () => {
         try {
             await google()
-            toast.success("You are successfully logged in")
-            router.push("/home")
+
+            setValues({ ...values, username: auth.currentUser.displayName, email: auth.currentUser.email });
         }
         catch (e) {
             console.log(e)
@@ -98,14 +102,18 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true)
-
+        console.log("submit")
         try {
             const res2 = await register(values)
             console.log(res2)
 
             if (res2 === 'success') {
                 toast.success("You account are successfully created")
-                router.push(`/verifyemail`)
+                if (auth.currentUser.providerData[0].providerId === "password")
+                    router.push(`/verifyemail`)
+                else {
+                    router.push(`/home`)
+                }
             }
 
         } catch (error) {
@@ -124,15 +132,6 @@ const SignUp = () => {
                 <div className="w-full  md:h-screen  sm:h-full  bg-gray-500 ">
                     <ToastContainer
                         position="top-center"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme="light"
                     />
                     <div className="w-full   ">
                         <div className="backdrop-blur-sm">
@@ -156,6 +155,7 @@ const SignUp = () => {
                                                     {...input}
                                                     value={values[input.name]}
                                                     onChange={onChange}
+                                                    google={auth.currentUser && auth.currentUser.providerData[0].providerId !== "password"}
                                                 />
                                             ))}
 
@@ -180,7 +180,7 @@ const SignUp = () => {
                                             </div>
                                             <button
                                                 type="submit"
-                                                className={`w-full text-slate-700  ${loading ? 'bg-yellow-200 ' :'bg-yellow-400 hover:bg-yellow-500 '} focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-primary-800`}
+                                                className={`w-full text-slate-700  ${loading ? 'bg-yellow-200 ' : 'bg-yellow-400 hover:bg-yellow-500 '} focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  dark:focus:ring-primary-800`}
                                                 disabled={loading ? true : false}
                                             >
                                                 {loading ? "Creating Account..." : "Create an account"}

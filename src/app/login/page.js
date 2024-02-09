@@ -47,7 +47,7 @@ const Login = () => {
         onAuthStateChanged(auth, (currentUser) => {
             if (currentUser && currentUser.emailVerified) {
                 console.log(currentUser)
-                router.push("/home")
+                setShow(false)
             }
             else {
                 setShow(false)
@@ -97,15 +97,6 @@ const Login = () => {
                             <Navbar />
                             <ToastContainer
                                 position="top-center"
-                                autoClose={5000}
-                                hideProgressBar={false}
-                                newestOnTop={false}
-                                closeOnClick
-                                rtl={false}
-                                pauseOnFocusLoss
-                                draggable
-                                pauseOnHover
-                                theme="light"
                             />
                             <div className="flex flex-col items-center justify-center px-2 py-4 mt-5  mx-auto lg:py-0 w-fll">
 

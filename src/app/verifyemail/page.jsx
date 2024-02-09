@@ -5,14 +5,11 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link'
 import { auth } from '../../utils/firebase';
 import { onAuthStateChanged } from "firebase/auth";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Verify = () => {
 
-    const [error, setError] = useState('')
-    const [msg, setMsg] = useState('')
     const [email, setEmail] = useState('')
-
-
     const [timer, setTimer] = useState(30);
 
 
@@ -38,7 +35,7 @@ const Verify = () => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser && !currentUser.emailVerified) {
+            if (currentUser && currentUser.emailVerified) {
                 console.log(currentUser)
                 setEmail(currentUser.email)
             }
@@ -54,6 +51,7 @@ const Verify = () => {
         setTimer(30)
         try {
             const isverify = await EmailVerify()
+            toast.success("We have e-mailed your email verify link!")
             console.log(isverify) // too many request error 
 
         } catch (error) {
@@ -71,6 +69,9 @@ const Verify = () => {
         <>
             {!email ? "Something wrong" : (
                 <div className="w-full">
+                    <ToastContainer
+                        position="top-center"
+                    />
                     <div className="w-full h-screen md:h-screen bg-gray-500">
                         <div className="backdrop-blur-sm h-full">
                             <div className="flex flex-col items-center justify-center px-2 py-4 mx-auto md:h-screen lg:py-0 w-fll">
