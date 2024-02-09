@@ -1,19 +1,13 @@
-"use client"
-import { useEffect } from 'react';
-import { Banner, Statics, Projects, Services, Contact, Footer, Testimonials } from '@/components';
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from '../../utils/firebase';
-
-
+import {
+  Banner,
+  Statics,
+  Projects,
+  Services,
+  Contact,
+  Footer,
+  Testimonials,
+} from '@/components';
 export default function Home() {
-  
-  useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser && currentUser.emailVerified) {
-        console.log('currentUser', currentUser)
-      }
-    });
-  }, [auth])
   return (
     <main className="flex flex-col items-center">
       <Banner />
