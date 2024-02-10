@@ -1,6 +1,6 @@
 'use client';
 import { FcGoogle } from 'react-icons/fc';
-import { login, google } from '@/utils/firebaseMethods';
+import { login, google, logout } from '@/utils/firebaseMethods';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -42,7 +42,7 @@ export default function Login() {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
-        router.push('/home');
+        // router.push('/home');
       } else {
         setShow(false);
       }
@@ -51,9 +51,16 @@ export default function Login() {
 
   const handleGoogle = async () => {
     try {
-      await google();
-      toast.success('You are successfully logged in');
-      router.push('/home');
+      let res = await google();
+      console.log(res)
+      if (res) {
+        toast.success('You are successfully logged in');
+        router.push('/home');
+      }
+      else {
+        logout()
+        notify("User is not registered. Please register the user first.")
+      }
     } catch (e) {
       notify(e.message);
     }
@@ -125,11 +132,10 @@ export default function Login() {
                       </div>
                       <button
                         type="submit"
-                        className={`w-full mt-5 text-slate-700  ${
-                          loading
-                            ? 'bg-yellow-200 '
-                            : 'bg-yellow-400 hover:bg-yellow-500 '
-                        }  focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2 text-center  dark:focus:ring-primary-800`}
+                        className={`w-full mt-5 text-slate-700  ${loading
+                          ? 'bg-yellow-200 '
+                          : 'bg-yellow-400 hover:bg-yellow-500 '
+                          }  focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2 text-center  dark:focus:ring-primary-800`}
                         disabled={loading ? true : false}
                       >
                         {loading ? 'Logging in...' : 'Login'}
