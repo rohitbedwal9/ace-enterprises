@@ -1,3 +1,4 @@
+'use client';
 import { FcGoogle } from 'react-icons/fc';
 import { login, google } from '@/utils/firebaseMethods';
 import React, { useEffect, useState } from 'react';
