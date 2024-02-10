@@ -90,12 +90,18 @@ const SignUp = () => {
 
     const handleGoogle = async () => {
         try {
-            await google()
-
-            setValues({ ...values, username: auth.currentUser.displayName, email: auth.currentUser.email });
+            let res = await google()
+            console.log(res)
+            if (res !== 'success') {
+                toast.success("User logged in successful")
+                router.push("/home")
+            }
+            else {
+                setValues({ ...values, username: auth.currentUser.displayName, email: auth.currentUser.email });
+            }
         }
         catch (e) {
-            console.log(e)
+            toast.error(e)
         }
     }
 
@@ -114,6 +120,9 @@ const SignUp = () => {
                 else {
                     router.push(`/home`)
                 }
+            }
+            else {
+                alert("user already exist")
             }
 
         } catch (error) {

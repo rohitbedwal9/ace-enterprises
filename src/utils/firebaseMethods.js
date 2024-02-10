@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import { ref, set, update } from "firebase/database";
+import { ref, set, update, onValue } from "firebase/database";
 import { ref as sRef, listAll } from "firebase/storage";
 import { auth, database, storage } from "./firebase";
 
@@ -8,10 +8,11 @@ const defaultImg = 'https://e7.pngegg.com/pngimages/1004/160/png-clipart-compute
 export const register = async (form) => {
     console.log("register")
 
-
+    let google = null;
     try {
         if (auth.currentUser && auth.currentUser.providerData[0].providerId === "google.com") {
             console.log("google")
+            google = auth.currentUser
         }
         else {
             console.log("user")
@@ -108,16 +109,24 @@ export const google = async () => {
     // console.log('userData :>> ', userData);
     const data = userData.user
 
-    let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
+    const dbRef = ref(database, 'users/' + data.uid);
+    onValue(dbRef, (snapshot) => {
+        if (snapshot.exists) {
+            console.log("User already Exist")
+            // let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
 
-    // await set(ref(database, 'users/' + data.uid), {
-    //     username: data.displayName,
-    //     email: data.email,
-    //     profile_picture: data.photoURL
-    // });
-    await update(ref(database, 'users/' + data.uid), {
-        last_login: time
+            // update(ref(database, 'users/' + data.uid), {
+            //     last_login: time
+            // });
+            return 'already'
+        }
+        else {
+            console.log("new login")
+            return 'success'
+        }
+
     });
+
 
 }
 
