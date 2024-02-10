@@ -8,7 +8,7 @@ import { auth } from '../../utils/firebase';
 import { logout } from '../../utils/firebaseMethods';
 import Image from 'next/image';
 
-export const Navbar = () => {
+export const Navbar = ({ transparent }) => {
   const [showMe, setShowMe] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [dropdownOn, setDropdownOn] = useState(false);
@@ -35,28 +35,26 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="flex flex-col w-full">
-      <div className="navbar flex bg-transparent justify-between items-center w-full pt-5 px-10 sm:py-6  ">
+    <navbar
+      className={`flex flex-col w-full ${
+        transparent ? 'bg-transparent' : 'bg-blue-500'
+      }`}
+    >
+      <nav className="navbar flex justify-between items-center w-full py-5 px-10 sm:py-6 ">
         <div className="md:hidden">
           <button
             style={{ display: showMe ? 'none' : 'block' }}
             title="Toggle Menu"
             onClick={toggle}
+            className="text-white"
           >
             <GiHamburgerMenu size={25} />
           </button>
-          <button
-            style={{ display: showMe ? 'block' : 'none' }}
-            title="Toggle Menu"
-            onClick={toggle}
-          >
-            <CgClose size={25} />
-          </button>
         </div>
-        <div className="logo flex flex-1 hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold select-none">
+        <div className="logo  flex-1 hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold">
           Ace-Enterprises
         </div>
-        <div className="hidden flex flex-1 md:flex text-lg justify-between bg-gray-900 p-2 rounded-3xl text-white">
+        <div className="hidden  flex-1 md:flex text-lg justify-between bg-gray-900 p-2 rounded-3xl text-white">
           <Link
             href="/"
             className="  hover:bg-gray-400 font-semibold px-2 rounded-3xl focus:opacity-70"
@@ -77,18 +75,18 @@ export const Navbar = () => {
           </Link>
           <Link
             href="/contact"
-            className="  hover:bg-gray-400 px-2 font-semibold rounded-3xl focus:opacity-70"
+            className=" hover:bg-gray-400 px-2 font-semibold rounded-3xl focus:opacity-70"
           >
             Contact
           </Link>
           <Link
             href="/faq"
-            className="  hover:bg-gray-400 px-2  font-semibold rounded-3xl focus:opacity-70"
+            className=" hover:bg-gray-400 px-2  font-semibold rounded-3xl focus:opacity-70"
           >
             FAQ
           </Link>
         </div>
-        <div className='flex flex-1 justify-end'>
+        <div className="flex flex-1 justify-end">
           {isLogin ? (
             <div className=" rounded-md">
               <div className="relative">
@@ -99,8 +97,9 @@ export const Navbar = () => {
                   height={40}
                   alt="Profile Picture"
                   loader={myLoader}
-                  src={`${data.photoURL ? data.photoURL : '/images/default.jpg'
-                    }`}
+                  src={`${
+                    data.photoURL ? data.photoURL : '/images/default.jpg'
+                  }`}
                   className="rounded-full"
                 />
 
@@ -118,7 +117,6 @@ export const Navbar = () => {
                       className="cursor-pointer block px-4 py-2 text-sm text-gray-500 rounded-lg hover:bg-gray-50 hover:text-gray-700"
                     >
                       Logout
-
                     </div>
                   </div>
                 </div>
@@ -126,52 +124,45 @@ export const Navbar = () => {
             </div>
           ) : (
             <Link href="/signup">
-              <button className="flex  items-center border-2 border-black  hover:bg-gray-900 hover:text-white p-2 rounded-3xl font-semibold sm:text-lg shadow-lg ">
+              <button className="flex  items-center border-2 border-white text-white  hover:bg-gray-900 hover:text-white p-2 rounded-3xl hover:border-black sm:text-lg shadow-lg ">
                 Sign Up
               </button>
             </Link>
           )}
         </div>
-      </div>
+      </nav>
 
-      <div
-        style={{ display: showMe ? 'block' : 'none' }}
-        className="bg-gray-900 text-white w-max  rounded-xl p-10 z-10 fixed top-20 left-1"
+      <menu
+        style={{ display: showMe ? 'flex' : 'none' }}
+        className=" bg-blue-400 text-white overflow-hidden  w-full h-full  pt-7 px-10 fixed left-0 top-0 flex flex-col gap-6 text-lg font-semibold"
       >
-        <div className="flex flex-col gap-6 text-lg font-semibold">
-          <div className="w-max  text-xl  text-yellow-300">Ace-Enterprises</div>
-          <Link
-            href="/"
-            className=" border-b-2 border-white  w-max hover:text-gray-300"
-          >
-            Home
-          </Link>
-          <Link
-            href="/projects"
-            className=" border-b-2 border-white  w-max hover:text-gray-300"
-          >
-            Projects
-          </Link>
-          <Link
-            href="/about"
-            className="border-b-2 border-white  w-max hover:text-gray-300"
-          >
-            About
-          </Link>
-          <Link
-            href="/contact"
-            className="border-b-2 border-white  w-max hover:text-gray-300"
-          >
-            Contact
-          </Link>
-          <Link
-            href="/faq"
-            className="border-b-2 border-white  w-max hover:text-gray-300"
-          >
-            FAQ
-          </Link>
+        <button
+          style={{ display: showMe ? 'block' : 'none' }}
+          title="Toggle Menu"
+          className="text-white"
+          onClick={toggle}
+        >
+          <CgClose size={25} />
+        </button>
+        <div className="w-max text-yellow-300 border-yellow-300 border-2 text-xl p-2 ">
+          Ace-Enterprises
         </div>
-      </div>
-    </div>
+        <Link href="/" className=" border-b-2 border-white  w-max ">
+          Home
+        </Link>
+        <Link href="/projects" className=" border-b-2 border-white  w-max">
+          Projects
+        </Link>
+        <Link href="/about" className="border-b-2 border-white  w-max ">
+          About
+        </Link>
+        <Link href="/contact" className="border-b-2 border-white w-max 0">
+          Contact
+        </Link>
+        <Link href="/faq" className="border-b-2 border-white  w-max ">
+          FAQ
+        </Link>
+      </menu>
+    </navbar>
   );
 };

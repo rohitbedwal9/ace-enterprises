@@ -1,35 +1,25 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import { ref, set, update, onValue } from "firebase/database";
+import {  ref, set, update } from "firebase/database";
 import { ref as sRef, listAll } from "firebase/storage";
 import { auth, database, storage } from "./firebase";
 
 const defaultImg = 'https://e7.pngegg.com/pngimages/1004/160/png-clipart-computer-icons-user-profile-social-web-others-blue-social-media.png'
 
 export const register = async (form) => {
-    console.log("register")
-
-    let google = null;
     try {
-        if (auth.currentUser && auth.currentUser.providerData[0].providerId === "google.com") {
-            console.log("google")
-            google = auth.currentUser
-        }
-        else {
-            console.log("user")
-            const userData = await createUserWithEmailAndPassword(auth, form.email, form.password)
+        const userData = await createUserWithEmailAndPassword(auth, form.email, form.password)
 
-            await sendEmailVerification(userData.user)
-        }
-        const data = google ? auth.currentUser : userData.user
+        await sendEmailVerification(userData.user)
+        const data = userData.user
+
         let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
 
         await set(ref(database, 'users/' + data.uid), {
             name: form.username,
             email: form.email,
             number: form.number,
-            profile_picture: google ? auth.currentUser.photoURL : defaultImg,
-            last_login: time,
-            is_download: false
+            profile_picture: defaultImg,
+            last_login: time
         });
 
 
@@ -109,33 +99,18 @@ export const google = async () => {
     // console.log('userData :>> ', userData);
     const data = userData.user
 
-    const dbRef = ref(database, 'users/' + data.uid);
-    onValue(dbRef, (snapshot) => {
-        if (snapshot.exists) {
-            console.log("User already Exist")
-            // let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
+    let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
 
-            // update(ref(database, 'users/' + data.uid), {
-            //     last_login: time
-            // });
-            return 'already'
-        }
-        else {
-            console.log("new login")
-            return 'success'
-        }
-
+    await set(ref(database, 'users/' + data.uid), {
+        username: data.displayName,
+        email: data.email,
+        profile_picture: data.photoURL
+    });
+    await update(ref(database, 'users/' + data.uid), {
+        last_login: time
     });
 
-
 }
-
-export const saveDownloader = async (user) => {
-    await update(ref(database, 'users/' + user.uid), {
-        is_download: true
-    });
-}
-
 // export const ReadData = async (i) => {
 //     console.log("i", i)
 //     let index = i === '' ? '' : i;

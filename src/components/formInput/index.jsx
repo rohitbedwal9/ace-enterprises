@@ -1,8 +1,8 @@
+'use client'
 import { useState } from "react";
-
-const FormInput = (props) => {
+export const FormInput = (props) => {
     const [focused, setFocused] = useState(false);
-    const { label, errorMessage, disabled, onChange, id, google, ...inputProps } = props;
+    const { label, errorMessage, onChange, id, ...inputProps } = props;
 
     const handleFocus = (e) => {
         setFocused(true);
@@ -10,9 +10,9 @@ const FormInput = (props) => {
 
     return (
         <div >
-            <label className="block mt-4 mb-2 text-white text-sm font-medium text-gray-900 dark:text-white">{label}</label>
+            <label className="block mt-4 mb-2  text-sm font-medium text-white">{label}</label>
             <input
-                className={`  ${google && disabled ? 'bg-gray-400' :'bg-gray-50'} border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+                className=" border   sm:text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                 {...inputProps}
                 onChange={onChange}
                 onBlur={handleFocus}
@@ -20,11 +20,9 @@ const FormInput = (props) => {
                     inputProps.name === "confirmPassword" && setFocused(true)
                 }
                 focused={focused.toString()}
-                disabled={google && disabled ? true : false}
             />
             <span className="span">{errorMessage}</span>
         </div>
     );
 };
 
-export default FormInput;
