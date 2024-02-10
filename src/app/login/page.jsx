@@ -65,11 +65,6 @@ export default function Login() {
         logout()
         notify("User is not registered. Please register the user first.")
       }
-
-      await google();
-      toast.success('You are successfully logged in');
-      router.push('/home');
-
     } catch (e) {
       notify(e.message);
     }
@@ -141,12 +136,6 @@ export default function Login() {
                       </div>
                       <button
                         type="submit"
-
-                        className={`w-full mt-5 text-slate-700  ${loading
-                          ? 'bg-yellow-200 '
-                          : 'bg-yellow-400 hover:bg-yellow-500 '
-                          }  focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2 text-center  dark:focus:ring-primary-800`}
-
                         className={`w-full mt-5 text-slate-700  ${
                           loading
                             ? 'bg-yellow-200 '
