@@ -10,6 +10,7 @@ import { MiniNav, FormInput } from '@/components';
 import { ToastContainer, toast } from 'react-toastify';
 import { onValue } from 'firebase/database';
 
+
 const inputs = [
   {
     id: 1,
@@ -70,6 +71,7 @@ export default function SignUp() {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
         // router.push('/home');
+
       } else {
         setShow(false);
       }
@@ -78,6 +80,7 @@ export default function SignUp() {
 
   const handleGoogle = async () => {
     try {
+
       let res = await google()
       console.log(res)
       if (res) {
@@ -119,6 +122,7 @@ export default function SignUp() {
       notify(error)
     }
     setLoading(false)
+
   };
 
   const onChange = (e) => {
@@ -196,6 +200,7 @@ export default function SignUp() {
                       ? 'bg-yellow-200 '
                       : 'bg-yellow-400 hover:bg-yellow-500 '
                       } focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2 text-center  dark:focus:ring-primary-800`}
+
                     disabled={loading ? true : false}
                   >
                     {loading ? 'Creating Account...' : 'Create an account'}
