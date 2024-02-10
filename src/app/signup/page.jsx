@@ -4,11 +4,18 @@ import { register, google } from '@/utils/firebaseMethods';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged } from 'firebase/auth';
+
 import { auth, database } from '../../utils/firebase';
 import Link from 'next/link';
 import { MiniNav, FormInput } from '@/components';
 import { ToastContainer, toast } from 'react-toastify';
 import { onValue } from 'firebase/database';
+
+import { auth } from '../../utils/firebase';
+import Link from 'next/link';
+import { MiniNav, FormInput } from '@/components';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const inputs = [
   {
@@ -17,9 +24,14 @@ const inputs = [
     type: 'text',
     placeholder: 'Username',
     errorMessage:
+
       "Username should be minimum 3 characters and shouldn't include any special character!",
     label: 'Username',
     pattern: `[A-Za-z]{3}([A-Za-z]+ ?)*`,
+
+      "Username should be 3-16 characters and shouldn't include any special character!",
+    label: 'Username',
+    pattern: `^[A-Za-z0-9]{3,16}$`,
     required: true,
   },
   {
@@ -69,7 +81,7 @@ export default function SignUp() {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
-        // router.push('/home');
+
       } else {
         setShow(false);
       }
@@ -78,6 +90,7 @@ export default function SignUp() {
 
   const handleGoogle = async () => {
     try {
+
       let res = await google()
       console.log(res)
       if (res) {
@@ -119,6 +132,30 @@ export default function SignUp() {
       notify(error)
     }
     setLoading(false)
+
+      await google();
+      toast.success('You are successfully logged in');
+      router.push('/home');
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res2 = await register(values);
+      if (res2 === 'success') {
+        toast.success('You account are successfully created');
+        router.push(`/verifyemail`);
+      }
+    } catch (error) {
+      notify(error);
+    }
+    setLoading(false);
+
   };
 
   const onChange = (e) => {
@@ -192,10 +229,18 @@ export default function SignUp() {
                   </div>
                   <button
                     type="submit"
+
                     className={`w-full text-slate-700  ${loading
                       ? 'bg-yellow-200 '
                       : 'bg-yellow-400 hover:bg-yellow-500 '
                       } focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2 text-center  dark:focus:ring-primary-800`}
+
+                    className={`w-full text-slate-700  ${
+                      loading
+                        ? 'bg-yellow-200 '
+                        : 'bg-yellow-400 hover:bg-yellow-500 '
+                    } focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2 text-center  dark:focus:ring-primary-800`}
+
                     disabled={loading ? true : false}
                   >
                     {loading ? 'Creating Account...' : 'Create an account'}
