@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Card from '../card';
 import useDownloader from 'react-use-downloader';
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../utils/firebase';
-import { storage } from "../../utils/firebase";
-import { ref as sRef, getDownloadURL } from "firebase/storage";
+import { storage } from '../../utils/firebase';
+import { ref as sRef, getDownloadURL } from 'firebase/storage';
 import { ToastContainer, toast } from 'react-toastify';
 
 const data = [
@@ -63,73 +63,75 @@ const data = [
 
 export const Projects = () => {
   const { download } = useDownloader();
-  const [isUser, setIsUser] = useState(null)
+  const [isUser, setIsUser] = useState(null);
   const loginWarning = () => (
     <div>
       You must
-      <Link className='underline text-blue-400' href="/login"> login </Link>
+      <Link className="underline text-blue-400" href="/login">
+        {' '}
+        login{' '}
+      </Link>
       first.
     </div>
   );
   const verifyWarning = () => (
     <div>
       You must
-      <Link className='underline text-blue-400' href="/verifyemail"> verify your email </Link>
+      <Link className="underline text-blue-400" href="/verifyemail">
+        {' '}
+        verify your email{' '}
+      </Link>
       first.
     </div>
   );
-  const notify = (text) => text === "login" ? toast.warning(loginWarning) : toast.warning(verifyWarning);
+  const notify = (text) =>
+    text === 'login'
+      ? toast.warning(loginWarning)
+      : toast.warning(verifyWarning);
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser)
+      console.log(currentUser);
       if (currentUser && currentUser.emailVerified) {
-        setIsUser(currentUser)
-      }
-      else {
-        setIsUser(null)
+        setIsUser(currentUser);
+      } else {
+        setIsUser(null);
       }
     });
-  }, [auth])
-  console.log("user:", isUser)
+  }, [auth]);
+  console.log('user:', isUser);
   const onhandleClick = async (title) => {
-    const user = Object.getPrototypeOf = isUser
+    const user = (Object.getPrototypeOf = isUser);
     if (user && user.emailVerified) {
-      if (user.providerData[0].providerId == "google.com") {
-
+      if (user.providerData[0].providerId == 'google.com') {
         let foo = prompt('Type here');
 
         if (foo) {
           const fileReference = sRef(storage, `files/${title}.pdf`);
           await getDownloadURL(fileReference)
             .then((url) => {
-              download(url, `${title}.pdf`)
+              download(url, `${title}.pdf`);
             })
             .catch((error) => {
-              console.log(error.message)
-            })
+              console.log(error.message);
+            });
         }
-      }
-      else {
+      } else {
         const fileReference = sRef(storage, `files/${title}.pdf`);
         await getDownloadURL(fileReference)
           .then((url) => {
-            download(url, `${title}.pdf`)
+            download(url, `${title}.pdf`);
           })
           .catch((error) => {
-            console.log(error.message)
-          })
+            console.log(error.message);
+          });
       }
-
+    } else if (user) {
+      notify('verify');
+    } else {
+      notify('login');
     }
-    else if (user) {
-
-      notify("verify")
-    }
-    else {
-      notify("login")
-    }
-  }
+  };
   return (
     <div className="py-5 md:px-20">
       <ToastContainer
@@ -144,7 +146,7 @@ export const Projects = () => {
         pauseOnHover
         theme="light"
       />
-      <div className="flex md:flex-row gap-4 flex-col m-4 md:m-10 items-center">
+      <div className="flex md:flex-row gap-4 flex-col mx-5 md:mx-10 items-center">
         <div className="flex flex-col gap-4 p-4 md:p-10 align-center md:w-[70%]">
           <p className="text-xl md:text-2xl font-bold text-gray-800 ">
             What we do
@@ -169,14 +171,15 @@ export const Projects = () => {
         </div>
       </div>
 
-
-
-
       <div className="w-full flex-wrap h-100 flex md:flex-row flex-col  justify-center items-center">
         {data.map((project) => (
-          <Card key={project.id} project={project} onhandleClick={onhandleClick} />
+          <Card
+            key={project.id}
+            project={project}
+            onhandleClick={onhandleClick}
+          />
         ))}
       </div>
     </div>
   );
-}
+};
