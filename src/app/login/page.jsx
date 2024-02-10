@@ -58,7 +58,7 @@ export default function Login() {
         router.push('/home');
       }
       else {
-        logout()
+        logout() //no logout delete user here
         notify("User is not registered. Please register the user first.")
       }
     } catch (e) {
