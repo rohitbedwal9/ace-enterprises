@@ -62,7 +62,7 @@ export default function ForgotPassword() {
 
                 <form onSubmit={handleSubmit}>
                   <div>
-                    <label className="block mt-4 mb-2 text-white text-sm font-medium text-gray-900 dark:text-white">
+                    <label className="block mt-4 mb-2 text-white text-sm font-medium">
                       Enter your email address and we will send you a ink to
                       reset your password
                     </label>
@@ -105,7 +105,7 @@ export default function ForgotPassword() {
                     <button
                       onClick={() => setError('')}
                       type="button"
-                      className="bg-red-400 -mx-1.5 -my-1.5   hover:bg-red-500 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-red-400 inline-flex items-center justify-center h-8 w-8 "
+                      className="bg-red-400 -mx-1.5 -my-1.5 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-red-400 inline-flex items-center justify-center h-8 w-8 "
                       data-dismiss-target="#toast-default"
                       aria-label="Close"
                     >
@@ -131,7 +131,7 @@ export default function ForgotPassword() {
                     <button
                       onClick={() => setmsg('')}
                       type="button"
-                      className="bg-green-400 -mx-1.5 -my-1.5   hover:bg-green-500 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-red-400 inline-flex items-center justify-center h-8 w-8 "
+                      className="bg-green-400 -mx-1.5 -my-1.5   hover:bg-green-500 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5  inline-flex items-center justify-center h-8 w-8 "
                       data-dismiss-target="#toast-default"
                       aria-label="Close"
                     >
