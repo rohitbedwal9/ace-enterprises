@@ -16,6 +16,7 @@ const inputs = [
     name: 'username',
     type: 'text',
     placeholder: 'Username',
+    autoFillGoogle: true,
     errorMessage:
       "Username should be minimum 3 characters and shouldn't include any special character!",
     label: 'Username',
@@ -26,6 +27,7 @@ const inputs = [
     id: 2,
     name: 'email',
     type: 'email',
+    autoFillGoogle: true,
     placeholder: 'Email',
     errorMessage: 'It should be a valid email address!',
     label: 'Email',
@@ -35,6 +37,7 @@ const inputs = [
     id: 3,
     name: 'password',
     type: 'password',
+    autoFillGoogle: false,
     placeholder: 'Password',
     errorMessage:
       'Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!',
@@ -46,6 +49,7 @@ const inputs = [
     id: 4,
     name: 'number',
     type: 'tel',
+    autoFillGoogle: false,
     placeholder: 'Phone Number',
     errorMessage: 'Not a valid Phone Number',
     label: 'Phone Number',
@@ -62,6 +66,7 @@ export default function SignUp() {
     number: '',
   });
   const [show, setShow] = useState(true);
+  const [oldUser, setOldUser] = useState(true)
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const notify = (text) => toast.error(text);
@@ -77,15 +82,22 @@ export default function SignUp() {
   }, [auth]);
 
   const handleGoogle = async () => {
+    setValues({
+      username: '',
+      email: '',
+      password: '',
+      number: '',
+    })
     try {
       let res = await google()
-      console.log(res)
+
       if (res) {
         toast.success("User logged in successful")
         router.push("/home")
       }
       else {
-
+        setOldUser(false)
+        toast.info("Please Fill Empty Fields")
         setValues({ ...values, username: auth.currentUser.displayName, email: auth.currentUser.email });
       }
 
@@ -101,6 +113,12 @@ export default function SignUp() {
     console.log("submit")
     try {
       const res2 = await register(values)
+      setValues({
+        username: '',
+        email: '',
+        password: '',
+        number: '',
+      })
       console.log(res2)
 
       if (res2 === 'success') {
@@ -132,7 +150,7 @@ export default function SignUp() {
       ) : (
         <div className="w-full bg-[url(https://res.cloudinary.com/dppjj5yox/image/upload/v1705992514/acehub/images/temp-bg.jpg)] bg-cover h-full">
           <div className="nav-mini w-full pl-4 md:pl-16 pt-4  md:pt-6">
-            <MiniNav />
+            <MiniNav oldUser={oldUser} values={values} />
           </div>
           <ToastContainer
             position="top-center"
@@ -162,6 +180,8 @@ export default function SignUp() {
                       value={values[input.name]}
                       onChange={onChange}
                       className="p-2 my-0 w-full text-sm"
+                      disabled={oldUser ? false : true}
+
                     />
                   ))}
 
