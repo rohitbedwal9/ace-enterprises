@@ -3,7 +3,7 @@ import { useState } from "react";
 export const FormInput = (props) => {
     const [focused, setFocused] = useState(false);
     const { label, errorMessage, onChange, autoFillGoogle, id, disabled, ...inputProps } = props;
-    console.log(disabled)
+ 
     const handleFocus = (e) => {
         setFocused(true);
     };

@@ -4,9 +4,16 @@ import { useRouter } from 'next/navigation';
 
 export const MiniNav = ({ oldUser, values }) => {
   const router = useRouter();
-  let emptyfield = values.number === '' && values.password === ''
+
 
   const handleBack = () => {
+    let emptyfield=true
+    if (values.number && values.password) {
+      if (values.number === '' && values.password === '') {
+        emptyfield=false
+      }
+    }
+
     if (emptyfield && oldUser === false) {
       toast.error("Please Fill empty feilds")
     }
