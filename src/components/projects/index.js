@@ -4,10 +4,11 @@ import Link from 'next/link';
 import Card from '../card';
 import useDownloader from 'react-use-downloader';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../utils/firebase';
+import { auth, database } from '../../utils/firebase';
 import { storage } from '../../utils/firebase';
 import { ref as sRef, getDownloadURL } from 'firebase/storage';
 import { ToastContainer, toast } from 'react-toastify';
+import { ref, update } from 'firebase/database';
 
 const data = [
   {
@@ -108,8 +109,13 @@ export const Projects = () => {
       const fileReference = sRef(storage, `files/${title}.pdf`);
       await getDownloadURL(fileReference)
         .then((url) => {
-          toast.success("Downloading is started")
+
+          update(ref(database, 'users/' + user.uid), {
+            is_download: true
+          });
+
           download(url, `${title}.pdf`);
+          toast.success("File Downloaded Successfully")
         })
         .catch((error) => {
           console.log(error.message);
@@ -120,8 +126,7 @@ export const Projects = () => {
     } else {
       notify('login');
     }
-    toast.dismiss()
-    toast.success("Downloading is completed")
+
   };
   return (
     <div className="py-5 md:px-20">
