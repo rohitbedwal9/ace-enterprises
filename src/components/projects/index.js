@@ -99,38 +99,29 @@ export const Projects = () => {
       }
     });
   }, [auth]);
+
   console.log('user:', isUser);
   const onhandleClick = async (title) => {
     const user = (Object.getPrototypeOf = isUser);
     if (user && user.emailVerified) {
-      if (user.providerData[0].providerId == 'google.com') {
-        let foo = prompt('Type here');
 
-        if (foo) {
-          const fileReference = sRef(storage, `files/${title}.pdf`);
-          await getDownloadURL(fileReference)
-            .then((url) => {
-              download(url, `${title}.pdf`);
-            })
-            .catch((error) => {
-              console.log(error.message);
-            });
-        }
-      } else {
-        const fileReference = sRef(storage, `files/${title}.pdf`);
-        await getDownloadURL(fileReference)
-          .then((url) => {
-            download(url, `${title}.pdf`);
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
-      }
-    } else if (user) {
+      const fileReference = sRef(storage, `files/${title}.pdf`);
+      await getDownloadURL(fileReference)
+        .then((url) => {
+          toast.success("Downloading is started")
+          download(url, `${title}.pdf`);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+    else if (user) {
       notify('verify');
     } else {
       notify('login');
     }
+    toast.dismiss()
+    toast.success("Downloading is completed")
   };
   return (
     <div className="py-5 md:px-20">
