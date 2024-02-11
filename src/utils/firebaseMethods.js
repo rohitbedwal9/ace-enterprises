@@ -28,6 +28,7 @@ export const register = async (form) => {
             name: form.username,
             email: form.email,
             number: form.number,
+            role: "user",
             profile_picture: google ? auth.currentUser.photoURL : defaultImg,
             last_login: time,
             is_download: false
