@@ -37,7 +37,7 @@ export const Navbar = ({ transparent }) => {
   return (
     <navbar
       className={`flex flex-col w-full ${
-        transparent ? 'bg-transparent' : 'bg-blue-500'
+        transparent ? 'bg-transparent' : 'bg-gray-900'
       }`}
     >
       <nav className="navbar flex justify-between items-center w-full py-5 px-10 sm:py-6 ">
@@ -54,34 +54,58 @@ export const Navbar = ({ transparent }) => {
         <div className="logo  flex-1 hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold">
           Ace-Enterprises
         </div>
-        <div className="hidden  flex-1 md:flex text-lg justify-between bg-gray-900 p-2 rounded-3xl text-white">
+        <div
+          className={`hidden flex-1 md:flex text-xl justify-between text-white font-bold ${
+            transparent ? 'bg-gray-900 rounded-3xl p-2  ' : 'bg-transparent'
+          }`}
+        >
           <Link
             href="/"
-            className="  hover:bg-gray-400 font-semibold px-2 rounded-3xl focus:opacity-70"
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700  px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
           >
             Home
           </Link>
           <Link
             href="/projects"
-            className="  hover:bg-gray-400 font-semibold px-2 rounded-3xl focus:opacity-70"
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
           >
             Projects
           </Link>
           <Link
             href="/about"
-            className="  hover:bg-gray-400 px-2 font-semibold rounded-3xl focus:opacity-70"
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
           >
             About
           </Link>
           <Link
             href="/contact"
-            className=" hover:bg-gray-400 px-2 font-semibold rounded-3xl focus:opacity-70"
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
           >
             Contact
           </Link>
           <Link
             href="/faq"
-            className=" hover:bg-gray-400 px-2  font-semibold rounded-3xl focus:opacity-70"
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
           >
             FAQ
           </Link>
@@ -134,7 +158,7 @@ export const Navbar = ({ transparent }) => {
 
       <menu
         style={{ display: showMe ? 'flex' : 'none' }}
-        className=" bg-blue-400 text-white overflow-hidden  w-full h-full  pt-7 px-10 fixed left-0 top-0 flex flex-col gap-6 text-lg font-semibold"
+        className=" bg-gray-900 text-white overflow-hidden  w-full h-full  pt-7 px-10 fixed left-0 top-0 flex flex-col gap-6 text-lg font-semibold"
       >
         <button
           style={{ display: showMe ? 'block' : 'none' }}
