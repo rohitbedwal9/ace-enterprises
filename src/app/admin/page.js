@@ -5,36 +5,6 @@ import { onValue, ref } from 'firebase/database';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-
-const people = [
-    {
-        name: 'Jane Cooper',
-        title: 'Regional Paradigm Technician',
-        department: 'Optimization',
-        role: 'Admin',
-        email: 'jane.cooper@example.com',
-        image: 'https://bit.ly/33HnjK0',
-    },
-    {
-        name: 'John Doe',
-        title: 'Regional Paradigm Technician',
-        department: 'Optimization',
-        role: 'Tester',
-        email: 'john.doe@example.com',
-        image: 'https://bit.ly/3I9nL2D',
-    },
-    {
-        name: 'Veronica Lodge',
-        title: 'Regional Paradigm Technician',
-        department: 'Optimization',
-        role: ' Software Engineer',
-        email: 'veronica.lodge@example.com',
-        image: 'https://bit.ly/3vaOTe1',
-    },
-    // More people...
-];
-
-
 export default function Home() {
     const [admin, setAdmin] = useState(false)
     const [usersData, setusersData] = useState([])
@@ -54,9 +24,12 @@ export default function Home() {
         const dbref = ref(database, "users");
         onValue(dbref, (snapshot) => {
             let records = []
+           
             snapshot.forEach(childSnapshot => {
+                console.log(childSnapshot)
                 let keyname = childSnapshot.key;
                 let data = childSnapshot.val();
+                console.log(childSnapshot.key, childSnapshot.val())
                 records.push({ "keys": keyname, "data": data })
             })
             setusersData(records)
@@ -110,6 +83,11 @@ export default function Home() {
                                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Phone Number
                                             </th>
+                                            <th
+                                                scope="col"
+                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Last Login
+                                            </th>
 
                                             <th
                                                 scope="col"
@@ -123,7 +101,7 @@ export default function Home() {
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">
                                         {usersData.map((user, index) => (
-                                            <tr key={user.email}>
+                                            <tr key={index}>
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="flex items-center">
                                                         <div className="flex-shrink-0 h-10 w-10">
@@ -148,6 +126,10 @@ export default function Home() {
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     {user.data.number}
                                                 </td>
+
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    {user.data.last_login}
+                                                </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                     {user.data.is_download ? "Yes" : "No"}
                                                 </td>
@@ -166,7 +148,7 @@ export default function Home() {
                 </div>
             ) : (
                 <div >
-                        <h1 className='bg-red-400 text-white p-4 text-center my-4 '>Please Login as admin to see users</h1>
+                    <h1 className='bg-red-400 text-white p-4 text-center my-4 '>Please Login as admin to see users</h1>
                 </div>
             )}
 
