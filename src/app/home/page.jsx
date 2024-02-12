@@ -1,6 +1,7 @@
 import {
   Banner,
   Statics,
+  About,
   Projects,
   Services,
   Contact,
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="flex flex-col items-center">
       <Banner />
       <Statics />
+      <About/>
       <Services />
       <Projects />
       <Contact />
