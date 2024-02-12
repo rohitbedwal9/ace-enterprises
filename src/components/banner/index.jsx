@@ -1,5 +1,5 @@
 import { Navbar } from '../navbar';
-
+import Link from 'next/link';
 export const Banner = () => {
   return (
     <div className="w-full h-screen bg-[url('https://res.cloudinary.com/dppjj5yox/image/upload/v1707500791/acehub/images/construction-background2_pnbpfm.jpg')] bg-no-repeat bg-cover bg-center md:bg-top">
@@ -18,18 +18,21 @@ export const Banner = () => {
               </span>
             </h1>
             <div className="flex gap-2">
-              <button className="bg-black hover:bg-gray-800 text-white font-bold px-5 py-3 rounded-3xl flex gap-2 items-start">
+              <Link
+                href="/signup"
+                className="bg-black hover:bg-gray-800 text-white font-bold px-5 py-3 rounded-3xl flex gap-2 items-start"
+              >
                 Register
-              </button>
-              <button className="bg-transparent border-2 text-white border-white hover:text-white hover:bg-gray-800 hover:border-black  font-bold px-5 py-3 rounded-3xl flex gap-2 items-center">
+              </Link>
+              <Link
+                href="/contact"
+                className="bg-transparent border-2 text-white border-white hover:text-white hover:bg-gray-800 hover:border-black  font-bold px-5 py-3 rounded-3xl flex gap-2 items-center"
+              >
                 Contact
-              </button>
+              </Link>
             </div>
           </div>
-          <div
-            id="wrk"
-            className="image flex bg-[url(/images/construction-worker.jpg)] bg-cover bg-no-repeat justify-center md:ml-28  w-[240px] h-[300px] md:w-[400px] md:h-[500px] rounded-lg"
-          ></div>
+          <div className="image flex bg-[url(https://res.cloudinary.com/dppjj5yox/image/upload/v1707720859/acehub/images/construction-worker_ljtwmm.jpg)] bg-cover bg-no-repeat justify-center md:ml-28  w-[240px] h-[300px] md:w-[400px] md:h-[500px] rounded-lg"></div>
         </div>
       </div>
     </div>

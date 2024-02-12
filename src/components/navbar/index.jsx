@@ -31,7 +31,7 @@ export const Navbar = ({ transparent }) => {
   }, []);
 
   const myLoader = ({ src }) => {
-    return `${data.photoURL ? data.photoURL : '/images/default.jpg'}`;
+    return `${data.photoURL ? data.photoURL : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'}`;
   };
 
   return (
@@ -122,7 +122,7 @@ export const Navbar = ({ transparent }) => {
                   alt="Profile Picture"
                   loader={myLoader}
                   src={`${
-                    data.photoURL ? data.photoURL : '/images/default.jpg'
+                    data.photoURL ? data.photoURL : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
                   }`}
                   className="rounded-full"
                 />
