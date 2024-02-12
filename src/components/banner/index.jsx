@@ -27,8 +27,7 @@ export const Banner = () => {
             </div>
           </div>
           <div
-            id="wrk"
-            className="image flex bg-[url(/images/construction-worker.jpg)] bg-cover bg-no-repeat justify-center md:ml-28  w-[240px] h-[300px] md:w-[400px] md:h-[500px] rounded-lg"
+            className="image flex bg-[url(https://res.cloudinary.com/dppjj5yox/image/upload/v1707720859/acehub/images/construction-worker_ljtwmm.jpg)] bg-cover bg-no-repeat justify-center md:ml-28  w-[240px] h-[300px] md:w-[400px] md:h-[500px] rounded-lg"
           ></div>
         </div>
       </div>
