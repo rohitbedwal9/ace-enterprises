@@ -4,15 +4,28 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { onValue, ref } from 'firebase/database';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { IoFilter } from "react-icons/io5";
 
 export default function Home() {
     const [admin, setAdmin] = useState(false)
     const [usersData, setusersData] = useState([])
+    const [sort, setSort] = useState([])
 
     useEffect(() => {
 
         onAuthStateChanged(auth, (currentUser) => {
             if (currentUser && currentUser.emailVerified) {
+                const dbref = ref(database, "users");
+                onValue(dbref, (snapshot) => {
+                    let records = []
+
+                    snapshot.forEach(childSnapshot => {
+                        let keyname = childSnapshot.key;
+                        let data = childSnapshot.val();
+                        records.push({ "keys": keyname, "data": data })
+                    })
+                    setusersData(records)
+                })
                 setAdmin(true);
 
             } else {
@@ -21,40 +34,47 @@ export default function Home() {
             }
         });
 
-        const dbref = ref(database, "users");
-        onValue(dbref, (snapshot) => {
-            let records = []
-           
-            snapshot.forEach(childSnapshot => {
-                console.log(childSnapshot)
-                let keyname = childSnapshot.key;
-                let data = childSnapshot.val();
-                console.log(childSnapshot.key, childSnapshot.val())
-                records.push({ "keys": keyname, "data": data })
-            })
-            setusersData(records)
-        })
 
     }, [])
-    console.log(usersData)
+    const handleSort = () => {
+
+        let sortedusers = usersData.sort((a, b) =>
+            a.data.last_login.split('/').reverse().join().localeCompare(b.data.last_login.split('/').reverse().join()));
+        setSort(sortedusers)
+
+    }
+
+    useEffect(() => {
+        setusersData(sort)
+    }, [sort])
+
+
     return (
         <div className='main h-screen'>
             <nav className="w-full p-4 flex justify-around">
                 <div className='text-xl font-semibold'>Ace-Enterprises</div>
-                <div className='text-lg'>
-                    <Link href="/admin/login" className="bg-yellow-300 hover:bg-yellow-400   p-2 rounded-lg">Login</Link>
-                </div>
+                {!usersData ? (
+                    <div className='text-lg'>
+                        <Link href="/login" className="bg-yellow-300 hover:bg-yellow-400   p-2 rounded-lg">Login</Link>
+                    </div>
+                ) : ''}
+
             </nav>
             <div className="flex flex-col justify-center items-center ">
                 <div className="text-4xl">
                     Welcome Admin
                 </div>
             </div>
+
             {admin ? (
                 <div className="w-full flex flex-col my-5  ">
                     <div className=" overflow-x-auto sm:mx-6 lg:mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                <div className='bg-yellow-300 p-1'>
+                                    <button className='-mx-5 p-1 w-full flex justify-end items-center text-sm' onClick={handleSort}><IoFilter className='mx-2'/>sort</button>
+                                </div>
+                                
                                 <table className="min-w-full divide-y divide-gray-200">
                                     <thead className="bg-gray-50">
                                         <tr>
@@ -100,7 +120,7 @@ export default function Home() {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">
-                                        {usersData.map((user, index) => (
+                                        {usersData && usersData.map((user, index) => (
                                             <tr key={index}>
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="flex items-center">

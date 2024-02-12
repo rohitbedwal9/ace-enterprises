@@ -102,7 +102,7 @@ export const google = async () => {
         const dbref = ref(database, "users/" + data.uid);
         onValue(dbref, (snapshot) => {
             if (snapshot.exists()) {
-                let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
+                let time = new Date(data.metadata.lastSignInTime).toDateString(undefined, { timeZone: 'Asia/Kolkata' });
 
                 update(dbref, {
                     last_login: time
