@@ -62,7 +62,6 @@ export default function SignUp() {
     number: '',
   });
   const [show, setShow] = useState(true);
-  const [oldUser, setOldUser] = useState(true)
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const notify = (text) => toast.error(text);
@@ -70,7 +69,7 @@ export default function SignUp() {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
-        // router.push('/home');
+        router.push('/home');
 
       } else {
         setShow(false);

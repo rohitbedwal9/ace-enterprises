@@ -103,6 +103,7 @@ export const Projects = () => {
 
   console.log('user:', isUser);
   const onhandleClick = async (title) => {
+    console.log("click")
     const user = (Object.getPrototypeOf = isUser);
     if (user && user.emailVerified) {
 

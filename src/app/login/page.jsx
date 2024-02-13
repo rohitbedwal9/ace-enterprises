@@ -42,7 +42,7 @@ export default function Login() {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
-        // router.push('/home');
+        router.push('/home');
       } else {
         setShow(false);
       }

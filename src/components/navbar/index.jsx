@@ -40,8 +40,8 @@ export const Navbar = ({ transparent }) => {
         transparent ? 'bg-transparent' : 'bg-gray-900'
       }`}
     >
-      <nav className="navbar flex justify-between items-center w-full py-5 px-10 sm:py-6 ">
-        <div className="md:hidden">
+      <nav className="navbar z-50 flex justify-between items-center w-full py-5 px-10 sm:py-6 ">
+        <div className="md:hidden z-50">
           <button
             style={{ display: showMe ? 'none' : 'block' }}
             title="Toggle Menu"
@@ -51,7 +51,7 @@ export const Navbar = ({ transparent }) => {
             <GiHamburgerMenu size={25} />
           </button>
         </div>
-        <div className="logo  flex-1 hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold">
+        <div className="logo z-50 flex-1 hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold">
           Ace-Enterprises
         </div>
         <div
@@ -110,7 +110,7 @@ export const Navbar = ({ transparent }) => {
             FAQ
           </Link>
         </div>
-        <div className="flex flex-1 justify-end">
+        <div className="flex flex-1  justify-end">
           {isLogin ? (
             <div className=" rounded-md">
               <div className="relative">
@@ -158,7 +158,7 @@ export const Navbar = ({ transparent }) => {
 
       <menu
         style={{ display: showMe ? 'flex' : 'none' }}
-        className=" bg-gray-900 text-white overflow-hidden  w-full h-full  pt-7 px-10 fixed left-0 top-0 flex flex-col gap-6 text-lg font-semibold"
+        className=" bg-gray-900 z-50 text-white overflow-hidden  w-full h-full  pt-7 px-10 fixed left-0 top-0 flex flex-col gap-6 text-lg font-semibold"
       >
         <button
           style={{ display: showMe ? 'block' : 'none' }}
