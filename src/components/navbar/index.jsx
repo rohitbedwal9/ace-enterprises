@@ -31,14 +31,16 @@ export const Navbar = ({ transparent }) => {
   }, []);
 
   const myLoader = ({ src }) => {
-    return `${data.photoURL ? data.photoURL : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'}`;
+    return `${
+      data.photoURL
+        ? data.photoURL
+        : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
+    }`;
   };
 
   return (
     <navbar
-      className={`flex flex-col w-full ${
-        transparent ? 'bg-transparent' : 'bg-gray-900'
-      }`}
+      className={`w-full ${transparent ? 'bg-transparent' : 'bg-gray-900'}`}
     >
       <nav className="navbar flex justify-between items-center w-full py-5 px-10 sm:py-6 ">
         <div className="md:hidden">
@@ -51,11 +53,11 @@ export const Navbar = ({ transparent }) => {
             <GiHamburgerMenu size={25} />
           </button>
         </div>
-        <div className="logo  flex-1 hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold">
+        <div className="logo flex-1 hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold">
           Ace-Enterprises
         </div>
         <div
-          className={`hidden flex-1 md:flex text-xl justify-between text-white font-bold ${
+          className={`hidden flex-1 md:flex text-xl justify-around text-white font-bold ${
             transparent ? 'bg-gray-900 rounded-3xl p-2  ' : 'bg-transparent'
           }`}
         >
@@ -99,16 +101,6 @@ export const Navbar = ({ transparent }) => {
           >
             Contact
           </Link>
-          <Link
-            href="/faq"
-            className={`${
-              transparent
-                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
-                : 'hover:border-white border-b-2 border-transparent'
-            }`}
-          >
-            FAQ
-          </Link>
         </div>
         <div className="flex flex-1 justify-end">
           {isLogin ? (
@@ -122,7 +114,9 @@ export const Navbar = ({ transparent }) => {
                   alt="Profile Picture"
                   loader={myLoader}
                   src={`${
-                    data.photoURL ? data.photoURL : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
+                    data.photoURL
+                      ? data.photoURL
+                      : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
                   }`}
                   className="rounded-full"
                 />
@@ -147,11 +141,20 @@ export const Navbar = ({ transparent }) => {
               </div>
             </div>
           ) : (
-            <Link href="/signup">
-              <button className="flex  items-center border-2 border-white text-white  hover:bg-gray-900 hover:text-white p-2 rounded-3xl hover:border-black sm:text-lg shadow-lg ">
+            <div className="flex gap-2">
+              <Link
+                href="/login"
+                className="flex  bg-black border-2 border-black  items-center hover:bg-gray-90 text-white px-4 y-2 rounded-3xl hover:bg-gray-800 sm:text-lg shadow-lg "
+              >
+                Log In
+              </Link>
+              <Link
+                href="/signup"
+                className="flex  items-center  border-2   text-white p-2  rounded-3xl hover:border-black hover:bg-gray-800 sm:text-lg shadow-lg "
+              >
                 Sign Up
-              </button>
-            </Link>
+              </Link>
+            </div>
           )}
         </div>
       </nav>
