@@ -35,10 +35,9 @@ export const Footer = () => {
           </div>
           <div className="flex flex-col mt-2 gap-2">
             <Link href="/">Home</Link>
-            <Link href="/products">Projects</Link>
+            <Link href="/projects">Projects</Link>
             <Link href="/about">About</Link>
             <Link href="/contact">Contact</Link>
-            <Link href="/faq">FAQ</Link>
           </div>
         </div>
         <div>
@@ -46,11 +45,10 @@ export const Footer = () => {
             Projects
           </div>
           <div className="flex flex-col mt-2 gap-2">
-            <Link href="/">Home</Link>
-            <Link href="/products">Projects</Link>
-            <Link href="/about">About</Link>
-            <Link href="/contact">Contact</Link>
-            <Link href="/faq">FAQ</Link>
+            <Link href="/projects">Project 1</Link>
+            <Link href="/projects">Project 2</Link>
+            <Link href="/projects">Project 3</Link>
+            <Link href="/projects">Project 4</Link>
           </div>
         </div>
         <div>
