@@ -2,8 +2,8 @@ import { Navbar } from '../navbar';
 import Link from 'next/link';
 export const Banner = () => {
   return (
-    <div className="w-full h-screen z-10 bg-[url('https://res.cloudinary.com/dppjj5yox/image/upload/v1707500791/acehub/images/construction-background2_pnbpfm.jpg')] bg-no-repeat bg-cover bg-center md:bg-top">
-      <div className="backdrop-blur-md z-10 h-full">
+    <div className="w-full h-screen z-20  bg-[url('https://res.cloudinary.com/dppjj5yox/image/upload/v1707500791/acehub/images/construction-background2_pnbpfm.jpg')] bg-no-repeat bg-cover bg-center md:bg-top">
+      <div className="backdrop-blur-md z-20 h-full">
         <Navbar transparent={true} />
         <div className="w-full  flex flex-col-reverse gap-10 md:gap-20  justify-center items-center md:flex-row h-[70%] md:h-[90%]">
           <div className="content  md:ml-30 md:mb-20  md:mt-24 flex flex-col gap-6 justify-center items-start">

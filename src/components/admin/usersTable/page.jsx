@@ -25,8 +25,10 @@ export default function UserTable({ usersData, setusersData }) {
 
     const handleSort = () => {
 
-        let sortedusers = usersData.sort((a, b) =>
-            a.data.last_login.split('/').reverse().join().localeCompare(b.data.last_login.split('/').reverse().join()));
+        let sortedusers = usersData.sort((a, b) => {
+            return new Date(a.last_login).getTime() -
+                new Date(b.last_login).getTime()
+        }).reverse();
         setSort(sortedusers)
 
     }

@@ -67,14 +67,11 @@ export default function Home() {
             listAll(imageRef)
                 .then((res) => {
                     res.items.forEach((item) => {
-
                         getDownloadURL(item)
                             .then((url) => {
-
                                 setImageList((prev) => {
                                     return [...prev, url]
                                 })
-
                             })
                     })
                 })
