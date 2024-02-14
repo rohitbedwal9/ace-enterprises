@@ -3,37 +3,37 @@ import Image from 'next/image';
 const clientData = [
   {
     id: 1,
-    img: '/images/BinaryBridge.png',
+    img: 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721753/acehub/images/BinaryBridge_yj2avc.png',
     link: '/home',
   },
   {
     id: 2,
-    img: '/images/BinaryBridge.png',
+    img: 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721753/acehub/images/BinaryBridge_yj2avc.png',
     link: '/home',
   },
   {
     id: 3,
-    img: '/images/BinaryBridge.png',
+    img: 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721753/acehub/images/BinaryBridge_yj2avc.png',
     link: '/home',
   },
   {
     id: 4,
-    img: '/images/BinaryBridge.png',
+    img: 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721753/acehub/images/BinaryBridge_yj2avc.png',
     link: '/home',
   },
   {
     id: 5,
-    img: '/images/BinaryBridge.png',
+    img: 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721753/acehub/images/BinaryBridge_yj2avc.png',
     link: '/home',
   },
   {
     id: 6,
-    img: '/images/BinaryBridge.png',
+    img: 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721753/acehub/images/BinaryBridge_yj2avc.png',
     link: '/home',
   },
   {
     id: 7,
-    img: '/images/BinaryBridge.png',
+    img: 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721753/acehub/images/BinaryBridge_yj2avc.png',
     link: '/home',
   },
 ];
@@ -54,7 +54,7 @@ export const Testimonials = () => {
             nunc nec justo.
           </div>
           <div className="flex gap-4 items-center">
-            <div className="w-16 h-16 rounded-full bg-[url('/images/worker-croped.jpg')] bg-cover bg-no-repeat bg-center"></div>
+            <div className="w-16 h-16 rounded-full bg-[url('https://res.cloudinary.com/dppjj5yox/image/upload/v1707721666/acehub/images/worker-croped_doggdw.jpg')] bg-cover bg-no-repeat bg-center"></div>
             <div className="flex flex-col gap-2">
               <div className="text-lg md:text-2xl font-semibold md:font-bold">
                 John Doe
@@ -74,7 +74,7 @@ export const Testimonials = () => {
             nunc nec justo.
           </div>
           <div className="flex gap-4 items-center">
-            <div className="w-20 h-20 rounded-full bg-[url('/images/worker-croped.jpg')] bg-cover bg-no-repeat bg-center"></div>
+            <div className="w-20 h-20 rounded-full bg-[url('https://res.cloudinary.com/dppjj5yox/image/upload/v1707721666/acehub/images/worker-croped_doggdw.jpg')] bg-cover bg-no-repeat bg-center"></div>
             <div className="flex flex-col gap-2">
               <div className="text-lg md:text-2xl font-semibold md:font-bold">
                 John Doe
@@ -94,7 +94,7 @@ export const Testimonials = () => {
             nunc nec justo.
           </div>
           <div className="flex gap-4 items-center">
-            <div className="w-20 h-20 rounded-full bg-[url('/images/worker-croped.jpg')] bg-cover bg-no-repeat bg-center"></div>
+            <div className="w-20 h-20 rounded-full bg-[url('https://res.cloudinary.com/dppjj5yox/image/upload/v1707721666/acehub/images/worker-croped_doggdw.jpg')] bg-cover bg-no-repeat bg-center"></div>
             <div className="flex flex-col gap-2">
               <div className="text-lg md:text-2xl font-semibold md:font-bold">
                 John Doe

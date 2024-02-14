@@ -2,6 +2,7 @@
 import {
   Banner,
   Statics,
+  About,
   Projects,
   Services,
   Contact,
@@ -32,6 +33,7 @@ export default function Home() {
         </div>
       </div>
       <Statics />
+      <About/>
       <Services />
       <Projects />
       <Contact />

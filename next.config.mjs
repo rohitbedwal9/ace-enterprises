@@ -3,7 +3,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 't3.ftcdn.net',
+        hostname: 'res.cloudinary.com',
       },
     ],
   },

@@ -1,10 +1,10 @@
 module.exports = {
-    images: {
-        domains: ['localhost','theacehub.co.in'],
-       remotePatterns: [
+  images: {
+    domains: ['localhost', 'theacehub.co.in'],
+    remotePatterns: [
       {
-        hostname: 't3.ftcdn.net',
-      },
+        hostname: 'res.cloudinary.com',
+      }
     ],
-    },
-}
+  },
+};

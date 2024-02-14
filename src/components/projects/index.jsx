@@ -14,49 +14,49 @@ const data = [
   {
     id: 1,
     imgUrl:
-      'https://t3.ftcdn.net/jpg/03/20/36/32/360_F_320363200_5OmTMzWXKD86jBvsiraMbZCA0uSKyGtt.jpg',
+      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
     title: 'Project 1',
     desc: 'Bridge',
   },
   {
     id: 2,
     imgUrl:
-      'https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg',
+      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
     title: 'Project 2',
     desc: 'Road',
   },
   {
     id: 3,
     imgUrl:
-      'https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg',
+      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
     title: 'Project 3',
     desc: 'Buiding',
   },
   {
     id: 4,
     imgUrl:
-      'https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg',
+      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
     title: 'Project 4',
     desc: 'Buiding',
   },
   {
     id: 5,
     imgUrl:
-      'https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg',
+      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
     title: 'Project 5',
     desc: 'Buiding',
   },
   {
     id: 6,
     imgUrl:
-      'https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg',
+      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
     title: 'Project 6',
     desc: 'Buiding',
   },
   {
     id: 7,
     imgUrl:
-      'https://t3.ftcdn.net/jpg/03/31/59/82/360_F_331598222_tadTdFeI0WxEmyGFoWuMTlEK1jNu2Xhl.jpg',
+      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
     title: 'Project 7',
     desc: 'Buiding',
   },
@@ -103,32 +103,28 @@ export const Projects = () => {
 
   console.log('user:', isUser);
   const onhandleClick = async (title) => {
-    console.log("click")
     const user = (Object.getPrototypeOf = isUser);
     if (user && user.emailVerified) {
-
       const fileReference = sRef(storage, `files/${title}.pdf`);
       await getDownloadURL(fileReference)
         .then((url) => {
-
           update(ref(database, 'users/' + user.uid), {
-            is_download: true
+            is_download: true,
           });
 
           download(url, `${title}.pdf`);
-          toast.success("File Downloaded Successfully")
+          toast.success('File Downloaded Successfully');
         })
         .catch((error) => {
           console.log(error.message);
         });
-    }
-    else if (user) {
+    } else if (user) {
       notify('verify');
     } else {
       notify('login');
     }
-
   };
+
   return (
     <div className="py-5 md:px-20">
       <ToastContainer
