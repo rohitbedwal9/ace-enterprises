@@ -1,47 +1,46 @@
 'use client'
-import { useState } from 'react';
-import { sendPasswordResetEmail } from 'firebase/auth';
+import { useEffect, useState } from 'react';
+import { onAuthStateChanged, sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../utils/firebase';
 import Link from 'next/link';
-import { IoIosClose } from 'react-icons/io';
-import { MdErrorOutline } from 'react-icons/md';
 import { MiniNav } from '@/components';
+import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
-  const [show, setShow] = useState(false);
-  const [error, setError] = useState('');
+  const [show, setShow] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [msg, setmsg] = useState('');
+  const router = useRouter();
 
-  const inputs = [
-    {
-      id: 1,
-      name: 'email',
-      type: 'email',
-      placeholder: 'Enter your email address',
-      errorMessage: 'It should be a valid email address!',
-      label:
-        'Enter your email address and we will send you a link to reset your password',
-      required: true,
-    },
-  ];
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
 
     try {
-      const res2 = await sendPasswordResetEmail(auth, email);
-      setmsg('Email send successfully');
+     await sendPasswordResetEmail(auth, email);
+      toast.success('Email send successfully');
     } catch (error) {
       if (error.message === 'Firebase: Error (auth/invalid-email).') {
-        setError('Invalid email.');
+        toast.error('Invalid email.');
       }
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser && currentUser.emailVerified) {
+        router.push('/home');
+
+      } else {
+        setShow(false);
+      }
+    });
+  }, [auth]);
+
 
   return (
     <>
@@ -52,7 +51,18 @@ export default function ForgotPassword() {
           <div className="nav-mini  w-full pl-4 md:pl-16 pt-4  md:pt-6">
             <MiniNav />
           </div>
-
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           <div className="w-full h-[90%] flex items-center justify-center px-2 py-4 lg:py-0 ">
             <div className="w-full rounded-lg shadow bg-gray-900 md:mt-0 sm:max-w-md xl:p-0">
               <div className="p-6  sm:px-8">
@@ -87,60 +97,7 @@ export default function ForgotPassword() {
                   <Link href="login">back to login page</Link>
                 </div>
               </div>
-              <div className="mb-4 flex justify-center">
-                {error === '' ? (
-                  ''
-                ) : (
-                  <div
-                    id="toast-default"
-                    className="flex items-center  max-w-xs px-4 py-3  bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
-                    role="alert"
-                  >
-                    <div className="flex items-center  max-w-xs px-4 py-3 text-white bg-red-400  rounded-lg shadow dark:text-white dark:bg-red-400">
-                      <MdErrorOutline />
-                    </div>
-                    <div className="mx-3 text-sm font-bold text-red-400">
-                      {error}
-                    </div>
-                    <button
-                      onClick={() => setError('')}
-                      type="button"
-                      className="bg-red-400 -mx-1.5 -my-1.5 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-red-400 inline-flex items-center justify-center h-8 w-8 "
-                      data-dismiss-target="#toast-default"
-                      aria-label="Close"
-                    >
-                      <span className="sr-only">Close</span>
-                      <IoIosClose size={25} color="white" />
-                    </button>
-                  </div>
-                )}
-                {msg === '' ? (
-                  ''
-                ) : (
-                  <div
-                    id="toast-default"
-                    className="flex items-center  max-w-xs px-4 py-3  bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
-                    role="alert"
-                  >
-                    <div className="flex items-center  max-w-xs px-4 py-3 text-white bg-green-400  rounded-lg shadow dark:text-white dark:bg-red-400">
-                      <MdErrorOutline />
-                    </div>
-                    <div className="mx-3 text-sm font-bold text-green-400">
-                      {msg}
-                    </div>
-                    <button
-                      onClick={() => setmsg('')}
-                      type="button"
-                      className="bg-green-400 -mx-1.5 -my-1.5   hover:bg-green-500 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5  inline-flex items-center justify-center h-8 w-8 "
-                      data-dismiss-target="#toast-default"
-                      aria-label="Close"
-                    >
-                      <span className="sr-only">Close</span>
-                      <IoIosClose size={25} color="white" />
-                    </button>
-                  </div>
-                )}
-              </div>
+              
             </div>
           </div>
         </div>

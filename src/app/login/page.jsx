@@ -42,7 +42,7 @@ export default function Login() {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
-        // router.push('/home');
+        router.push('/home');
       } else {
         setShow(false);
       }
@@ -53,14 +53,11 @@ export default function Login() {
     try {
       let res = await google();
       console.log(res)
-      if (res) {
+      if (res === "success") {
         toast.success('You are successfully logged in');
         router.push('/home');
       }
-      else {
-        logout() //no logout delete user here
-        notify("User is not registered. Please register the user first.")
-      }
+
     } catch (e) {
       notify(e.message);
     }

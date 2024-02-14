@@ -124,6 +124,7 @@ export const Projects = () => {
       notify('login');
     }
   };
+
   return (
     <div className="py-5 md:px-20">
       <ToastContainer

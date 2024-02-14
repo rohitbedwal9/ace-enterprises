@@ -2,7 +2,7 @@
 import { useState } from "react";
 export const FormInput = (props) => {
     const [focused, setFocused] = useState(false);
-    const { label, errorMessage, onChange, autoFillGoogle, id, disabled, ...inputProps } = props;
+    const { label, errorMessage, onChange, id, ...inputProps } = props;
  
     const handleFocus = (e) => {
         setFocused(true);
@@ -20,7 +20,6 @@ export const FormInput = (props) => {
                     inputProps.name === "confirmPassword" && setFocused(true)
                 }
                 focused={focused.toString()}
-                disabled={autoFillGoogle && disabled}
             />
             <span className="span">{errorMessage}</span>
         </div>
