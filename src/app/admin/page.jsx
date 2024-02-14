@@ -7,6 +7,7 @@ import { ref as Sref, uploadBytes, listAll, getDownloadURL } from 'firebase/stor
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Projects from '@/components/admin/projects/page';
+import { logout } from '@/utils/firebaseMethods';
 
 
 
@@ -18,37 +19,40 @@ export default function Home() {
     const [imageList, setImageList] = useState([])
 
     useEffect(() => {
+        function fetchUser() {
+            onAuthStateChanged(auth, (currentUser) => {
+                if (currentUser && currentUser.emailVerified) {
+                    console.log(currentUser)
+                    const dbref = ref(database, "users");
+                    onValue(dbref, (snapshot) => {
+                        let records = []
 
-        onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser && currentUser.emailVerified) {
-                const dbref = ref(database, "users");
-                onValue(dbref, (snapshot) => {
-                    let records = []
-
-                    snapshot.forEach(childSnapshot => {
-                        let keyname = childSnapshot.key;
-                        let data = childSnapshot.val();
-                        records.push({ "keys": keyname, "data": data })
+                        snapshot.forEach(childSnapshot => {
+                            let keyname = childSnapshot.key;
+                            let data = childSnapshot.val();
+                            records.push({ "keys": keyname, "data": data })
+                        })
+                        setusersData(records)
                     })
-                    setusersData(records)
-                })
-                setAdmin(true);
+                    setAdmin(true);
 
-            } else {
-                setAdmin(false);
-                return;
-            }
-        });
+                } else {
+                    setAdmin(false);
+                    return;
+                }
+            });
+        }
+
         if (showAll) {
             setShowAll(true)
         }
-
-    }, [showAll])
-
-
+        return () => fetchUser()
+    }, [])
 
 
-  
+
+
+
     function uploadImage() {
 
         if (imageUpload === null) return;
@@ -79,17 +83,24 @@ export default function Home() {
         showImage()
     }, [])
 
-
-
+    const handleLogout = () => {
+        logout()
+        setAdmin(false)
+    }
+ 
     return (
         <div className='main h-screen'>
             <nav className="w-full p-4 flex justify-around">
                 <div className='text-xl font-semibold'>Ace-Enterprises</div>
-                {!usersData ? (
+                {!admin ? (
                     <div className='text-lg'>
                         <Link href="/login" className="bg-yellow-300 hover:bg-yellow-400   p-2 rounded-lg">Login</Link>
                     </div>
-                ) : ''}
+                ) : (
+                    <div>
+                        <button onClick={handleLogout}>Logout</button>
+                    </div>
+                )}
 
             </nav>
             <div className="flex flex-col justify-center items-center ">
@@ -105,7 +116,7 @@ export default function Home() {
                     <h1 className='text-4xl font-bold text-center my-4'>Projects</h1>
 
 
-                    <Projects usersData={usersData}/>
+                    <Projects usersData={usersData} />
                 </div>
 
             ) : (

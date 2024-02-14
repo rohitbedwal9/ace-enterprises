@@ -13,7 +13,7 @@ export const register = async (form) => {
         const userData = await createUserWithEmailAndPassword(auth, form.email, form.password)
         const data = userData.user
 
-        let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
+        let time = new Date(data.metadata.lastSignInTime).toLocaleDateString(undefined, { timeZone: 'Asia/Kolkata' });
 
         await set(ref(database, 'users/' + data.uid), {
             name: form.username,
@@ -29,7 +29,7 @@ export const register = async (form) => {
         return "success"
 
     } catch (error) {
-      
+
         if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
             throw "Email already in use"
         }
@@ -51,7 +51,7 @@ export const login = async (form) => {
         const userData = await signInWithEmailAndPassword(auth, form.email, form.password)
         const data = userData.user
 
-        let time = new Date(data.metadata.lastSignInTime).toLocaleString(undefined, { timeZone: 'Asia/Kolkata' });
+        let time = new Date(data.metadata.lastSignInTime).toLocaleDateString(undefined, { timeZone: 'Asia/Kolkata' });
 
         await update(ref(database, 'users/' + data.uid), {
             last_login: time
@@ -80,7 +80,7 @@ export const logout = async () => {
 }
 
 export const EmailVerify = async () => {
-   
+
     try {
         await sendEmailVerification(auth.currentUser)
         return 'success'
@@ -102,7 +102,7 @@ export const google = async () => {
         const dbref = ref(database, "users/" + data.uid);
         onValue(dbref, (snapshot) => {
             if (snapshot.exists()) {
-                let time = new Date(data.metadata.lastSignInTime).toDateString(undefined, { timeZone: 'Asia/Kolkata' });
+                let time = new Date(data.metadata.lastSignInTime).toLocaleDateString(undefined, { timeZone: 'Asia/Kolkata' });
 
                 update(dbref, {
                     last_login: time
