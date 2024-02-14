@@ -31,18 +31,15 @@ export const Navbar = ({ transparent }) => {
   }, []);
 
   const myLoader = ({ src }) => {
-    return `${
-      data.photoURL
-        ? data.photoURL
-        : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
-    }`;
+    return `${data.photoURL
+      ? data.photoURL
+      : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
+      }`;
   };
 
   return (
-    <navbar
-      className={`w-full ${transparent ? 'bg-transparent' : 'bg-gray-900'}`}
-    >
-      <nav className="navbar z-50 flex justify-between items-center w-full py-5 px-10 sm:py-6 ">
+    <div>
+      <nav className={`w-full ${transparent ? 'bg-transparent' : 'bg-gray-900'} navbar z-50 flex  justify-between items-center w-full py-5 px-10 sm:py-6 `}>
         <div className="md:hidden z-50">
           <button
             style={{ display: showMe ? 'none' : 'block' }}
@@ -57,47 +54,42 @@ export const Navbar = ({ transparent }) => {
           Ace-Enterprises
         </div>
         <div
-          className={`hidden flex-1 md:flex text-xl justify-around text-white font-bold ${
-            transparent ? 'bg-gray-900 rounded-3xl p-2  ' : 'bg-transparent'
-          }`}
+          className={`hidden flex-1 md:flex text-xl justify-around text-white font-bold ${transparent ? 'bg-gray-900 rounded-3xl p-2  ' : 'bg-transparent'
+            }`}
         >
           <Link
             href="/"
-            className={`${
-              transparent
-                ? 'hover:bg-gray-700  px-2 rounded-3xl focus:opacity-70'
-                : 'hover:border-white border-b-2 border-transparent'
-            }`}
+            className={`${transparent
+              ? 'hover:bg-gray-700  px-2 rounded-3xl focus:opacity-70'
+              : 'hover:border-white border-b-2 border-transparent'
+              }`}
           >
             Home
           </Link>
           <Link
             href="/projects"
-            className={`${
-              transparent
-                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
-                : 'hover:border-white border-b-2 border-transparent'
-            }`}
+            className={`${transparent
+              ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+              : 'hover:border-white border-b-2 border-transparent'
+              }`}
           >
             Projects
           </Link>
           <Link
             href="/about"
-            className={`${
-              transparent
-                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
-                : 'hover:border-white border-b-2 border-transparent'
-            }`}
+            className={`${transparent
+              ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+              : 'hover:border-white border-b-2 border-transparent'
+              }`}
           >
             About
           </Link>
           <Link
             href="/contact"
-            className={`${
-              transparent
-                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
-                : 'hover:border-white border-b-2 border-transparent'
-            }`}
+            className={`${transparent
+              ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+              : 'hover:border-white border-b-2 border-transparent'
+              }`}
           >
             Contact
           </Link>
@@ -113,11 +105,10 @@ export const Navbar = ({ transparent }) => {
                   height={40}
                   alt="Profile Picture"
                   loader={myLoader}
-                  src={`${
-                    data.photoURL
-                      ? data.photoURL
-                      : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
-                  }`}
+                  src={`${data.photoURL
+                    ? data.photoURL
+                    : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
+                    }`}
                   className="rounded-full"
                 />
 
@@ -144,7 +135,7 @@ export const Navbar = ({ transparent }) => {
             <div className="flex gap-2">
               <Link
                 href="/login"
-                className="flex  bg-black border-2 border-black  items-center hover:bg-gray-90 text-white px-4 y-2 rounded-3xl hover:bg-gray-800 sm:text-lg shadow-lg "
+                  className={`flex  bg-black border-2 ${transparent ? 'border-black' : 'border-white'}   items-center hover:bg-gray-90 text-white px-4 y-2 rounded-3xl hover:bg-gray-800 sm:text-lg shadow-lg `}
               >
                 Log In
               </Link>
@@ -190,6 +181,6 @@ export const Navbar = ({ transparent }) => {
           FAQ
         </Link>
       </menu>
-    </navbar>
+    </div>
   );
 };
