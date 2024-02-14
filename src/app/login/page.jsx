@@ -52,7 +52,7 @@ export default function Login() {
   const handleGoogle = async () => {
     try {
       let res = await google();
-      console.log(res)
+    
       if (res === "success") {
         toast.success('You are successfully logged in');
         router.push('/home');

@@ -92,7 +92,7 @@ export const Projects = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
+    
       if (currentUser && currentUser.emailVerified) {
         setIsUser(currentUser);
       } else {
@@ -101,7 +101,7 @@ export const Projects = () => {
     });
   }, [auth]);
 
-  console.log('user:', isUser);
+  
   const onhandleClick = async (title) => {
     const user = (Object.getPrototypeOf = isUser);
     if (user && user.emailVerified) {

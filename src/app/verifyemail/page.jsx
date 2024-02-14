@@ -39,7 +39,7 @@ const Verify = () => {
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
             if (currentUser && !currentUser.emailVerified) {
-                console.log(currentUser)
+               
                 setEmail(currentUser.email)
             }
             else {

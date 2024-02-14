@@ -6,7 +6,7 @@ import { auth, database, storage } from "./firebase";
 const defaultImg = 'https://e7.pngegg.com/pngimages/1004/160/png-clipart-computer-icons-user-profile-social-web-others-blue-social-media.png'
 
 export const register = async (form) => {
-    console.log("register")
+
 
 
     try {
@@ -29,7 +29,7 @@ export const register = async (form) => {
         return "success"
 
     } catch (error) {
-        console.log(error.message)
+      
         if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
             throw "Email already in use"
         }
@@ -80,7 +80,7 @@ export const logout = async () => {
 }
 
 export const EmailVerify = async () => {
-    console.log(auth.currentUser)
+   
     try {
         await sendEmailVerification(auth.currentUser)
         return 'success'
