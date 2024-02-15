@@ -1,12 +1,13 @@
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
-import { Navbar, Footer } from "@/components";
+import { Navbar, Footer, ScrollUp } from "@/components";
 
 export default function Contact() {
   return (
 
     <div className="w-full " id="contact">
+      <ScrollUp />
       <div className=" mb-2 bg-[url('/images/construction-background2.jpeg')] bg-cover bg-no-repeat"> <span className="backdrop-blur-sm"><Navbar /></span></div>
       <div className='w-[100%] h-full lg:flex justify-center'>
         <div className='relative  lg:w-[40%] lg:h-[820px] h-[300px]  bg-[url("https://images.unsplash.com/  photo-1523966211575-eb4a01e7dd51?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y29udGFjdCUyMHVzfGVufDB8MXwwfHx8MA%3D%3D")] bg-center bg-cover bg-no-repeat'>

@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Projects from '@/components/admin/projects/page';
 import { logout } from '@/utils/firebaseMethods';
+import { ScrollUp } from '@/components';
 
 
 
@@ -90,6 +91,7 @@ export default function Home() {
  
     return (
         <div className='main h-screen'>
+            <ScrollUp/>
             <nav className="w-full p-4 flex justify-around">
                 <div className='text-xl font-semibold'>Ace-Enterprises</div>
                 {!admin ? (

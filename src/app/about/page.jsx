@@ -1,7 +1,5 @@
-
 import Image from 'next/image';
-import { Navbar } from '@/components';
-import { Footer } from '@/components';
+import { Navbar,Footer, ScrollUp } from '@/components';
 import { IoIosCall, IoLogoLinkedin, IoIosMail } from 'react-icons/io';
 
 const people = [
@@ -40,6 +38,7 @@ export default function About() {
   return (
     <div className="min-h-screen">
       <Navbar />
+      <ScrollUp />
       <div className="banner bg-white  h-full bg-no-repeat mx-auto  flex flex-col items-center  shadow-xl ">
         <div className=" pb-10 ">
           <h1 className=" text-2xl sm:text-3xl md:text-4xl font-semibold  text-black w-max mx-auto my-16 ">
