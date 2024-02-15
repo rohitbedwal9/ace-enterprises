@@ -49,6 +49,7 @@ export default function Home() {
         return () => fetchUser()
     }, [])
 
+    
 
 
 
@@ -87,7 +88,7 @@ export default function Home() {
         logout()
         setAdmin(false)
     }
- 
+
     return (
         <div className='main h-screen'>
             <nav className="w-full p-4 flex justify-around">
