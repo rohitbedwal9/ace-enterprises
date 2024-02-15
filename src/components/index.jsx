@@ -1,6 +1,7 @@
 export { Navbar } from './navbar';
 export { MiniNav } from './miniNav';
 export { Banner } from './banner';
+export { ScrollUp } from './scrollUp';
 export { Statics } from './statics';
 export { About } from './about';
 export { Projects } from './projects';
