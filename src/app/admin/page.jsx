@@ -50,6 +50,7 @@ export default function Home() {
         return () => fetchUser()
     }, [])
 
+    
 
 
 
@@ -88,7 +89,7 @@ export default function Home() {
         logout()
         setAdmin(false)
     }
- 
+
     return (
         <div className='main h-screen'>
             <ScrollUp/>
