@@ -13,7 +13,7 @@ export const register = async (form) => {
         const userData = await createUserWithEmailAndPassword(auth, form.email, form.password)
         const data = userData.user
 
-        let time = new Date(data.metadata.lastSignInTime).toLocaleDateString(undefined, { timeZone: 'Asia/Kolkata' });
+        let time = new Date(data.metadata.lastSignInTime).toDateString(undefined, { timeZone: 'Asia/Kolkata' });
 
         await set(ref(database, 'users/' + data.uid), {
             name: form.username,
@@ -51,7 +51,7 @@ export const login = async (form) => {
         const userData = await signInWithEmailAndPassword(auth, form.email, form.password)
         const data = userData.user
 
-        let time = new Date(data.metadata.lastSignInTime).toLocaleDateString(undefined, { timeZone: 'Asia/Kolkata' });
+        let time = new Date(data.metadata.lastSignInTime)
 
         await update(ref(database, 'users/' + data.uid), {
             last_login: time
@@ -100,9 +100,10 @@ export const google = async () => {
         const data = userData.user
 
         const dbref = ref(database, "users/" + data.uid);
+        let time = new Date(data.metadata.lastSignInTime).toDateString(undefined, { timeZone: 'Asia/Kolkata' });
+
         onValue(dbref, (snapshot) => {
             if (snapshot.exists()) {
-                let time = new Date(data.metadata.lastSignInTime).toLocaleDateString(undefined, { timeZone: 'Asia/Kolkata' });
 
                 update(dbref, {
                     last_login: time

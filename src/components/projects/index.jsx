@@ -8,7 +8,7 @@ import { auth, database } from '../../utils/firebase';
 import { storage } from '../../utils/firebase';
 import { ref as sRef, getDownloadURL } from 'firebase/storage';
 import { ToastContainer, toast } from 'react-toastify';
-import { ref, update } from 'firebase/database';
+import { onValue, ref, update } from 'firebase/database';
 
 const data = [
   {
@@ -65,6 +65,8 @@ const data = [
 export const Projects = () => {
   const { download } = useDownloader();
   const [isUser, setIsUser] = useState(null);
+  const [projects, setProjects] = useState([])
+
   const loginWarning = () => (
     <div>
       You must
@@ -91,8 +93,20 @@ export const Projects = () => {
       : toast.warning(verifyWarning);
 
   useEffect(() => {
+
+    const dbref = ref(database, "projects");
+    onValue(dbref, (snapshot) => {
+      let arr = []
+      snapshot.forEach((doc) => {
+        arr.push({ ...doc.val() })
+      })
+      setProjects(arr)
+    })
+  }, [])
+
+  useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-    
+
       if (currentUser && currentUser.emailVerified) {
         setIsUser(currentUser);
       } else {
@@ -101,7 +115,7 @@ export const Projects = () => {
     });
   }, [auth]);
 
-  
+
   const onhandleClick = async (title) => {
     const user = (Object.getPrototypeOf = isUser);
     if (user && user.emailVerified) {
@@ -164,8 +178,8 @@ export const Projects = () => {
         </div>
       </div>
 
-      <div className="w-full flex-wrap h-100 flex md:flex-row flex-col  justify-center items-center">
-        {data.map((project) => (
+      <div className=" flex-wrap h-100 flex md:flex-row flex-col  justify-center items-center">
+        {projects && projects.map((project) => (
           <Card
             key={project.id}
             project={project}
