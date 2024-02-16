@@ -1,9 +1,11 @@
 'use client';
-import { database } from '@/utils/firebase';
-import { onValue, ref, remove } from 'firebase/database';
+import { database, storage } from '@/utils/firebase';
+import { onValue, ref, remove, set } from 'firebase/database';
+import { ref as sRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import React, { useEffect, useState } from 'react'
 import ProjectRow from '../projectRow';
 import Modal from '../modal';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Projects() {
     const [showAll, setShowAll] = useState(true)
@@ -42,10 +44,33 @@ export default function Projects() {
             console.log("done")
         }
     }
-    const handleSubmit = async (e,values) => {
-        e.preventDefault();
-        console.log(values)
+
+    const handleSubmit = async (title, desc, imageUpload) => {
+        toast.info("Please wait project is creating...")
+        let imageName = imageUpload.name + Math.floor(Math.random() * 1000)
+        const imageRef = sRef(storage, `images/${imageName}`)
+
+        uploadBytes(imageRef, imageUpload)
+            .then(() => {
+                getDownloadURL(imageRef)
+                    .then((url) => {
+                        const dbref = ref(database, 'projects/')
+                        projects.push({
+                            title: title,
+                            desc: desc,
+                            imgURL: url,
+                            downloads: 50
+                        })
+                        set(dbref, projects)
+                        toast.dismiss()
+                        toast.success("Project have created successfully")
+                    })
+                    .catch((error) => {
+                        toast.error(error.message)
+                    });
+            })
     };
+
     return (
         <div >
 
@@ -95,7 +120,7 @@ export default function Projects() {
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
                                     {projects && projects.map((project, index) => (
-                                        <ProjectRow key={index} project={project} index={index}  handleDelete={handleDelete} />
+                                        <ProjectRow key={index} project={project} index={index} handleDelete={handleDelete} />
                                     ))}
                                 </tbody>
                             </table>
@@ -106,6 +131,10 @@ export default function Projects() {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+            />
         </div>
     )
 }
