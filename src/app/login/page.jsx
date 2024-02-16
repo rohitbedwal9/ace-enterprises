@@ -85,7 +85,7 @@ export default function Login() {
       {show ? (
         ''
       ) : (
-        <div className="w-full bg-[url('https://res.cloudinary.com/dppjj5yox/image/upload/v1705992514/acehub/images/temp-bg.jpg')] bg-norepeat bg-cover">
+        <div className="w-full bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Ftemp-bg.jpg?alt=media&token=67e09f1d-70d9-4591-adba-6c6341026a19')] bg-norepeat bg-cover">
           <div className="w-full h-screen ">
             <div className="backdrop-blur-sm h-full">
               <div className="nav-mini w-full pl-4 md:pl-16 pt-4  md:pt-6">

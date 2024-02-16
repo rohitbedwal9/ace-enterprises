@@ -11,7 +11,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { onValue, ref, update } from 'firebase/database';
 
 
-
 export const Projects = () => {
   const { download } = useDownloader();
   const [isUser, setIsUser] = useState(null);
@@ -120,7 +119,7 @@ export const Projects = () => {
         </div>
         <div className="mx-auto justify-self-center text-center md:w-[20%] ">
           <Link
-            href="/services"
+            href="/projects"
             className="p-3 ml-auto rounded-3xl text-sky-600 border-sky-600 border-2    "
           >
             Read More
