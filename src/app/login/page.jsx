@@ -124,7 +124,7 @@ export default function Login() {
                       ))}
 
                       <div className="m-1 flex justify-end text-yellow-400 hover:text-yellow-500 text-sm">
-                        <Link href="/forgot-password">Forgot Password?</Link>
+                        <Link href="/reset-password">Forgot Password?</Link>
                       </div>
                       <button
                         type="submit"
