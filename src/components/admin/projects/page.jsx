@@ -1,6 +1,6 @@
 'use client';
 import { database, storage } from '@/utils/firebase';
-import { onValue, ref, remove, set } from 'firebase/database';
+import { onValue, ref, remove, set, update } from 'firebase/database';
 import { ref as sRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import React, { useEffect, useState } from 'react'
 import ProjectRow from '../projectRow';
@@ -11,6 +11,7 @@ export default function Projects() {
     const [showAll, setShowAll] = useState(true)
     const [projects, setProjects] = useState([])
     const [showModal, setShowModal] = useState(false);
+    const [project, setProject] = useState(null)
 
     useEffect(() => {
         const dbref = ref(database, "projects");
@@ -18,7 +19,7 @@ export default function Projects() {
 
             let arr = []
             snapshot.forEach((doc) => {
-                arr.push({ ...doc.val() })
+                arr.push({ ...doc.val(), id: doc.key })
             })
             setProjects(arr)
         })
@@ -38,6 +39,7 @@ export default function Projects() {
     // }
     const handleDelete = async (id) => {
         let x = confirm("Are you sure?");
+        console.log(projects)
         if (x) {
             const dbref = ref(database, 'projects/' + id)
             await remove(dbref)
@@ -45,23 +47,52 @@ export default function Projects() {
         }
     }
 
-    const handleSubmit = async (title, desc, imageUpload) => {
+    const handleEditOpen = async (project) => {
+        setProject(project)
+        setShowModal(true)
+    }
+   
+    const handleNew = async (title, desc, imageUpload, file, isEdit, id) => {
         toast.info("Please wait project is creating...")
         let imageName = imageUpload.name + Math.floor(Math.random() * 1000)
         const imageRef = sRef(storage, `images/${imageName}`)
+
+        let fileName = title + '.pdf'
+        const fileRef = sRef(storage, `files/${fileName}`)
+
+        uploadBytes(fileRef, file)
+            .then(() => {
+                toast.success("file uploaded")
+            })
+            .catch((error) => {
+                toast.error(error.message)
+            });
 
         uploadBytes(imageRef, imageUpload)
             .then(() => {
                 getDownloadURL(imageRef)
                     .then((url) => {
-                        const dbref = ref(database, 'projects/')
-                        projects.push({
-                            title: title,
-                            desc: desc,
-                            imgURL: url,
-                            downloads: 50
-                        })
-                        set(dbref, projects)
+
+                        if (isEdit) {
+                            const dbref = ref(database, 'projects/' + id)
+                            update(dbref, {
+                                title: title,
+                                desc: desc,
+                                imgURL: url,
+                                downloads: 50
+                            })
+                        }
+                        else {
+                            const dbref = ref(database, 'projects/')
+                            projects.push({
+                                title: title,
+                                desc: desc,
+                                imgURL: url,
+                                downloads: 50
+                            })
+                            set(dbref, projects)
+                        }
+
                         toast.dismiss()
                         toast.success("Project have created successfully")
                     })
@@ -76,7 +107,7 @@ export default function Projects() {
 
             <div className="w-full flex flex-col my-5  ">
                 <div className='flex justify-end sm:mx-12 lg:mx-16'>
-                    <button onClick={() => setShowModal(true)} className='bg-yellow-400 p-2 '>
+                    <button onClick={() => { setProject(null); setShowModal(true) }} className='bg-yellow-400 p-2 '>
                         Add New Projects
                     </button>
                 </div>
@@ -120,12 +151,14 @@ export default function Projects() {
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
                                     {projects && projects.map((project, index) => (
-                                        <ProjectRow key={index} project={project} index={index} handleDelete={handleDelete} />
+
+                                        <ProjectRow key={index} project={project} index={index} handleEditOpen={handleEditOpen} setShowModal={setShowModal} handleDelete={handleDelete} />
+
                                     ))}
                                 </tbody>
                             </table>
 
-                            <Modal showModal={showModal} setShowModal={setShowModal} handleSubmit={handleSubmit} />
+                            <Modal project={project} showModal={showModal} setShowModal={setShowModal} handleNew={handleNew} />
 
                         </div>
                     </div>
