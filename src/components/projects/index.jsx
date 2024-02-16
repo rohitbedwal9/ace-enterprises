@@ -44,7 +44,7 @@ export const Projects = () => {
 
 
   useEffect(() => {
-    console.log("Sdcf")
+  
     onAuthStateChanged(auth, (currentUser) => {
 
       if (currentUser && currentUser.emailVerified) {
