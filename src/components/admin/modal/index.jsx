@@ -1,20 +1,43 @@
 'use client';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoClose } from "react-icons/io5";
 
 
-export default function Modal({ showModal, setShowModal, handleSubmit }) {
-    const [title, setTitle] = useState('')
-    const [desc, setDesc] = useState('')
+export default function Modal({ project, showModal, setShowModal, handleNew }) {
+    const [title, setTitle] = useState()
+    const [desc, setDesc] = useState()
     const [image, setImage] = useState('')
+    const [file, setFile] = useState('')
+
+    useEffect(() => {
+        setTitle(project !== null ? project.title : '')
+        setDesc(project !== null ? project.desc : '')
+        
+    }, [project])
+
 
     const newProject = (e) => {
         e.preventDefault()
-        if (image === '' && title === '' && desc === '') {
+        if (image === '' && title === '' && desc === '' && file === '') {
             alert("Please fill the empty feilds")
             return
         }
-        handleSubmit(title, desc, image);
+        let isedit = false
+        handleNew(title, desc, image, file, isedit, project.id);
+        setTitle('')
+        setDesc('')
+        setImage('')
+        setShowModal(false)
+    }
+    const editProject = (e) => {
+
+        e.preventDefault()
+        if (image === '' && title === '' && desc === '' && file === '') {
+            alert("Please fill the empty feilds")
+            return
+        }
+        let isedit = true
+        handleNew(title, desc, image, file, isedit, project.id);
         setTitle('')
         setDesc('')
         setImage('')
@@ -27,6 +50,7 @@ export default function Modal({ showModal, setShowModal, handleSubmit }) {
         setImage('')
         setShowModal(false)
     }
+
     return (
         < div >
 
@@ -39,11 +63,11 @@ export default function Modal({ showModal, setShowModal, handleSubmit }) {
                             </div>
                             <div className="p-4  sm:px-8">
                                 <h1 className="mb-2 text-center text-2xl md:font-bold leading-tight tracking-tight text-yellow-400 md:text-3xl ">
-                                    New Project
+                                    {project !== null ? 'Edit ' : ' New '}Project
                                 </h1>
                                 <form
                                     className="flex flex-col gap-2 "
-                                    onSubmit={(e) => newProject(e)}
+                                    onSubmit={(e) => project !== null ? editProject(e) : newProject(e)}
                                 >
                                     <label className='text-gray-200 text-sm' >Title</label>
                                     <input
@@ -69,11 +93,19 @@ export default function Modal({ showModal, setShowModal, handleSubmit }) {
                                         onChange={(e) => setImage(e.target.files[0])}
                                         required
                                     />
+                                    <label className='text-gray-200 text-sm'>PDF</label>
+                                    <input
+                                        type='file'
+                                        className='text-gray-200 text-sm'
+                                        accept='application/pdf'
+                                        onChange={(e) => setFile(e.target.files[0])}
+                                        required
+                                    />
                                     <button
                                         type="submit"
                                         className={`w-full mt-5 text-slate-700 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2 text-center  dark:focus:ring-primary-800`}
                                     >
-                                        Add Project
+                                        {project !== null ? 'Edit ' : 'Add '}Project
                                     </button>
                                 </form>
 
@@ -82,6 +114,7 @@ export default function Modal({ showModal, setShowModal, handleSubmit }) {
                     </div>
                 </>
             ) : null}
+
         </div>
     )
 }

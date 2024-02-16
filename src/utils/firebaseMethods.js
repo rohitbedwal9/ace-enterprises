@@ -12,7 +12,7 @@ export const register = async (form) => {
     try {
         const userData = await createUserWithEmailAndPassword(auth, form.email, form.password)
         const data = userData.user
-
+        console.log(data)
         let time = new Date(data.metadata.lastSignInTime).toDateString(undefined, { timeZone: 'Asia/Kolkata' });
 
         await set(ref(database, 'users/' + data.uid), {
@@ -51,7 +51,7 @@ export const login = async (form) => {
         const userData = await signInWithEmailAndPassword(auth, form.email, form.password)
         const data = userData.user
 
-        let time = new Date(data.metadata.lastSignInTime)
+        let time = new Date(data.metadata.lastSignInTime).toDateString(undefined, { timeZone: 'Asia/Kolkata' });
 
         await update(ref(database, 'users/' + data.uid), {
             last_login: time

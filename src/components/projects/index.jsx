@@ -10,57 +10,7 @@ import { ref as sRef, getDownloadURL } from 'firebase/storage';
 import { ToastContainer, toast } from 'react-toastify';
 import { onValue, ref, update } from 'firebase/database';
 
-const data = [
-  {
-    id: 1,
-    imgUrl:
-      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
-    title: 'Project 1',
-    desc: 'Bridge',
-  },
-  {
-    id: 2,
-    imgUrl:
-      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
-    title: 'Project 2',
-    desc: 'Road',
-  },
-  {
-    id: 3,
-    imgUrl:
-      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
-    title: 'Project 3',
-    desc: 'Buiding',
-  },
-  {
-    id: 4,
-    imgUrl:
-      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
-    title: 'Project 4',
-    desc: 'Buiding',
-  },
-  {
-    id: 5,
-    imgUrl:
-      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
-    title: 'Project 5',
-    desc: 'Buiding',
-  },
-  {
-    id: 6,
-    imgUrl:
-      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
-    title: 'Project 6',
-    desc: 'Buiding',
-  },
-  {
-    id: 7,
-    imgUrl:
-      'https://res.cloudinary.com/dppjj5yox/image/upload/v1706968354/acehub/images/project-img.jpg',
-    title: 'Project 7',
-    desc: 'Buiding',
-  },
-];
+
 
 export const Projects = () => {
   const { download } = useDownloader();
@@ -92,19 +42,10 @@ export const Projects = () => {
       ? toast.warning(loginWarning)
       : toast.warning(verifyWarning);
 
-  useEffect(() => {
 
-    const dbref = ref(database, "projects");
-    onValue(dbref, (snapshot) => {
-      let arr = []
-      snapshot.forEach((doc) => {
-        arr.push({ ...doc.val() })
-      })
-      setProjects(arr)
-    })
-  }, [])
 
   useEffect(() => {
+    console.log("Sdcf")
     onAuthStateChanged(auth, (currentUser) => {
 
       if (currentUser && currentUser.emailVerified) {
@@ -112,6 +53,15 @@ export const Projects = () => {
       } else {
         setIsUser(null);
       }
+      const dbref = ref(database, "projects");
+      onValue(dbref, (snapshot) => {
+        let arr = []
+        snapshot.forEach((doc) => {
+          arr.push({ ...doc.val() })
+          console.log(arr)
+        })
+        setProjects(arr)
+      })
     });
   }, [auth]);
 
@@ -179,9 +129,9 @@ export const Projects = () => {
       </div>
 
       <div className=" flex-wrap h-100 flex md:flex-row flex-col  justify-center items-center">
-        {projects && projects.map((project) => (
+        {projects && projects.map((project,index) => (
           <Card
-            key={project.id}
+            key={index}
             project={project}
             onhandleClick={onhandleClick}
           />

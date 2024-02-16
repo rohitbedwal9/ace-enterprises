@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image';
 
-function ProjectRow({ project, index, handleDelete }) {
+function ProjectRow({ project, index, handleEditOpen,handleDelete }) {
     return (
 
         <tr key={index}>
@@ -26,15 +26,16 @@ function ProjectRow({ project, index, handleDelete }) {
 
 
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button className="text-indigo-600 hover:text-indigo-900">
+                <button onClick={() => handleEditOpen(project)} className="text-indigo-600 hover:text-indigo-900">
                     Edit
                 </button>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button onClick={() => handleDelete(index)} className="text-indigo-600 hover:text-indigo-900">
+                <button onClick={() => handleDelete(project.id)} className="text-indigo-600 hover:text-indigo-900">
                     Delete
                 </button>
             </td>
+         
         </tr>
 
     )
