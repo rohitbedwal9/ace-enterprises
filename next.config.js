@@ -3,7 +3,9 @@ module.exports = {
     domains: ['localhost', 'theacehub.co.in'],
     remotePatterns: [
       {
-        hostname: 'res.cloudinary.com',
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+        pathname: '**',
       }
     ],
   },

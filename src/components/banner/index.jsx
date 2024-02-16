@@ -2,7 +2,7 @@ import { Navbar } from '../navbar';
 import Link from 'next/link';
 export const Banner = () => {
   return (
-    <div className="w-full h-screen  bg-[url('https://res.cloudinary.com/dppjj5yox/image/upload/v1707500791/acehub/images/construction-background2_pnbpfm.jpg')] bg-no-repeat bg-cover bg-center md:bg-top">
+    <div className="w-full h-screen  bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fconstruction-background2_pnbpfm.jpg?alt=media&token=10362562-d009-41e0-8033-d03d6287a974')] bg-no-repeat bg-cover bg-center md:bg-top">
       <div className="backdrop-blur-md h-full">
         <Navbar transparent={true} />
         <div className="w-full  flex flex-col-reverse gap-10 md:gap-20  justify-center items-center md:flex-row h-[70%] md:h-[90%]">
@@ -32,7 +32,7 @@ export const Banner = () => {
               </Link>
             </div>
           </div>
-          <div className="image flex bg-[url(https://res.cloudinary.com/dppjj5yox/image/upload/v1707720859/acehub/images/construction-worker_ljtwmm.jpg)] bg-cover bg-no-repeat justify-center md:ml-28  w-[240px] h-[300px] md:w-[400px] md:h-[500px] rounded-lg"></div>
+          <div className="image flex bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fconstruction-worker_ljtwmm.jpg?alt=media&token=e5795f95-7d17-41ba-9090-00653cede111')] bg-cover bg-no-repeat justify-center md:ml-28  w-[240px] h-[300px] md:w-[400px] md:h-[500px] rounded-lg"></div>
         </div>
       </div>
     </div>
