@@ -7,7 +7,7 @@ const people = [
     id: 1,
     name: 'Jane Cooper',
     image:
-      'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721752/acehub/images/about_zgcfnv.jpg',
+      'https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fabout_zgcfnv.jpg?alt=media&token=6a37d7ed-167d-4a81-85dd-3ee5e0ce6a96',
     department: 'Ace Enterprises',
     role: 'Founder',
     description:
@@ -17,7 +17,7 @@ const people = [
     id: 2,
     name: 'John Doe',
     image:
-      'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721752/acehub/images/about_zgcfnv.jpg',
+      'https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fabout_zgcfnv.jpg?alt=media&token=6a37d7ed-167d-4a81-85dd-3ee5e0ce6a96',
     department: 'Ace Enterprises',
     role: 'Co-Founder',
     description:
@@ -27,7 +27,7 @@ const people = [
     id: 3,
     name: 'Veronica Lodge',
     image:
-      'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721752/acehub/images/about_zgcfnv.jpg',
+      'https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fabout_zgcfnv.jpg?alt=media&token=6a37d7ed-167d-4a81-85dd-3ee5e0ce6a96',
     department: 'Ace Enterprises',
     role: 'Co-Founder',
     description:
@@ -46,7 +46,7 @@ export default function About() {
           </h1>
           <div className="flex flex-col  md:flex-row md:px-20 justify-between items-center gap-10">
             <Image
-              src="https://res.cloudinary.com/dppjj5yox/image/upload/v1707819800/acehub/images/scott-blake-x-ghf9LjrVg-unsplash_i6ff6c.jpg"
+              src="https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fscott-blake-x-ghf9LjrVg-unsplash_i6ff6c.jpg?alt=media&token=17ccffb7-53c7-43ea-931f-5c3d3aabb5d7"
               width={300}
               height={300}
               alt="image"
@@ -96,7 +96,7 @@ export default function About() {
           <div className="flex flex-col md:flex-row items-center w-full px-10">
             <div className="flex flex-col  w-[90%] md:w-[40%] gap-2 items-center">
               <Image
-                src="https://res.cloudinary.com/dppjj5yox/image/upload/v1707721752/acehub/images/about_zgcfnv.jpg"
+                src="https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fabout_zgcfnv.jpg?alt=media&token=6a37d7ed-167d-4a81-85dd-3ee5e0ce6a96"
                 alt="image"
                 width={300}
                 height={300}

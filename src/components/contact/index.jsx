@@ -33,7 +33,7 @@ export const Contact = () => {
       </div>
       <div className="image-div   md:mx-10 flex justify-center w-full h-full">
 
-        <div className="w-[250px] md:w-[380px] h-[320px] md:h-[470px] rounded-xl  bg-[url('https://res.cloudinary.com/dppjj5yox/image/upload/v1707721666/acehub/images/worker-croped_doggdw.jpg')] bg-cover  bg-no-repeat bg-center"></div>
+        <div className="w-[250px] md:w-[380px] h-[320px] md:h-[470px] rounded-xl  bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fworker-croped_doggdw.jpg?alt=media&token=29aa2c9b-173d-45b4-87f3-c87a8ae59aa9')] bg-cover  bg-no-repeat bg-center"></div>
 
       </div>
     </div>
