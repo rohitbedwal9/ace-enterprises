@@ -55,12 +55,14 @@ export const Navbar = ({ transparent }) => {
             <GiHamburgerMenu size={25} />
           </button>
         </div>
-        <div className="logo flex-1 hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold">
+        <div className="logo  hidden md:block text-xl sm:text-3xl text-yellow-300 font-bold">
           Ace-Enterprises
         </div>
         <div
-          className={`hidden flex-1 md:flex text-xl justify-around text-white font-bold ${
-            transparent ? 'bg-gray-900 rounded-3xl py-2  ' : 'bg-transparent'
+          className={`hidden  md:flex text-xl gap-6 text-white font-bold ${
+            transparent
+              ? 'bg-gray-900 rounded-3xl py-2 px-2  '
+              : 'bg-transparent'
           }`}
         >
           <Link
@@ -72,6 +74,16 @@ export const Navbar = ({ transparent }) => {
             }`}
           >
             Home
+          </Link>
+          <Link
+            href="/services"
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
+          >
+            Services
           </Link>
           <Link
             href="/projects"
@@ -104,7 +116,7 @@ export const Navbar = ({ transparent }) => {
             Contact
           </Link>
         </div>
-        <div className="flex flex-1  justify-end">
+        <div className="flex  justify-end">
           {isLogin ? (
             <div className=" rounded-md">
               <div className="relative">
@@ -185,6 +197,9 @@ export const Navbar = ({ transparent }) => {
         <Link href="/" className=" border-b-2 border-white  w-max ">
           Home
         </Link>
+        <Link href="/services" className="border-b-2 border-white  w-max ">
+          Services
+        </Link>
         <Link href="/projects" className=" border-b-2 border-white  w-max">
           Projects
         </Link>
@@ -193,9 +208,6 @@ export const Navbar = ({ transparent }) => {
         </Link>
         <Link href="/contact" className="border-b-2 border-white w-max 0">
           Contact
-        </Link>
-        <Link href="/faq" className="border-b-2 border-white  w-max ">
-          FAQ
         </Link>
       </menu>
     </div>

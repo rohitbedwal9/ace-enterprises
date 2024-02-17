@@ -52,12 +52,11 @@ export default function Login() {
   const handleGoogle = async () => {
     try {
       let res = await google();
-    
-      if (res === "success") {
+
+      if (res === 'success') {
         toast.success('You are successfully logged in');
         router.push('/home');
       }
-
     } catch (e) {
       notify(e.message);
     }
@@ -125,15 +124,15 @@ export default function Login() {
                       ))}
 
                       <div className="m-1 flex justify-end text-yellow-400 hover:text-yellow-500 text-sm">
-                        <Link href="/reset-password">Forgot Password?</Link>
+                        <Link href="/forgot-password">Forgot Password?</Link>
                       </div>
                       <button
                         type="submit"
-                        className={`w-full mt-5 text-slate-700  ${loading
-                          ? 'bg-yellow-200 '
-                          : 'bg-yellow-400 hover:bg-yellow-500 '
-                          }  focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2 text-center  dark:focus:ring-primary-800`}
-
+                        className={`w-full mt-5 text-slate-700  ${
+                          loading
+                            ? 'bg-yellow-200 '
+                            : 'bg-yellow-400 hover:bg-yellow-500 '
+                        }  focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2 text-center  dark:focus:ring-primary-800`}
                         disabled={loading ? true : false}
                       >
                         {loading ? 'Logging in...' : 'Login'}
