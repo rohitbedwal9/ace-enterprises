@@ -4,6 +4,7 @@ import { database, auth, storage } from '@/utils/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { onValue, ref } from 'firebase/database';
 import { IoFilter } from "react-icons/io5";
+import Image from 'next/image';
 
 export default function UserTable({ usersData, setusersData }) {
 
@@ -89,8 +90,8 @@ export default function UserTable({ usersData, setusersData }) {
                                     <tr key={index}>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="flex items-center">
-                                                <div className="flex-shrink-0 h-10 w-10">
-                                                    <img className="h-10 w-10 rounded-full" src={user.data.profile_picture} alt="" />
+                                                <div className="flex-shrink-0 h-auto w-auto">
+                                                    <Image className="rounded-full" src={user.data.profile_picture} alt="" width={50} height={50} />
                                                 </div>
                                                 <div className="ml-4">
                                                     <div className="text-sm font-medium text-gray-900">{user.data.name}</div>
