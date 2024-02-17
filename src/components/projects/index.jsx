@@ -10,11 +10,10 @@ import { ref as sRef, getDownloadURL } from 'firebase/storage';
 import { ToastContainer, toast } from 'react-toastify';
 import { onValue, ref, update } from 'firebase/database';
 
-
 export const Projects = () => {
   const { download } = useDownloader();
   const [isUser, setIsUser] = useState(null);
-  const [projects, setProjects] = useState([])
+  const [projects, setProjects] = useState([]);
 
   const loginWarning = () => (
     <div>
@@ -41,29 +40,27 @@ export const Projects = () => {
       ? toast.warning(loginWarning)
       : toast.warning(verifyWarning);
 
-
-
   useEffect(() => {
-    console.log("Sdcf")
     onAuthStateChanged(auth, (currentUser) => {
-
       if (currentUser && currentUser.emailVerified) {
         setIsUser(currentUser);
       } else {
         setIsUser(null);
       }
-      const dbref = ref(database, "projects");
+      const dbref = ref(database, 'projects');
       onValue(dbref, (snapshot) => {
-        let arr = []
+        let arr = [];
+        let counter = 0;
         snapshot.forEach((doc) => {
-          arr.push({ ...doc.val() })
-          console.log(arr)
-        })
-        setProjects(arr)
-      })
+          if (counter < 6) {
+            arr.push({ ...doc.val() });
+            counter++;
+          }
+        });
+        setProjects(arr);
+      });
     });
   }, [auth]);
-
 
   const onhandleClick = async (title) => {
     const user = (Object.getPrototypeOf = isUser);
@@ -128,13 +125,10 @@ export const Projects = () => {
       </div>
 
       <div className=" flex-wrap h-100 flex md:flex-row flex-col  justify-center items-center">
-        {projects && projects.map((project,index) => (
-          <Card
-            key={index}
-            project={project}
-            onhandleClick={onhandleClick}
-          />
-        ))}
+        {projects &&
+          projects.map((project, index) => (
+            <Card key={index} project={project} onhandleClick={onhandleClick} />
+          ))}
       </div>
     </div>
   );
