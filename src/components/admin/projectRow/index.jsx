@@ -1,15 +1,15 @@
 import React from 'react'
 import Image from 'next/image';
 
-function ProjectRow({ project, index, handleEditOpen,handleDelete }) {
+function ProjectRow({ project, index, handleEditOpen, handleDelete }) {
     return (
 
         <tr key={index}>
             <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex sm:justify-start justify-center ">
-                    <div className="flex-shrink-0 h-50 w-50">
-                        <Image src={project.imgURL} alt="" width={100} height={100} />
-                    </div>
+
+                    <Image className='w-auto h-auto rounded' src={project.imgURL} alt="" width={120} height={50} />
+
                 </div>
             </td>
 
@@ -31,11 +31,11 @@ function ProjectRow({ project, index, handleEditOpen,handleDelete }) {
                 </button>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button onClick={() => handleDelete(project.id)} className="text-indigo-600 hover:text-indigo-900">
+                <button onClick={() => handleDelete(project)} className="text-indigo-600 hover:text-indigo-900">
                     Delete
                 </button>
             </td>
-         
+
         </tr>
 
     )

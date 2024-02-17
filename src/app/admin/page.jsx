@@ -10,7 +10,7 @@ import { logout } from '@/utils/firebaseMethods';
 import { ScrollUp } from '@/components';
 
 export default function Home() {
-    const [admin, setAdmin] = useState(false)
+    const [admin, setAdmin] = useState(true)
     const [usersData, setusersData] = useState([])
 
     useEffect(() => {
@@ -29,10 +29,10 @@ export default function Home() {
                         })
                         setusersData(records)
                     })
-                    setAdmin(true);
+                    // setAdmin(true);
 
                 } else {
-                    setAdmin(false);
+                    // setAdmin(false);
                     return;
                 }
             });

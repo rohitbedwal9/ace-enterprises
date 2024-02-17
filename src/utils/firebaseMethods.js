@@ -3,7 +3,7 @@ import { ref, set, update, onValue } from "firebase/database";
 import { ref as sRef, listAll } from "firebase/storage";
 import { auth, database, storage } from "./firebase";
 
-const defaultImg = 'https://e7.pngegg.com/pngimages/1004/160/png-clipart-computer-icons-user-profile-social-web-others-blue-social-media.png'
+const defaultImg = 'https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fuser-200.png?alt=media&token=9d3a5b25-6552-422b-887b-860c22df8529'
 
 export const register = async (form) => {
 

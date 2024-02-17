@@ -23,7 +23,7 @@ export default function Modal({ project, showModal, setShowModal, handleNew }) {
             return
         }
         let isedit = false
-        handleNew(title, desc, image, file, isedit, project.id);
+        handleNew(title, desc, image, file, isedit, '');
         setTitle('')
         setDesc('')
         setImage('')
