@@ -64,7 +64,7 @@ export const Projects = () => {
         let arr = [];
         let counter = 0;
         snapshot.forEach((doc) => {
-          if (counter < 6) {
+          if (counter < 8) {
             arr.push({ ...doc.val() });
             counter++;
           }
