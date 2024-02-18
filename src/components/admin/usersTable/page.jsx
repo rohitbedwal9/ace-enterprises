@@ -8,20 +8,14 @@ import Image from 'next/image';
 
 export default function UserTable({ usersData, setusersData }) {
 
-    const [showAll, setShowAll] = useState(true)
-    const [sort, setSort] = useState([])
+    const [sort, setSort] = useState(usersData)
+    const [isSort, setIsSort] = useState(false)
 
     useEffect(() => {
-        if (showAll) {
-            setShowAll(true)
-        }
-
-    }, [showAll])
-
-    useEffect(() => {
-        if (usersData !== null)
+        if (isSort) {
             setusersData(sort)
-    }, [sort])
+        }
+    }, [isSort])
 
 
     const handleSort = () => {
@@ -29,7 +23,7 @@ export default function UserTable({ usersData, setusersData }) {
         let sortedusers = usersData.sort((a, b) =>
             b.data.last_login.localeCompare(a.data.last_login))
         setSort(sortedusers)
-
+        setIsSort(true)
     }
 
     return (
