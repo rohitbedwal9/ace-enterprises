@@ -1,9 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { database, auth, storage } from '@/utils/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
-import { onValue, ref } from 'firebase/database';
 import { IoFilter } from 'react-icons/io5';
 import Image from 'next/image';
 
@@ -122,8 +119,8 @@ export default function UserTable({ usersData, setusersData }) {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {/* <div className="text-sm text-gray-900">{user.keys}</div> */}
-                        <div className="text-sm text-gray-900">hidden</div>
+                        <div className="text-sm px-2 text-gray-900">{user.keys}</div>
+                      
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {user.data.role}
