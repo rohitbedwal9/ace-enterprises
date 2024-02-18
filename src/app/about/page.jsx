@@ -73,7 +73,7 @@ export default function About() {
             </div>
           </div>
           <div className="border-t-2 border-dashed border-blue-300 pt-6 text-gray-500  text-base sm:text-lg mx-auto mt-6 w-[90%] md:w-[80%]">
-          Step into a realm where craftsmanship meets ingenuity, where each brick laid is a testament to our dedication. At Ace Enterprises, we don&apos;t just build structures; we weave dreams into reality. With a legacy steeped in tradition and a vision set on the horizon, we invite you to embark on a journey where every corner holds the promise of brilliance. Join us, and together, let&apos;s build a future where excellence knows no bounds.
+          Step into a realm where craftsmanship meets ingenuity, where each brick laid is a testament to our dedication. At Ace Enterprises, we don't just build structures; we weave dreams into reality. With a legacy steeped in tradition and a vision set on the horizon, we invite you to embark on a journey where every corner holds the promise of brilliance. Join us, and together, let&apos;s build a future where excellence knows no bounds.
           </div>
         </div>
       </div>
