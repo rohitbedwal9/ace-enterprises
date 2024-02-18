@@ -40,6 +40,7 @@ export const Banner = () => {
               width={400}
               height={500}
               objectFit="cover"
+              loading="lazy"
               className="w-[240px] h-[300px] md:w-[400px] md:h-[500px] rounded-lg"
             />
           </div>
