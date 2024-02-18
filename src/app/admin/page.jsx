@@ -10,37 +10,43 @@ import { logout } from '@/utils/firebaseMethods';
 import { ScrollUp } from '@/components';
 
 export default function Home() {
-    const [admin, setAdmin] = useState(true)
+    const [admin, setAdmin] = useState(false)
     const [usersData, setusersData] = useState([])
 
     useEffect(() => {
+        onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser && currentUser.emailVerified) {
+
+                const andminref = ref(database, "users/" + currentUser.uid);
+                onValue(andminref, (snapshot) => {
+                    let role = snapshot.val().role;
+                    if (role === "admin") {
+                      
+                        setAdmin(true)
+                        fetchUser()
+                    }
+
+                })
+            }
+        })
         function fetchUser() {
-            onAuthStateChanged(auth, (currentUser) => {
-                if (currentUser && currentUser.emailVerified) {
+           
+            if (admin) {
+               
+                const dbref = ref(database, "users");
+                onValue(dbref, (snapshot) => {
+                    let records = []
 
-                    const dbref = ref(database, "users");
-                    onValue(dbref, (snapshot) => {
-                        let records = []
-
-                        snapshot.forEach(childSnapshot => {
-                            let keyname = childSnapshot.key;
-                            let data = childSnapshot.val();
-                            records.push({ "keys": keyname, "data": data })
-                        })
-                        setusersData(records)
+                    snapshot.forEach(childSnapshot => {
+                        let keyname = childSnapshot.key;
+                        let data = childSnapshot.val();
+                        records.push({ "keys": keyname, "data": data })
                     })
-                    // setAdmin(true);
-
-                } else {
-                    // setAdmin(false);
-                    return;
-                }
-            });
+                    setusersData(records)
+                })
+            }
         }
-
-
-        return () => fetchUser()
-    }, [])
+    }, [admin])
 
     const handleLogout = () => {
         logout()
@@ -49,12 +55,13 @@ export default function Home() {
 
     return (
         <div className='main h-screen'>
-            <ScrollUp/>
+
+            <ScrollUp />
             <nav className="w-full p-4 flex justify-around">
                 <div className='text-xl font-semibold'>Ace-Enterprises</div>
                 {!admin ? (
                     <div className='text-lg'>
-                        <Link href="/login" className="bg-yellow-300 hover:bg-yellow-400   p-2 rounded-lg">Login</Link>
+                        <Link href="/admin/login" className="bg-yellow-300 hover:bg-yellow-400   p-2 rounded-lg">Login</Link>
                     </div>
                 ) : (
                     <div>
