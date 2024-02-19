@@ -73,27 +73,16 @@ export default function About() {
             </div>
           </div>
           <div className="border-t-2 border-dashed border-blue-300 pt-6 text-gray-500  text-base sm:text-lg mx-auto mt-6 w-[90%] md:w-[80%]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque ipsa
-            exercitationem ex cupiditate sit assumenda dolor culpa sequi,
-            suscipit ipsum minus tenetur quibusdam in eum aut nesciunt a
-            reprehenderit doloremque labore porro iure, dolore nulla! Labore,
-            perspiciatis cupiditate natus ipsam nesciunt est veniam quaerat
-            recusandae quae, debitis quas. Nulla eaque, reprehenderit minus
-            provident nemo modi, expedita doloribus, est fugit possimus commodi?
-            Accusantium cum dolorem obcaecati odio, cupiditate, rerum excepturi
-            eum architecto sapiente autem expedita quo vel, qui ipsa ipsum
-            quisquam consequatur. Dolorum placeat provident mollitia! Sint,
-            error? Exercitationem quaerat tenetur magni itaque accusamus
-            voluptatem? Earum, expedita. Similique facilis iusto corporis?
+          Step into a realm where craftsmanship meets ingenuity, where each brick laid is a testament to our dedication. At Ace Enterprises, we don&apos;t just build structures; we weave dreams into reality. With a legacy steeped in tradition and a vision set on the horizon, we invite you to embark on a journey where every corner holds the promise of brilliance. Join us, and together, let&apos;s build a future where excellence knows no bounds.
           </div>
         </div>
       </div>
-      <div className="">
+
         <div className="flex flex-col justify-center items-center my-10">
           <h1 className="my-10 text-2xl sm:text-3xl md:text-4xl font-semibold">
             Founder
           </h1>
-          <div className="flex flex-col md:flex-row items-center w-full px-10">
+          <div className="flex flex-col md:flex-row items-center w-full md:px-10 ">
             <div className="flex flex-col  w-[90%] md:w-[40%] gap-2 items-center">
               <Image
                 src="https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fabout_zgcfnv.jpg?alt=media&token=6a37d7ed-167d-4a81-85dd-3ee5e0ce6a96"
@@ -102,38 +91,16 @@ export default function About() {
                 height={300}
                 className="rounded-xl "
               />
-              <div className="text-xl font-semibold">Jane Cooper</div>
+              <div className="text-xl font-semibold">Mohammad Furqan</div>
               <div className="text-gray-500 text-base">
                 Founder, Ace Enterprises
               </div>
             </div>
-            <div className="description text-gray-500 text-base mt-10  md:px-20 w-[90%] md:w-[60%] flex flex-col items-center">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores
-              facilis placeat non impedit repellendus asperiores earum beatae
-              aspernatur magnam nam aperiam odio ab nihil repellat ducimus porro
-              omnis possimus modi, itaque molestias mollitia. Et porro
-              architecto assumenda adipisci culpa in dolores, ipsam maiores
-              natus, explicabo quae officiis. Necessitatibus, numquam
-              dignissimos. Lorem ipsum, dolor sit amet consectetur adipisicing
-              elit. Dolores facilis placeat non impedit repellendus asperiores
-              earum beatae aspernatur magnam nam aperiam odio ab nihil repellat
-              ducimus porro omnis possimus modi, itaque molestias mollitia. Et
-              porro architecto assumenda adipisci culpa in dolores, ipsam
-              maiores natus, explicabo quae officiis. Necessitatibus, numquam
-              dignissimos. Lorem ipsum, dolor sit amet consectetur adipisicing
-              elit. Dolores facilis placeat non impedit repellendus asperiores
-              earum beatae aspernatur magnam nam aperiam odio ab nihil repellat
-              ducimus porro omnis possimus modi, itaque molestias mollitia. Et
-              porro architecto assumenda adipisci culpa in dolores, ipsam
-              maiores natus, explicabo quae officiis. Necessitatibus, numquam
-              dignissimos.
+            <div className="description text-gray-500 text-base  md:px-20 w-[90%] md:w-[60%] flex flex-col items-center mt-4 md:mt-0 ">
+            In the auspicious year of 2012, against the backdrop of a burgeoning industry, Mohammad Furqan embarked on a bold odyssey, sowing the seeds of Ace Enterprises with a profound vision for revolutionizing the landscape of civil construction. With an unwavering resolve and a fervent dedication to excellence, he meticulously nurtured Ace Enterprises, cultivating a culture steeped in innovation, integrity, and relentless pursuit of perfection. Mohammad Furqan&apos;s visionary leadership has not only propelled Ace Enterprises to the vanguard of the industry but has also transformed it into a veritable powerhouse of ingenuity and craftsmanship. Each project undertaken under his stewardship bears the hallmarks of his discerning eye and unwavering commitment to quality, earning accolades and admiration from peers and clients alike. As the custodian of Ace Enterprises illustrious legacy, Mohammad Furqan continues to chart a course towards new horizons of success, where the company&apos;s name becomes synonymous with unparalleled achievement and its contributions resonate as enduring testaments to the indomitable spirit of human endeavor.
             </div>
           </div>
-          <div className="social-links flex flex-row gap-5 my-10">
-            <IoLogoLinkedin className="text-4xl text-blue-500" />
-            <IoIosMail className="text-4xl text-blue-500" />
-            <IoIosCall className="text-4xl text-blue-500" />
-          </div>
+         
           <h1 className="my-10 text-2xl sm:text-3xl md:text-4xl font-semibold">
             Our Team
           </h1>
@@ -161,7 +128,7 @@ export default function About() {
             ))}
           </div>
         </div>
-      </div>
+    
       <Footer />
     </div>
   );

@@ -107,7 +107,7 @@ export const Testimonials = () => {
         </div>
       </div>
       <h1 className="my-10 text-xl font-semibold">
-        Our Cliets / Partners / Certificates
+        Our Clients / Partners / Certificates
       </h1>
       <div className="flex flex-wrap md:flex-nowrap md:flex-row gap-10 px-2 justify-center bg-white shadow-xl rounded-xl items-center w-full p-10 md:p-5">
         {clientData.map((client) => (
