@@ -1,8 +1,13 @@
 'use client';
 import { database, storage } from '@/utils/firebase';
 import { onValue, ref, remove, set, update } from 'firebase/database';
-import { ref as sRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-import React, { useEffect, useState } from 'react'
+import {
+  ref as sRef,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage';
+import React, { useEffect, useState } from 'react';
 import ProjectRow from '../projectRow';
 import Modal from '../modal';
 import { ToastContainer, toast } from 'react-toastify';
@@ -33,32 +38,34 @@ export default function Projects() {
 
   // }, [showAll])
 
-    // function handleShow() {
-    //     setShowAll(!showAll)
-    // }
-    const handleDelete = async (id) => {
-        let x = confirm("Are you sure?");
-        console.log(projects)
-        if (x) {
-            const dbref = ref(database, 'projects/' + id)
-            await remove(dbref)
-            console.log("done")
-        }
+  // function handleShow() {
+  //     setShowAll(!showAll)
+  // }
+  const handleDelete = async (project) => {
+    let x = confirm('Are you sure?');
+
+
+    if (x) {
+      const fileRef = sRef(storage, `files/${project.id}.pdf`);
+      const imageRef = sRef(storage, `images/project/${project.id}`);
+      await deleteObject(imageRef);
+      await deleteObject(fileRef);
+      const dbref = ref(database, 'projects/' + project.id);
+      await remove(dbref);
+
     }
   };
 
-    const handleEditOpen = async (project) => {
-        setProject(project)
-        setShowModal(true)
-    }
-   
-    const handleNew = async (title, desc, imageUpload, file, isEdit, id) => {
-        toast.info("Please wait project is creating...")
-        let imageName = imageUpload.name + Math.floor(Math.random() * 1000)
-        const imageRef = sRef(storage, `images/${imageName}`)
+  const handleEditOpen = async (project) => {
+    setProject(project);
+    setShowModal(true);
+  };
 
-        let fileName = title + '.pdf'
-        const fileRef = sRef(storage, `files/${fileName}`)
+  const handleNew = async (title, desc, imageUpload, file, isEdit, id) => {
+    toast.info('Please wait project is creating...');
+    const imageRef = sRef(storage, `images/project/${id}`);
+    const fileRef = sRef(storage, `files/${id}.pdf`);
+
 
     uploadBytes(fileRef, file)
       .then(() => {
@@ -175,6 +182,7 @@ export default function Projects() {
                 setShowModal={setShowModal}
                 handleNew={handleNew}
               />
+
             </div>
           </div>
         </div>

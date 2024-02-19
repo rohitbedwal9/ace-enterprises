@@ -8,15 +8,14 @@ import { IoFilter } from 'react-icons/io5';
 import Image from 'next/image';
 
 export default function UserTable({ usersData, setusersData }) {
-  const [showAll, setShowAll] = useState(true);
-    const [sort, setSort] = useState(usersData)
-    const [isSort, setIsSort] = useState(false)
+  const [sort, setSort] = useState(usersData)
+  const [isSort, setIsSort] = useState(false)
 
-    useEffect(() => {
-        if (isSort) {
-            setusersData(sort)
-        }
-    }, [isSort])
+  useEffect(() => {
+    if (isSort) {
+      setusersData(sort)
+    }
+  }, [isSort])
 
 
   useEffect(() => {
@@ -85,6 +84,7 @@ export default function UserTable({ usersData, setusersData }) {
                     Last Login
                   </th>
 
+
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -122,8 +122,8 @@ export default function UserTable({ usersData, setusersData }) {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm  px-2 text-gray-900">{user.keys}</div>
-                        {/* <div className="text-sm text-gray-900">hidden</div> */}
+                        {/* <div className="text-sm text-gray-900">{user.keys}</div> */}
+                        <div className="text-sm text-gray-900">hidden</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {user.data.role}

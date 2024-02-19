@@ -10,19 +10,41 @@ import { logout } from '@/utils/firebaseMethods';
 import { ScrollUp } from '@/components';
 import { useRouter } from 'next/navigation';
 
-export default function Home() {
-    const [admin, setAdmin] = useState(true)
+export default function AdminPanel() {
+    const [admin, setAdmin] = useState(false)
     const [usersData, setusersData] = useState([])
     const router = useRouter();
 
     useEffect(() => {
-        function fetchUser() {
-            onAuthStateChanged(auth, (currentUser) => {
-                if (currentUser && currentUser.emailVerified) {
+        onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser && currentUser.emailVerified) {
 
-                    const dbref = ref(database, "users");
-                    onValue(dbref, (snapshot) => {
-                        let records = []
+                const andminref = ref(database, "users/" + currentUser.uid);
+                onValue(andminref, (snapshot) => {
+                    let role = snapshot.val().role;
+                    if (role === "admin") {
+                        setAdmin(true)
+                        fetchUser()
+                    }
+                    else {
+                        router.push('/home');
+                    }
+
+                })
+            }
+            else {
+                setAdmin(false)
+                router.push('/home');
+                return
+            }
+        })
+        function fetchUser() {
+
+            if (admin) {
+
+                const dbref = ref(database, "users");
+                onValue(dbref, (snapshot) => {
+                    let records = []
 
                     snapshot.forEach(childSnapshot => {
                         let keyname = childSnapshot.key;
@@ -42,18 +64,21 @@ export default function Home() {
 
     return (
         <div className='main h-screen'>
-            <ScrollUp/>
-            <nav className="w-full p-4 flex justify-around">
-                <div className='text-xl font-semibold'>Ace-Enterprises</div>
-                {!admin ? (
-                    <div className='text-lg'>
-                        <Link href="/login" className="bg-yellow-300 hover:bg-yellow-400   p-2 rounded-lg">Login</Link>
-                    </div>
-                ) : (
-                    <div>
-                        <button onClick={handleLogout}>Logout</button>
-                    </div>
-                )}
+
+            {admin ? (
+                <div>
+                    <ScrollUp />
+                    <nav className="w-full p-4 flex justify-around">
+                        <div className='text-xl font-semibold'>Ace-Enterprises</div>
+                        {!admin ? (
+                            <div className='text-lg'>
+                                <Link href="/login" className="bg-yellow-300 hover:bg-yellow-400   p-2 rounded-lg">Login</Link>
+                            </div>
+                        ) : (
+                            <div>
+                                <button onClick={handleLogout}>Logout</button>
+                            </div>
+                        )}
 
                     </nav>
                     <div className="flex flex-col justify-center items-center ">
