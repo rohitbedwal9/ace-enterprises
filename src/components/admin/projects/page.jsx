@@ -86,7 +86,7 @@ export default function Projects() {
                                 title: title,
                                 desc: desc,
                                 imgURL: url,
-                                downloads: 50
+                                downloads: project.downloads
                             })
                         }
                         else {
@@ -95,7 +95,7 @@ export default function Projects() {
                                 title: title,
                                 desc: desc,
                                 imgURL: url,
-                                downloads: 50
+                                downloads: 0
                             })
                             set(dbref, projects)
                         }

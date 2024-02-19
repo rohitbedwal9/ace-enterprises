@@ -4,7 +4,7 @@ import React from 'react';
 export default function Card({ project, onhandleClick }) {
   return (
     <div
-      onClick={() => onhandleClick(project.title)}
+      onClick={() => onhandleClick(project)}
       className=" m-5 cursor-pointer rounded-lg shadow-lg bg-white"
     >
       <Image

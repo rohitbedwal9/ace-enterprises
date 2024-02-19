@@ -1,8 +1,5 @@
 'use client';
 import React, { useEffect, useState } from 'react'
-import { database, auth, storage } from '@/utils/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
-import { onValue, ref } from 'firebase/database';
 import { IoFilter } from "react-icons/io5";
 import Image from 'next/image';
 
