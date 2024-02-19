@@ -1,6 +1,6 @@
 'use client';
 import UserTable from '@/components/admin/usersTable/page';
-import { database, auth, storage } from '@/utils/firebase';
+import { database, auth } from '@/utils/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { onValue, ref } from 'firebase/database';
 import Link from 'next/link';
@@ -21,18 +21,21 @@ export default function Home() {
                 onValue(andminref, (snapshot) => {
                     let role = snapshot.val().role;
                     if (role === "admin") {
-                      
                         setAdmin(true)
                         fetchUser()
                     }
 
                 })
             }
+            else {
+                setAdmin(false)
+                return
+            }
         })
         function fetchUser() {
-           
+
             if (admin) {
-               
+
                 const dbref = ref(database, "users");
                 onValue(dbref, (snapshot) => {
                     let records = []
@@ -61,7 +64,7 @@ export default function Home() {
                 <div className='text-xl font-semibold'>Ace-Enterprises</div>
                 {!admin ? (
                     <div className='text-lg'>
-                        <Link href="/admin/login" className="bg-yellow-300 hover:bg-yellow-400   p-2 rounded-lg">Login</Link>
+                        <Link href="/login" className="bg-yellow-300 hover:bg-yellow-400   p-2 rounded-lg">Login</Link>
                     </div>
                 ) : (
                     <div>

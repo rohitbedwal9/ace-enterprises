@@ -62,17 +62,22 @@ export const Projects = () => {
     });
   }, [auth]);
 
-  const onhandleClick = async (title) => {
+  const onhandleClick = async (project) => {
     const user = (Object.getPrototypeOf = isUser);
     if (user && user.emailVerified) {
-      const fileReference = sRef(storage, `files/${title}.pdf`);
+      const fileReference = sRef(storage, `files/${project.title}.pdf`);
       await getDownloadURL(fileReference)
         .then((url) => {
           update(ref(database, 'users/' + user.uid), {
             is_download: true,
           });
+          let NoOfdownloads = project.downloads + 1
+         
+          update(ref(database, 'projects/' + project.id), {
+            downloads: NoOfdownloads,
+          });
 
-          download(url, `${title}.pdf`);
+          download(url, `${project.title}.pdf`);
           toast.success('File Downloaded Successfully');
         })
         .catch((error) => {

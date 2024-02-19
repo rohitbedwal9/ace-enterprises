@@ -53,7 +53,7 @@ export default function Projects() {
       await deleteObject(fileRef);
       const dbref = ref(database, 'projects/' + project.id);
       await remove(dbref);
-      console.log('done');
+    ;
     }
   };
 
@@ -78,38 +78,41 @@ export default function Projects() {
         toast.error(error.message);
       });
 
-    uploadBytes(imageRef, imageUpload).then(() => {
-      getDownloadURL(imageRef)
-        .then((url) => {
-          if (isEdit) {
-            const dbref = ref(database, 'projects/' + id);
-            update(dbref, {
-              title: title,
-              desc: desc,
-              imgURL: url,
-              downloads: 50,
-            });
-          } else {
-            const dbref = ref(database, 'projects/');
-            projects.push({
-              title: title,
-              desc: desc,
-              imgURL: url,
-              downloads: 50,
-            });
-            set(dbref, projects);
-          }
+        uploadBytes(imageRef, imageUpload)
+            .then(() => {
+                getDownloadURL(imageRef)
+                    .then((url) => {
 
-          toast.dismiss();
-          toast.success('Project have created successfully');
-        })
-        .catch((error) => {
-          toast.error(error.message);
-        });
-    });
-  };
+                        if (isEdit) {
+                            const dbref = ref(database, 'projects/' + id)
+                            update(dbref, {
+                                title: title,
+                                desc: desc,
+                                imgURL: url,
+                                downloads: project.downloads
+                            })
+                        }
+                        else {
+                            const dbref = ref(database, 'projects/')
+                            projects.push({
+                                title: title,
+                                desc: desc,
+                                imgURL: url,
+                                downloads: 0
+                            })
+                            set(dbref, projects)
+                        }
 
-  return (
+                        toast.dismiss()
+                        toast.success("Project have created successfully")
+                    })
+                    .catch((error) => {
+                        toast.error(error.message)
+                    });
+            })
+    };
+
+    return (
     <div className="w-[99%]">
       <div className="w-full flex flex-col my-5 ">
         <div className="flex justify-end sm:mx-12 lg:mx-16">
@@ -183,6 +186,7 @@ export default function Projects() {
                 setShowModal={setShowModal}
                 handleNew={handleNew}
               />
+
             </div>
           </div>
         </div>
