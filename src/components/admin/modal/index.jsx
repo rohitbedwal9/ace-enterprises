@@ -12,7 +12,7 @@ export default function Modal({ project, showModal, setShowModal, handleNew }) {
     useEffect(() => {
         setTitle(project !== null ? project.title : '')
         setDesc(project !== null ? project.desc : '')
-        
+
     }, [project])
 
 
@@ -22,8 +22,10 @@ export default function Modal({ project, showModal, setShowModal, handleNew }) {
             alert("Please fill the empty feilds")
             return
         }
+
+        let key = new Date().getTime().toString();
         let isedit = false
-        handleNew(title, desc, image, file, isedit, '');
+         handleNew(title, desc, image, file, isedit, key);
         setTitle('')
         setDesc('')
         setImage('')

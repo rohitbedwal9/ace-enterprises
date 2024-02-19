@@ -65,7 +65,7 @@ export const Projects = () => {
   const onhandleClick = async (project) => {
     const user = (Object.getPrototypeOf = isUser);
     if (user && user.emailVerified) {
-      const fileReference = sRef(storage, `files/${project.title}.pdf`);
+      const fileReference = sRef(storage, `files/${project.id}.pdf`);
       await getDownloadURL(fileReference)
         .then((url) => {
           update(ref(database, 'users/' + user.uid), {
@@ -77,7 +77,7 @@ export const Projects = () => {
             downloads: NoOfdownloads,
           });
 
-          download(url, `${project.title}.pdf`);
+          download(url, `${project.id}.pdf`);
           toast.success('File Downloaded Successfully');
         })
         .catch((error) => {
