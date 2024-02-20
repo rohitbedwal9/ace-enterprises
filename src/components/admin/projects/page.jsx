@@ -46,9 +46,8 @@ export default function Projects() {
     console.log(project);
 
     if (x) {
-      let fileName = project.title + '.pdf';
-      const fileRef = sRef(storage, `files/${fileName}`);
-      const imageRef = sRef(storage, `images/project/${project.title}`);
+      const fileRef = sRef(storage, `files/${project.id}.pdf`);
+      const imageRef = sRef(storage, `images/project/${project.id}`);
       await deleteObject(imageRef);
       await deleteObject(fileRef);
       const dbref = ref(database, 'projects/' + project.id);
@@ -64,11 +63,8 @@ export default function Projects() {
 
   const handleNew = async (title, desc, imageUpload, file, isEdit, id) => {
     toast.info('Please wait project is creating...');
-    let imageName = title;
-    const imageRef = sRef(storage, `images/project/${imageName}`);
-
-    let fileName = title + '.pdf';
-    const fileRef = sRef(storage, `files/${fileName}`);
+    const imageRef = sRef(storage, `images/project/${id}`);
+    const fileRef = sRef(storage, `files/${id}.pdf`);
 
     uploadBytes(fileRef, file)
       .then(() => {
@@ -93,14 +89,14 @@ export default function Projects() {
                             })
                         }
                         else {
-                            const dbref = ref(database, 'projects/')
-                            projects.push({
-                                title: title,
-                                desc: desc,
-                                imgURL: url,
-                                downloads: 0
+                            const dbref = ref(database, 'projects/'+id)
+                            set(dbref, {
+                              title: title,
+                              desc: desc,
+                              imgURL: url,
+                              downloads: 0,
+                              id: id
                             })
-                            set(dbref, projects)
                         }
 
                         toast.dismiss()
