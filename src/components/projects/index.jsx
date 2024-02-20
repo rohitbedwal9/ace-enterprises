@@ -17,6 +17,7 @@ export const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [showModal, setShowModal] = useState(false)
   const [isPhoneVerify, setIsPhoneVerify] = useState(false)
+
   const loginWarning = () => (
     <div>
       You must
@@ -73,6 +74,7 @@ export const Projects = () => {
       });
     });
   }, [auth]);
+
 
   const handlePhoneNumber = async (number) => {
     console.log(number, isUser)

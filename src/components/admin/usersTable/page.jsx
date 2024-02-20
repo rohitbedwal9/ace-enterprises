@@ -8,8 +8,7 @@ import { IoFilter } from 'react-icons/io5';
 import Image from 'next/image';
 
 export default function UserTable({ usersData, setusersData }) {
-  const [showAll, setShowAll] = useState(true);
-    const [sort, setSort] = useState(usersData)
+ const [sort, setSort] = useState(usersData)
     const [isSort, setIsSort] = useState(false)
 
     useEffect(() => {
@@ -85,6 +84,7 @@ export default function UserTable({ usersData, setusersData }) {
                     Last Login
                   </th>
 
+
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -159,3 +159,4 @@ export default function UserTable({ usersData, setusersData }) {
     </div>
   );
 }
+

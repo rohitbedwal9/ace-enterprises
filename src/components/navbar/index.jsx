@@ -67,10 +67,13 @@ export const Navbar = ({ transparent }) => {
           Ace-Enterprises
         </div>
         <div
-          className={`hidden  md:flex text-xl gap-6 text-white font-bold ${transparent
-            ? 'bg-gray-900 rounded-3xl py-2 px-2  '
-            : 'bg-transparent'
-            }`}
+
+          className={`hidden md:flex text-lg gap-12 text-white font-semibold px-2 ${
+            transparent
+              ? 'bg-gray-900 rounded-3xl py-2 gap-6'
+              : 'bg-transparent'
+          }`}
+
         >
           <Link
             href="/"
@@ -83,10 +86,11 @@ export const Navbar = ({ transparent }) => {
           </Link>
           <Link
             href="/services"
-            className={`${transparent
-              ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
-              : 'hover:border-white border-b-2 border-transparent'
-              }`}
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
           >
             Services
           </Link>
@@ -118,6 +122,7 @@ export const Navbar = ({ transparent }) => {
             Contact
           </Link>
         </div>
+
         <div className="flex  justify-end">
           {isLogin ? isAdmin ? (
             <Link
@@ -139,10 +144,11 @@ export const Navbar = ({ transparent }) => {
                     height={40}
                     alt="Profile Picture"
                     loader={myLoader}
-                    src={`${data.photoURL
-                      ? data.photoURL
-                      : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
-                      }`}
+                    src={`${
+                      data.photoURL
+                        ? data.photoURL
+                        : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
+                    }`}
                     className="rounded-full"
                   />
 
@@ -165,12 +171,14 @@ export const Navbar = ({ transparent }) => {
                   </div>
                 </div>
               </div>
-            ) : (
+            )
+          ) : (
             <div className="flex gap-2">
               <Link
                 href="/login"
-                className={`flex  bg-black border-2 ${transparent ? 'border-gray-800' : 'border-white'
-                  }   items-center  text-white px-4 y-2 rounded-3xl hover:bg-gray-800 sm:text-lg shadow-lg `}
+                className={`flex  bg-black border-2 ${
+                  transparent ? 'border-gray-800' : 'border-white'
+                }   items-center  text-white px-4  rounded-3xl hover:bg-gray-800 sm:text-lg shadow-lg `}
               >
                 Log In
               </Link>

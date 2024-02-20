@@ -43,7 +43,7 @@ export default function Projects() {
   // }
   const handleDelete = async (project) => {
     let x = confirm('Are you sure?');
-    console.log(project);
+  
 
     if (x) {
       const fileRef = sRef(storage, `files/${project.id}.pdf`);
@@ -52,7 +52,7 @@ export default function Projects() {
       await deleteObject(fileRef);
       const dbref = ref(database, 'projects/' + project.id);
       await remove(dbref);
-      console.log('done');
+ 
     }
   };
 
@@ -66,6 +66,7 @@ export default function Projects() {
     const imageRef = sRef(storage, `images/project/${id}`);
     const fileRef = sRef(storage, `files/${id}.pdf`);
 
+   
     uploadBytes(fileRef, file)
       .then(() => {
         toast.success('file uploaded');
@@ -181,6 +182,7 @@ export default function Projects() {
                 setShowModal={setShowModal}
                 handleNew={handleNew}
               />
+
             </div>
           </div>
         </div>
