@@ -8,10 +8,12 @@ import { useEffect, useState } from 'react';
 import Projects from '@/components/admin/projects/page';
 import { logout } from '@/utils/firebaseMethods';
 import { ScrollUp } from '@/components';
+import { useRouter } from 'next/navigation';
 
-export default function Home() {
+export default function AdminPanel() {
     const [admin, setAdmin] = useState(false)
     const [usersData, setusersData] = useState([])
+    const router = useRouter();
 
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
@@ -24,11 +26,15 @@ export default function Home() {
                         setAdmin(true)
                         fetchUser()
                     }
+                    else {
+                        router.push('/home');
+                    }
 
                 })
             }
             else {
                 setAdmin(false)
+                router.push('/home');
                 return
             }
         })
@@ -59,38 +65,37 @@ export default function Home() {
     return (
         <div className='main h-screen'>
 
-            <ScrollUp />
-            <nav className="w-full p-4 flex justify-around">
-                <div className='text-xl font-semibold'>Ace-Enterprises</div>
-                {!admin ? (
-                    <div className='text-lg'>
-                        <Link href="/login" className="bg-yellow-300 hover:bg-yellow-400   p-2 rounded-lg">Login</Link>
-                    </div>
-                ) : (
-                    <div>
-                        <button onClick={handleLogout}>Logout</button>
-                    </div>
-                )}
-
-            </nav>
-            <div className="flex flex-col justify-center items-center ">
-                <div className="text-4xl">
-                    Welcome Admin
-                </div>
-            </div>
-
             {admin ? (
-                <div className="w-full flex flex-col my-5  ">
-                    <UserTable usersData={usersData} setusersData={setusersData} />
+                <div>
+                    <ScrollUp />
+                    <nav className="w-full p-4 flex justify-around">
+                        <div className='text-xl font-semibold'>Ace-Enterprises</div>
+                        {!admin ? (
+                            <div className='text-lg'>
+                                <Link href="/login" className="bg-yellow-300 hover:bg-yellow-400   p-2 rounded-lg">Login</Link>
+                            </div>
+                        ) : (
+                            <div>
+                                <button onClick={handleLogout}>Logout</button>
+                            </div>
+                        )}
 
-                    <h1 className='text-4xl font-bold text-center my-4'>Projects</h1>
+                    </nav>
+                    <div className="flex flex-col justify-center items-center ">
+                        <div className="text-4xl">
+                            Welcome Admin
+                        </div>
+                    </div>
+                    <div className="w-full flex flex-col my-5  ">
+                        <UserTable usersData={usersData} setusersData={setusersData} />
 
-                    <Projects usersData={usersData} />
+                        <h1 className='text-4xl font-bold text-center my-4'>Projects</h1>
+
+                        <Projects usersData={usersData} />
+                    </div>
                 </div>
-
             ) : (
-                <div >
-                    <h1 className='bg-red-400 text-white p-4 text-center my-4 '>Please Login as admin to see users</h1>
+                <div>
                 </div>
             )}
 
