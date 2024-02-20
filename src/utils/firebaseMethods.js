@@ -115,7 +115,8 @@ export const google = async () => {
                     email: data.email,
                     role: "user",
                     profile_picture: data.photoURL,
-                    is_download: false
+                    is_download: false,
+                    number:""
                 });
             }
         })

@@ -9,11 +9,14 @@ import { storage } from '../../utils/firebase';
 import { ref as sRef, getDownloadURL } from 'firebase/storage';
 import { ToastContainer, toast } from 'react-toastify';
 import { onValue, ref, update } from 'firebase/database';
+import PhoneModal from '../phonemodal';
 
 export const Projects = () => {
   const { download } = useDownloader();
   const [isUser, setIsUser] = useState(null);
   const [projects, setProjects] = useState([]);
+  const [showModal, setShowModal] = useState(false)
+  const [isPhoneVerify, setIsPhoneVerify] = useState(false)
 
   const loginWarning = () => (
     <div>
@@ -41,9 +44,19 @@ export const Projects = () => {
       : toast.warning(verifyWarning);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
+ onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
         setIsUser(currentUser);
+        onValue(ref(database, 'users/' + currentUser.uid), (snapshot) => {
+          let PhoneVerify = snapshot.val().number !== ""
+          if (!PhoneVerify) {
+            setIsPhoneVerify(false)
+          }
+          else {
+            setIsPhoneVerify(true)
+          }
+
+        });
       } else {
         setIsUser(null);
       }
@@ -52,7 +65,7 @@ export const Projects = () => {
         let arr = [];
         let counter = 0;
         snapshot.forEach((doc) => {
-          if (counter < 8) {
+          if (counter < 6) {
             arr.push({ ...doc.val() });
             counter++;
           }
@@ -62,27 +75,44 @@ export const Projects = () => {
     });
   }, [auth]);
 
+
+  const handlePhoneNumber = async (number) => {
+    console.log(number, isUser)
+    await update(ref(database, "users/" + isUser.uid), {
+      number: number
+    })
+  }
+
   const onhandleClick = async (project) => {
     const user = (Object.getPrototypeOf = isUser);
     if (user && user.emailVerified) {
-      const fileReference = sRef(storage, `files/${project.id}.pdf`);
-      await getDownloadURL(fileReference)
-        .then((url) => {
-          update(ref(database, 'users/' + user.uid), {
-            is_download: true,
-          });
-          let NoOfdownloads = project.downloads + 1
-         
-          update(ref(database, 'projects/' + project.id), {
-            downloads: NoOfdownloads,
-          });
 
-          download(url, `${project.id}.pdf`);
-          toast.success('File Downloaded Successfully');
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
+
+      if (isPhoneVerify) {
+        console.log("download")
+        const fileReference = sRef(storage, `files/${project.id}.pdf`);
+        await getDownloadURL(fileReference)
+          .then((url) => {
+            toast.success('File Downloaded Successfully');
+            update(ref(database, 'users/' + user.uid), {
+              is_download: true,
+            });
+            let NoOfdownloads = project.downloads + 1
+
+            update(ref(database, 'projects/' + project.id), {
+              downloads: NoOfdownloads,
+            });
+
+            download(url, `${project.title}.pdf`);
+           
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      } else {
+        setShowModal(true)
+        console.log("modal open")
+      }
     } else if (user) {
       notify('verify');
     } else {
@@ -92,18 +122,7 @@ export const Projects = () => {
 
   return (
     <div className="py-5 md:px-20">
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+     
       <div className="flex md:flex-row gap-4 flex-col mx-5 md:mx-10 items-center">
         <div className="flex flex-col gap-4 p-4 md:p-10 align-center md:w-[70%]">
           <p className="text-xl md:text-2xl font-bold text-gray-800 ">
@@ -135,6 +154,14 @@ export const Projects = () => {
             <Card key={index} project={project} onhandleClick={onhandleClick} />
           ))}
       </div>
+    
+      <PhoneModal
+
+        showModal={showModal}
+        setShowModal={setShowModal}
+        handlePhoneNumber={handlePhoneNumber}
+      />
+
     </div>
   );
 };

@@ -58,7 +58,7 @@ export default function Modal({ project, showModal, setShowModal, handleNew }) {
 
             {showModal ? (
                 <>
-                    <div className="fixed top-0 flex items-center justify-center p-10 left-0 right-0 bottom-0 bg-opacity-25 bg-black z-10">
+                    <div className="fixed top-0 flex items-center justify-center sm:p-10 left-0 right-0 bottom-0 bg-opacity-25 bg-black z-10">
                         <div className="w-full h-100 bg-gray-800 p-5 rounded-lg max-w-2xl z-50 relative ">
                             <div className=' w-full flex justify-end cursor-pointer'>
                                 <IoClose color='white' size={25} onClick={closeModal} />

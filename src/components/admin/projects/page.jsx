@@ -43,7 +43,7 @@ export default function Projects() {
   // }
   const handleDelete = async (project) => {
     let x = confirm('Are you sure?');
-    console.log(project);
+  
 
     if (x) {
       const fileRef = sRef(storage, `files/${project.id}.pdf`);
@@ -52,7 +52,7 @@ export default function Projects() {
       await deleteObject(fileRef);
       const dbref = ref(database, 'projects/' + project.id);
       await remove(dbref);
-    ;
+ 
     }
   };
 
@@ -66,6 +66,7 @@ export default function Projects() {
     const imageRef = sRef(storage, `images/project/${id}`);
     const fileRef = sRef(storage, `files/${id}.pdf`);
 
+   
     uploadBytes(fileRef, file)
       .then(() => {
         toast.success('file uploaded');
@@ -73,42 +74,41 @@ export default function Projects() {
       .catch((error) => {
         toast.error(error.message);
       });
+    uploadBytes(imageRef, imageUpload)
+      .then(() => {
+        getDownloadURL(imageRef)
+          .then((url) => {
 
-        uploadBytes(imageRef, imageUpload)
-            .then(() => {
-                getDownloadURL(imageRef)
-                    .then((url) => {
+            if (isEdit) {
+              const dbref = ref(database, 'projects/' + id)
+              update(dbref, {
+                title: title,
+                desc: desc,
+                imgURL: url,
+                downloads: project.downloads
+              })
+            }
+            else {
+              const dbref = ref(database, 'projects/' + id)
+              set(dbref, {
+                title: title,
+                desc: desc,
+                imgURL: url,
+                downloads: 0,
+                id: id
+              })
+            }
 
-                        if (isEdit) {
-                            const dbref = ref(database, 'projects/' + id)
-                            update(dbref, {
-                                title: title,
-                                desc: desc,
-                                imgURL: url,
-                                downloads: project.downloads
-                            })
-                        }
-                        else {
-                            const dbref = ref(database, 'projects/'+id)
-                            set(dbref, {
-                              title: title,
-                              desc: desc,
-                              imgURL: url,
-                              downloads: 0,
-                              id: id
-                            })
-                        }
+            toast.dismiss()
+            toast.success("Project have created successfully")
+          })
+          .catch((error) => {
+            toast.error(error.message)
+          });
+      })
+  }
 
-                        toast.dismiss()
-                        toast.success("Project have created successfully")
-                    })
-                    .catch((error) => {
-                        toast.error(error.message)
-                    });
-            })
-    };
-
-    return (
+  return (
     <div className="w-[99%]">
       <div className="w-full flex flex-col my-5 ">
         <div className="flex justify-end sm:mx-12 lg:mx-16">
