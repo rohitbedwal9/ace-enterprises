@@ -24,14 +24,13 @@ export const Navbar = ({ transparent }) => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
         setIsLogin(true);
-        const andminref = ref(database, "users/" + currentUser.uid);
+        const andminref = ref(database, 'users/' + currentUser.uid);
         onValue(andminref, (snapshot) => {
           let role = snapshot.val().role;
-          if (role === "admin") {
-            setIsAdmin(true)
+          if (role === 'admin') {
+            setIsAdmin(true);
           }
-
-        })
+        });
         setData(currentUser.providerData[0]);
       } else {
         setIsLogin(false);
@@ -41,17 +40,19 @@ export const Navbar = ({ transparent }) => {
   }, []);
 
   const myLoader = ({ src }) => {
-    return `${data.photoURL
-      ? data.photoURL
-      : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
-      }`;
+    return `${
+      data.photoURL
+        ? data.photoURL
+        : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
+    }`;
   };
 
   return (
     <div>
       <nav
-        className={`w-full ${transparent ? 'bg-transparent' : 'bg-gray-900'
-          } navbar  flex  justify-between items-center w-full py-5 px-10 sm:py-6 `}
+        className={`w-full ${
+          transparent ? 'bg-transparent' : 'bg-gray-900'
+        } navbar  flex  justify-between items-center w-full py-5 px-10 sm:py-6 `}
       >
         <div className="md:hidden ">
           <button
@@ -67,69 +68,77 @@ export const Navbar = ({ transparent }) => {
           Ace-Enterprises
         </div>
         <div
-          className={`hidden  md:flex text-xl gap-6 text-white font-bold ${transparent
-            ? 'bg-gray-900 rounded-3xl py-2 px-2  '
-            : 'bg-transparent'
-            }`}
+          className={`hidden md:flex text-lg gap-12 text-white font-semibold px-2 ${
+            transparent
+              ? 'bg-gray-900 rounded-3xl py-2 gap-6'
+              : 'bg-transparent'
+          }`}
         >
           <Link
             href="/"
-            className={`${transparent
-              ? 'hover:bg-gray-700  px-2 rounded-3xl focus:opacity-70'
-              : 'hover:border-white border-b-2 border-transparent'
-              }`}
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700  px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
           >
             Home
           </Link>
           <Link
             href="/services"
-            className={`${transparent
-              ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
-              : 'hover:border-white border-b-2 border-transparent'
-              }`}
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
           >
             Services
           </Link>
           <Link
             href="/projects"
-            className={`${transparent
-              ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
-              : 'hover:border-white border-b-2 border-transparent'
-              }`}
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
           >
             Projects
           </Link>
           <Link
             href="/about"
-            className={`${transparent
-              ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
-              : 'hover:border-white border-b-2 border-transparent'
-              }`}
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
           >
             About
           </Link>
           <Link
             href="/contact"
-            className={`${transparent
-              ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
-              : 'hover:border-white border-b-2 border-transparent'
-              }`}
+            className={`${
+              transparent
+                ? 'hover:bg-gray-700 px-2 rounded-3xl focus:opacity-70'
+                : 'hover:border-white border-b-2 border-transparent'
+            }`}
           >
             Contact
           </Link>
         </div>
-        <div className="flex  justify-end">
-          {isLogin ? isAdmin ? (
-            <Link
-              href="admin"
-              className={`${transparent
-                ? 'text-lg text-white px-4 p-3 bg-black hover:bg-yellow-300 hover:text-black rounded-3xl focus:opacity-70'
-                : 'border-white text-lg text-black px-4 p-3  bg-white hover:bg-yellow-300  delay-50 ease-in rounded-3xl'
+        <div className="flex justify-end">
+          {isLogin ? (
+            isAdmin ? (
+              <Link
+                href="admin"
+                className={`text-md font-semibold md:text-lg py-2 px-4  hover:bg-yellow-300  delay-50 ease-in rounded-3xl focus:opacity-70${
+                  transparent
+                    ? ' text-white  bg-black hover:text-black hover:gray-800 '
+                    : 'border-white  text-black  bg-white '
                 }`}
-            >
-              Admin Panel</Link>
-          ) :
-            (
+              >
+                Admin Panel
+              </Link>
+            ) : (
               <div className=" rounded-md">
                 <div className="relative">
                   <Image
@@ -139,10 +148,11 @@ export const Navbar = ({ transparent }) => {
                     height={40}
                     alt="Profile Picture"
                     loader={myLoader}
-                    src={`${data.photoURL
-                      ? data.photoURL
-                      : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
-                      }`}
+                    src={`${
+                      data.photoURL
+                        ? data.photoURL
+                        : 'https://res.cloudinary.com/dppjj5yox/image/upload/v1707721410/acehub/images/default_yetsex.jpg'
+                    }`}
                     className="rounded-full"
                   />
 
@@ -165,21 +175,24 @@ export const Navbar = ({ transparent }) => {
                   </div>
                 </div>
               </div>
-            ) : (
+            )
+          ) : (
             <div className="flex gap-2">
               <Link
                 href="/login"
-                className={`flex  bg-black border-2 ${transparent ? 'border-gray-800' : 'border-white'
-                  }   items-center  text-white px-4 y-2 rounded-3xl hover:bg-gray-800 sm:text-lg shadow-lg `}
+                className={`flex  bg-black border-2 ${
+                  transparent ? 'border-gray-800' : 'border-white'
+                }   items-center  text-white px-4  rounded-3xl hover:bg-gray-800 sm:text-lg shadow-lg `}
               >
                 Log In
               </Link>
               <Link
                 href="/signup"
-                className={`flex  items-center  border-2   text-white p-2 bg-black rounded-3xl  hover:text-white  sm:text-lg shadow-lg ${transparent
-                  ? 'bg-transparent hover:bg-gray-800 hover:border-black'
-                  : 'bg-gray-900 hover:bg-gray-800'
-                  }`}
+                className={`flex  items-center  border-2   text-white p-2 bg-black rounded-3xl  hover:text-white  sm:text-lg shadow-lg ${
+                  transparent
+                    ? 'bg-transparent hover:bg-gray-800 hover:border-black'
+                    : 'bg-gray-900 hover:bg-gray-800'
+                }`}
               >
                 Sign Up
               </Link>
