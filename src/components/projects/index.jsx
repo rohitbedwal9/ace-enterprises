@@ -16,7 +16,7 @@ export const Projects = () => {
   const [isUser, setIsUser] = useState(null);
   const [projects, setProjects] = useState([]);
   const [showModal, setShowModal] = useState(false)
-
+  const [isPhoneVerify, setIsPhoneVerify] = useState(false)
   const loginWarning = () => (
     <div>
       You must
@@ -46,6 +46,16 @@ export const Projects = () => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
         setIsUser(currentUser);
+        onValue(ref(database, 'users/' + currentUser.uid), (snapshot) => {
+          let PhoneVerify = snapshot.val().number !== ""
+          if (!PhoneVerify) {
+            setIsPhoneVerify(false)
+          }
+          else {
+            setIsPhoneVerify(true)
+          }
+
+        });
       } else {
         setIsUser(null);
       }
@@ -64,35 +74,43 @@ export const Projects = () => {
     });
   }, [auth]);
 
+  const handlePhoneNumber = async (number) => {
+    console.log(number, isUser)
+    await update(ref(database, "users/" + isUser.uid), {
+      number: number
+    })
+  }
+
   const onhandleClick = async (project) => {
     const user = (Object.getPrototypeOf = isUser);
     if (user && user.emailVerified) {
-      setIsUser(user)
-      onValue(ref(database, 'users/' + user.uid), (snapshot) => {
-        let isPhoneVerify = snapshot.val().number !== ""
-        if (!isPhoneVerify) {
-          setShowModal(true)
-        }
 
-      });
-      const fileReference = sRef(storage, `files/${project.id}.pdf`);
-      // await getDownloadURL(fileReference)
-      //   .then((url) => {
-      //     update(ref(database, 'users/' + user.uid), {
-      //       is_download: true,
-      //     });
-      //     let NoOfdownloads = project.downloads + 1
 
-      //     update(ref(database, 'projects/' + project.id), {
-      //       downloads: NoOfdownloads,
-      //     });
+      if (isPhoneVerify) {
+        console.log("download")
+        const fileReference = sRef(storage, `files/${project.id}.pdf`);
+        await getDownloadURL(fileReference)
+          .then((url) => {
+            toast.success('File Downloaded Successfully');
+            update(ref(database, 'users/' + user.uid), {
+              is_download: true,
+            });
+            let NoOfdownloads = project.downloads + 1
 
-      //     download(url, `${project.id}.pdf`);
-      //     toast.success('File Downloaded Successfully');
-      //   })
-      //   .catch((error) => {
-      //     console.log(error.message);
-      //   });
+            update(ref(database, 'projects/' + project.id), {
+              downloads: NoOfdownloads,
+            });
+
+            download(url, `${project.title}.pdf`);
+           
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      } else {
+        setShowModal(true)
+        console.log("modal open")
+      }
     } else if (user) {
       notify('verify');
     } else {
@@ -102,18 +120,7 @@ export const Projects = () => {
 
   return (
     <div className="py-5 md:px-20">
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+     
       <div className="flex md:flex-row gap-4 flex-col mx-5 md:mx-10 items-center">
         <div className="flex flex-col gap-4 p-4 md:p-10 align-center md:w-[70%]">
           <p className="text-xl md:text-2xl font-bold text-gray-800 ">
@@ -145,11 +152,12 @@ export const Projects = () => {
             <Card key={index} project={project} onhandleClick={onhandleClick} />
           ))}
       </div>
+    
       <PhoneModal
 
         showModal={showModal}
         setShowModal={setShowModal}
-        user={isUser}
+        handlePhoneNumber={handlePhoneNumber}
       />
 
     </div>
