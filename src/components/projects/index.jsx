@@ -9,11 +9,13 @@ import { storage } from '../../utils/firebase';
 import { ref as sRef, getDownloadURL } from 'firebase/storage';
 import { ToastContainer, toast } from 'react-toastify';
 import { onValue, ref, update } from 'firebase/database';
+import PhoneModal from '../phonemodal';
 
 export const Projects = () => {
   const { download } = useDownloader();
   const [isUser, setIsUser] = useState(null);
   const [projects, setProjects] = useState([]);
+  const [showModal, setShowModal] = useState(false)
 
   const loginWarning = () => (
     <div>
@@ -52,7 +54,7 @@ export const Projects = () => {
         let arr = [];
         let counter = 0;
         snapshot.forEach((doc) => {
-          if (counter < 8) {
+          if (counter < 6) {
             arr.push({ ...doc.val() });
             counter++;
           }
@@ -65,24 +67,32 @@ export const Projects = () => {
   const onhandleClick = async (project) => {
     const user = (Object.getPrototypeOf = isUser);
     if (user && user.emailVerified) {
-      const fileReference = sRef(storage, `files/${project.id}.pdf`);
-      await getDownloadURL(fileReference)
-        .then((url) => {
-          update(ref(database, 'users/' + user.uid), {
-            is_download: true,
-          });
-          let NoOfdownloads = project.downloads + 1
-         
-          update(ref(database, 'projects/' + project.id), {
-            downloads: NoOfdownloads,
-          });
+      setIsUser(user)
+      onValue(ref(database, 'users/' + user.uid), (snapshot) => {
+        let isPhoneVerify = snapshot.val().number !== ""
+        if (!isPhoneVerify) {
+          setShowModal(true)
+        }
 
-          download(url, `${project.id}.pdf`);
-          toast.success('File Downloaded Successfully');
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
+      });
+      const fileReference = sRef(storage, `files/${project.id}.pdf`);
+      // await getDownloadURL(fileReference)
+      //   .then((url) => {
+      //     update(ref(database, 'users/' + user.uid), {
+      //       is_download: true,
+      //     });
+      //     let NoOfdownloads = project.downloads + 1
+
+      //     update(ref(database, 'projects/' + project.id), {
+      //       downloads: NoOfdownloads,
+      //     });
+
+      //     download(url, `${project.id}.pdf`);
+      //     toast.success('File Downloaded Successfully');
+      //   })
+      //   .catch((error) => {
+      //     console.log(error.message);
+      //   });
     } else if (user) {
       notify('verify');
     } else {
@@ -135,6 +145,13 @@ export const Projects = () => {
             <Card key={index} project={project} onhandleClick={onhandleClick} />
           ))}
       </div>
+      <PhoneModal
+
+        showModal={showModal}
+        setShowModal={setShowModal}
+        user={isUser}
+      />
+
     </div>
   );
 };

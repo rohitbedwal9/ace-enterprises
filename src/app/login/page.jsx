@@ -1,6 +1,6 @@
 'use client';
 import { FcGoogle } from 'react-icons/fc';
-import { login, google, logout } from '@/utils/firebaseMethods';
+import { login, google } from '@/utils/firebaseMethods';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { onAuthStateChanged } from 'firebase/auth';
