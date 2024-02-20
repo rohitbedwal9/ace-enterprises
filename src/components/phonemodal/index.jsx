@@ -1,13 +1,20 @@
 'use client';
 import React, { useState } from 'react'
 import { IoClose } from "react-icons/io5";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function PhoneModal({ showModal, setShowModal, handlePhoneNumber }) {
     const [number, setNumber] = useState('')
-    const [focused, setFocused] = useState(false);
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(number)
+        if(number.length<10 ||number.length>10){
+            toast.error("Please enter the valid phone number (10 digits)")
+            return
+        }
+        handlePhoneNumber("+91"+number)
+        console.log("phone")
+        closeModal()
     }
 
     const closeModal = () => {
@@ -48,7 +55,7 @@ export default function PhoneModal({ showModal, setShowModal, handlePhoneNumber 
                                   
                                    
                                             <input
-                                                type="tel"
+                                                type="number"
                                                 className="block p-2.5 w-[80%]  z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-0 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
                                                 placeholder="123-456-7890"
                                                 value={number}
@@ -65,7 +72,19 @@ export default function PhoneModal({ showModal, setShowModal, handlePhoneNumber 
                     </div>
                 </>
             ) : null}
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
 
+            />
         </div>
     )
 }
