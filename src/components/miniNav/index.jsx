@@ -5,7 +5,7 @@ export const MiniNav = () => {
   return (
     <div className="text-white bg-white bg-opacity-20 gap-1 flex flex-row  w-max  rounded-xl bg-transparent shadow-xl p-2">
 
-      <Link href="home" className='flex'>
+      <Link href="/" className='flex'>
         <IoArrowBackCircle size={24} />
         Home
       </Link>

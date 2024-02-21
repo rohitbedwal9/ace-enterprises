@@ -15,7 +15,7 @@ export default function AdminPanel() {
     const [usersData, setusersData] = useState([])
     const router = useRouter();
 
-    useEffect(() => {
+     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
             if (currentUser && currentUser.emailVerified) {
 
@@ -27,14 +27,14 @@ export default function AdminPanel() {
                         fetchUser()
                     }
                     else {
-                        router.push('/home');
+                        router.push('/');
                     }
 
                 })
             }
             else {
                 setAdmin(false)
-                router.push('/home');
+                router.push('/');
                 return
             }
         })

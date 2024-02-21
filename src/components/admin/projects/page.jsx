@@ -52,7 +52,6 @@ export default function Projects() {
       await deleteObject(fileRef);
       const dbref = ref(database, 'projects/' + project.id);
       await remove(dbref);
-
     }
   };
 
@@ -65,7 +64,6 @@ export default function Projects() {
     toast.info('Please wait project is creating...');
     const imageRef = sRef(storage, `images/project/${id}`);
     const fileRef = sRef(storage, `files/${id}.pdf`);
-
 
     uploadBytes(fileRef, file)
       .then(() => {

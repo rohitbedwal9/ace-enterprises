@@ -5,8 +5,8 @@ import { IoFilter } from 'react-icons/io5';
 import Image from 'next/image';
 
 export default function UserTable({ usersData, setusersData }) {
-  const [sort, setSort] = useState(usersData)
-  const [isSort, setIsSort] = useState(false)
+ const [sort, setSort] = useState(usersData)
+ const [isSort, setIsSort] = useState(false)
 
   useEffect(() => {
     if (isSort) {
