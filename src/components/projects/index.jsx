@@ -1,193 +1,167 @@
 'use client';
-import { database, storage } from '@/utils/firebase';
-import { onValue, ref, remove, set, update } from 'firebase/database';
-import {
-  ref as sRef,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject,
-} from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
-import ProjectRow from '../projectRow';
-import Modal from '../modal';
+import Link from 'next/link';
+import Card from '../card';
+import useDownloader from 'react-use-downloader';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, database } from '../../utils/firebase';
+import { storage } from '../../utils/firebase';
+import { ref as sRef, getDownloadURL } from 'firebase/storage';
 import { ToastContainer, toast } from 'react-toastify';
+import { onValue, ref, update } from 'firebase/database';
+import PhoneModal from '../phonemodal';
 
-export default function Projects() {
-  const [showAll, setShowAll] = useState(true);
+export const Projects = () => {
+  const { download } = useDownloader();
+  const [isUser, setIsUser] = useState(null);
   const [projects, setProjects] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [project, setProject] = useState(null);
+  const [showModal, setShowModal] = useState(false)
+  const [isPhoneVerify, setIsPhoneVerify] = useState(false)
+
+  const loginWarning = () => (
+    <div>
+      You must
+      <Link className="underline text-blue-400" href="/login">
+        {' '}
+        login{' '}
+      </Link>
+      first.
+    </div>
+  );
+  const verifyWarning = () => (
+    <div>
+      You must
+      <Link className="underline text-blue-400" href="/verifyemail">
+        {' '}
+        verify your email{' '}
+      </Link>
+      first.
+    </div>
+  );
+  const notify = (text) =>
+    text === 'login'
+      ? toast.warning(loginWarning)
+      : toast.warning(verifyWarning);
 
   useEffect(() => {
-    const dbref = ref(database, 'projects');
-    const unsubscribe = onValue(dbref, (snapshot) => {
-      let arr = [];
-      snapshot.forEach((doc) => {
-        arr.push({ ...doc.val(), id: doc.key });
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser && currentUser.emailVerified) {
+        setIsUser(currentUser);
+        onValue(ref(database, 'users/' + currentUser.uid), (snapshot) => {
+          let PhoneVerify = snapshot.val().number !== ""
+          if (!PhoneVerify) {
+            setIsPhoneVerify(false)
+          }
+          else {
+            setIsPhoneVerify(true)
+          }
+
+        });
+      } else {
+        setIsUser(null);
+      }
+      const dbref = ref(database, 'projects');
+      onValue(dbref, (snapshot) => {
+        let arr = [];
+        let counter = 0;
+        snapshot.forEach((doc) => {
+          if (counter < 8) {
+            arr.push({ ...doc.val() });
+            counter++;
+          }
+        });
+        setProjects(arr);
       });
-      setProjects(arr);
     });
-    return () => unsubscribe;
-  }, []);
-
-  // useEffect(() => {
-
-  //     if (showAll) {
-  //         setShowAll(true)
-  //     }
-
-  // }, [showAll])
-
-  // function handleShow() {
-  //     setShowAll(!showAll)
-  // }
-  const handleDelete = async (project) => {
-    let x = confirm('Are you sure?');
+  }, [auth]);
 
 
-    if (x) {
-      const fileRef = sRef(storage, `files/${project.id}.pdf`);
-      const imageRef = sRef(storage, `images/project/${project.id}`);
-      await deleteObject(imageRef);
-      await deleteObject(fileRef);
-      const dbref = ref(database, 'projects/' + project.id);
-      await remove(dbref);
+  const handlePhoneNumber = async (number) => {
+    console.log(number, isUser)
+    await update(ref(database, "users/" + isUser.uid), {
+      number: number
+    })
+  }
 
+  const onhandleClick = async (project) => {
+    const user = (Object.getPrototypeOf = isUser);
+    if (user && user.emailVerified) {
+
+
+      if (isPhoneVerify) {
+        console.log("download")
+        const fileReference = sRef(storage, `files/${project.id}.pdf`);
+        await getDownloadURL(fileReference)
+          .then((url) => {
+            toast.success('File Downloaded Successfully');
+            update(ref(database, 'users/' + user.uid), {
+              is_download: true,
+            });
+            let NoOfdownloads = project.downloads + 1
+
+            update(ref(database, 'projects/' + project.id), {
+              downloads: NoOfdownloads,
+            });
+
+            download(url, `${project.title}.pdf`);
+
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      } else {
+        setShowModal(true)
+        console.log("modal open")
+      }
+    } else if (user) {
+      notify('verify');
+    } else {
+      notify('login');
     }
   };
 
-  const handleEditOpen = async (project) => {
-    setProject(project);
-    setShowModal(true);
-  };
-
-  const handleNew = async (title, desc, imageUpload, file, isEdit, id) => {
-    toast.info('Please wait project is creating...');
-    const imageRef = sRef(storage, `images/project/${id}`);
-    const fileRef = sRef(storage, `files/${id}.pdf`);
-
-
-    uploadBytes(fileRef, file)
-      .then(() => {
-        toast.success('file uploaded');
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
-    uploadBytes(imageRef, imageUpload)
-      .then(() => {
-        getDownloadURL(imageRef)
-          .then((url) => {
-
-            if (isEdit) {
-              const dbref = ref(database, 'projects/' + id)
-              update(dbref, {
-                title: title,
-                desc: desc,
-                imgURL: url,
-                downloads: project.downloads
-              })
-            }
-            else {
-              const dbref = ref(database, 'projects/' + id)
-              set(dbref, {
-                title: title,
-                desc: desc,
-                imgURL: url,
-                downloads: 0,
-                id: id
-              })
-            }
-
-            toast.dismiss()
-            toast.success("Project have created successfully")
-          })
-          .catch((error) => {
-            toast.error(error.message)
-          });
-      })
-  }
-
   return (
-    <div className="w-[99%]">
-      <div className="w-full flex flex-col my-5 ">
-        <div className="flex justify-end sm:mx-12 lg:mx-10">
-          <button
-            onClick={() => {
-              setProject(null);
-              setShowModal(true);
-            }}
-            className="bg-yellow-400 px-5 py-2 rounded-full"
-          >
-            Add New Projects
-          </button>
+    <div className="py-5 md:px-20">
+
+      <div className="flex md:flex-row gap-4 flex-col mx-5 md:mx-10 items-center">
+        <div className="flex flex-col gap-4 p-4 md:p-10 align-center md:w-[70%]">
+          <p className="text-xl md:text-2xl font-bold text-gray-800 ">
+            What we do
+          </p>
+          <h1 className="text-2xl md:text-4xl font-bold w-max text-black px-2 bg-yellow-300">
+            Recent Projects
+          </h1>
+          <p className="text-xl font-semibold">
+            We design curated residential spaces that are a beautiful reflection
+            of what&apos;s most important to you. Our portfolio spans all style
+            disciplines, from traditional to contemporary and everything in
+            between.
+          </p>
         </div>
-        <div className="overflow-y-scroll w-[98%] min-h-screen no-scrollbar overflow-x-auto md:overflow-x-hidden sm:mx-6 lg:mx-8">
-          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Project Image
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Project Title
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Project Description
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      No. of Downloads
-                    </th>
-
-                    <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Edit</span>
-                    </th>
-                    <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Delete</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {projects &&
-                    projects.map((project, index) => (
-                      <ProjectRow
-                        key={index}
-                        project={project}
-                        index={index}
-                        handleEditOpen={handleEditOpen}
-                        setShowModal={setShowModal}
-                        handleDelete={handleDelete}
-                      />
-                    ))}
-                </tbody>
-              </table>
-
-              <Modal
-                project={project}
-                showModal={showModal}
-                setShowModal={setShowModal}
-                handleNew={handleNew}
-              />
-
-            </div>
-          </div>
+        <div className="mx-auto justify-self-center text-center md:w-[20%] ">
+          <Link
+            href="/projects"
+            className="p-3 ml-auto rounded-3xl text-sky-600 border-sky-600 border-2    "
+          >
+            Read More
+          </Link>
         </div>
       </div>
-      <ToastContainer position="top-center" autoClose={5000} />
+
+      <div className=" flex-wrap h-100 flex md:flex-row flex-col  justify-center items-center">
+        {projects &&
+          projects.map((project, index) => (
+            <Card key={index} project={project} onhandleClick={onhandleClick} />
+          ))}
+      </div>
+
+      <PhoneModal
+
+        showModal={showModal}
+        setShowModal={setShowModal}
+        handlePhoneNumber={handlePhoneNumber}
+      />
+
     </div>
   );
-}
+};
