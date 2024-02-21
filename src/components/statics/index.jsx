@@ -1,5 +1,7 @@
-'use client';
-import AnimatedNumbers from 'react-animated-numbers';
+import dynamic from "next/dynamic";
+const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
+  ssr: false,
+});
 export const Statics = () => {
   return (
     <div className="flex  shadow-xl flex-col w-full gap-10 md:flex-row justify-around md:px-56 py-10 items-center h-full md:h-56 bg-white">
