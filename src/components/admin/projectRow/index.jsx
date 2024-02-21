@@ -8,7 +8,7 @@ function ProjectRow({ project, index, handleEditOpen, handleDelete }) {
             <td className="px-6 py-4  whitespace-nowrap">
                 <div className="flex sm:justify-start justify-center ">
 
-                    <Image className='w-100 h-auto rounded' src={project.imgURL} alt={project.imgURL} width={120} height={100} />
+                    <Image className='w-100 h-50 rounded' src={project.imgURL} alt={project.imgURL} width={100} height={50} />
 
                 </div>
             </td>

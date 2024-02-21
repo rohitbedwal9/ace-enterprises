@@ -28,19 +28,18 @@ export default function UserTable({ usersData, setusersData }) {
 
   return (
     <div className="w-[97%]">
-      <div className="overflow-y-scroll overflow-x-auto no-scrollbar md:overflow-x-hidden max-h-screen w-full sm:mx-6 lg:mx-8">
+      <div className="p-2  flex sm:w-[95%] rounded  justify-center sm:mx-12 lg:mx-16 items-center bg-yellow-400 ">
+        <button
+          className=" w-full flex px-5  justify-end items-center text-sm"
+          onClick={handleSort}
+        >
+          <IoFilter className="mx-2" />
+          sort
+        </button>
+      </div>
+      <div className="overflow-y-scroll overflow-x-auto  md:overflow-x-hidden max-h-screen w-full sm:mx-6 lg:mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-            <div className="bg-yellow-300 p-1">
-              <button
-                className="-mx-5 p-1 w-full flex justify-end items-center text-sm"
-                onClick={handleSort}
-              >
-                <IoFilter className="mx-2" />
-                sort
-              </button>
-            </div>
-
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
@@ -88,9 +87,7 @@ export default function UserTable({ usersData, setusersData }) {
                   >
                     Download
                   </th>
-                  <th scope="col" className="relative px-6 py-3">
-                    <span className="sr-only">Edit</span>
-                  </th>
+                 
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -108,7 +105,7 @@ export default function UserTable({ usersData, setusersData }) {
                               height={50}
                             />
                           </div>
-                          <div className="ml-4">
+                          <div className=" px-4 py-2 ">
                             <div className="text-sm font-medium text-gray-900">
                               {user.data.name}
                             </div>
@@ -138,14 +135,7 @@ export default function UserTable({ usersData, setusersData }) {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {user.data.is_download ? 'Yes' : 'No'}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a
-                          href="#"
-                          className="text-indigo-600 hover:text-indigo-900"
-                        >
-                          Edit
-                        </a>
-                      </td>
+                      
                     </tr>
                   ))}
               </tbody>

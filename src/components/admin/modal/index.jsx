@@ -4,8 +4,8 @@ import { IoClose } from "react-icons/io5";
 
 
 export default function Modal({ project, showModal, setShowModal, handleNew }) {
-    const [title, setTitle] = useState()
-    const [desc, setDesc] = useState()
+    const [title, setTitle] = useState('')
+    const [desc, setDesc] = useState('')
     const [image, setImage] = useState('')
     const [file, setFile] = useState('')
 
@@ -25,7 +25,7 @@ export default function Modal({ project, showModal, setShowModal, handleNew }) {
 
         let key = new Date().getTime().toString();
         let isedit = false
-         handleNew(title, desc, image, file, isedit, key);
+        handleNew(title, desc, image, file, isedit, key);
         setTitle('')
         setDesc('')
         setImage('')
@@ -47,9 +47,13 @@ export default function Modal({ project, showModal, setShowModal, handleNew }) {
     }
 
     const closeModal = () => {
-        setTitle('')
-        setDesc('')
-        setImage('')
+       
+        if (project === null) {
+            setTitle('')
+            setDesc('')
+            setImage('')
+        }
+
         setShowModal(false)
     }
 

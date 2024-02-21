@@ -18,7 +18,7 @@ export const register = async (form) => {
         await set(ref(database, 'users/' + data.uid), {
             name: form.username,
             email: form.email,
-            number: form.number,
+            number: "+91"+form.number,
             role: "user",
             profile_picture: defaultImg,
             last_login: time,

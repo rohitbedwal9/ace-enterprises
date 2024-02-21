@@ -111,13 +111,13 @@ export default function Projects() {
   return (
     <div className="w-[99%]">
       <div className="w-full flex flex-col my-5 ">
-        <div className="flex justify-end sm:mx-12 lg:mx-16">
+        <div className="flex justify-end sm:mx-12 lg:mx-10">
           <button
             onClick={() => {
               setProject(null);
               setShowModal(true);
             }}
-            className="bg-yellow-400 p-2 "
+            className="bg-yellow-400 px-5 py-2 rounded-full"
           >
             Add New Projects
           </button>
