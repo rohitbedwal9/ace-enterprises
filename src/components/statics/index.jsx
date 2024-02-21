@@ -1,4 +1,4 @@
-'use strict';
+'use client';
 import AnimatedNumbers from 'react-animated-numbers';
 export const Statics = () => {
   return (
