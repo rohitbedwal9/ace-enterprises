@@ -8,7 +8,7 @@ export const Statics = () => {
           <AnimatedNumbers
             includeComma
             transitions={(index) => ({
-              type: 'up',
+              type: 'spring',
               duration: index + 0.3,
             })}
             animateToNumber={25}
@@ -25,7 +25,7 @@ export const Statics = () => {
           <AnimatedNumbers
             includeComma
             transitions={(index) => ({
-              type: 'up',
+              type: 'spring',
               duration: index + 0.3,
             })}
             animateToNumber={24}
@@ -42,7 +42,7 @@ export const Statics = () => {
           <AnimatedNumbers
             includeComma
             transitions={(index) => ({
-              type: 'up',
+              type: 'spring',
               duration: index + 0.3,
             })}
             animateToNumber={50}
@@ -59,7 +59,7 @@ export const Statics = () => {
           <AnimatedNumbers
             includeComma
             transitions={(index) => ({
-              type: 'up',
+              type: 'spring',
               duration: index + 0.3,
             })}
             animateToNumber={100}
