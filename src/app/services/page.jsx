@@ -1,12 +1,10 @@
-import { Footer, Navbar, ScrollUp } from '@/components';
-export default function Services() {
+import { Footer, Navbar, ScrollUp ,Services} from '@/components';
+export default function Service() {
   return (
     <>
       <Navbar />
       <ScrollUp />
-      <div>
-        <h1>Services</h1>
-      </div>
+      <Services/>
       <Footer />
     </>
   );
