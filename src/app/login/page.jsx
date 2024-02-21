@@ -42,7 +42,7 @@ export default function Login() {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
-        router.push('/home');
+        router.push('/');
       } else {
         setShow(false);
       }
@@ -55,7 +55,7 @@ export default function Login() {
 
       if (res === 'success') {
         toast.success('You are successfully logged in');
-        router.push('/home');
+        router.push('/');
       }
     } catch (e) {
       notify(e.message);
@@ -68,7 +68,7 @@ export default function Login() {
     try {
       const res2 = await login(values);
       toast.success('You are successfully logged in');
-      router.push('/home');
+      router.push('/');
     } catch (error) {
       notify(error);
     }

@@ -14,13 +14,13 @@ export const Footer = () => {
           <div className="logo text-2xl sm:text-3xl font-semibold text-yellow-500">
             Ace-Enterprises
           </div>
-          <div className="address sm:text-md md:w-[12em]">
+          <div className="address sm:text-md md:w-[16em]">
             Bank Colony Gautam Nagar Kashipur-244713 U.S.Nagar (Uttarakhand)
           </div>
           <div className="flex flex-col contact sm:text-md w-[12em]">
             <span>Contact Details : </span>
-            <span>+918475800044 (O)</span>
-            <span>+919897031600 (M)</span>
+            <Link href="tel:+918475800044">+918475800044 (O)</Link>
+            <Link href="tel:+919897031600">+919897031600 (M)</Link>
           </div>
         </div>
         <div className="flex md:w-[20%] w-[80%] justify-between ">
@@ -63,7 +63,12 @@ export const Footer = () => {
               <IoMdSend />
             </button>
           </form>
-          <div className="mt-4">E-mail: aceenterprisesksp@gmail.com</div>
+          <div className="mt-4">
+            E-mail:{' '}
+            <Link href="mailto:aceenterprisesksp@gmail.com">
+              aceenterprisesksp@gmail.com
+            </Link>
+          </div>
         </div>
       </div>
       <div className="flex flex-col sm:flex-row sm:justify-between items-center sm:mx-44 p-4 mt-6 text-sm sm:text-md border-t-2 border-white  border-dotted ">

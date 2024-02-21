@@ -69,7 +69,7 @@ export default function SignUp() {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
-        router.push('/home');
+        router.push('/');
 
       } else {
         setShow(false);
@@ -89,7 +89,7 @@ export default function SignUp() {
       let res = await google()
       if (res === "success") {
         toast.success("User logged in successful")
-        router.push("/home")
+        router.push("/")
 
       }
 
@@ -118,7 +118,7 @@ export default function SignUp() {
         if (auth.currentUser.providerData[0].providerId === "password")
           router.push(`/verifyemail`)
         else {
-          router.push(`/home`)
+          router.push(`/`)
         }
       }
       else {

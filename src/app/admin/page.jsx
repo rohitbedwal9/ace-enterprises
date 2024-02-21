@@ -27,14 +27,14 @@ export default function AdminPanel() {
                         fetchUser()
                     }
                     else {
-                        router.push('/home');
+                        router.push('/');
                     }
 
                 })
             }
             else {
                 setAdmin(false)
-                router.push('/home');
+                router.push('/');
                 return
             }
         })
