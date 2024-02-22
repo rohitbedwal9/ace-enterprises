@@ -141,7 +141,7 @@ export default function SignUp() {
       {show ? (
         ''
       ) : (
-        <div className="w-full bg-[url(https://res.cloudinary.com/dppjj5yox/image/upload/v1705992514/acehub/images/temp-bg.jpg)] bg-cover h-full">
+        <div className="w-full bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Ftemp-bg.avif?alt=media&token=ce29cf09-359d-48d5-91d7-03965bb65572')] bg-cover h-full">
           <div className="nav-mini w-full pl-4 md:pl-16 pt-4  md:pt-6">
             <MiniNav />
           </div>
