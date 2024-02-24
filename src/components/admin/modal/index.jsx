@@ -84,8 +84,10 @@ export default function Modal({ project, showModal, setShowModal, handleNew }) {
                                         required
                                     />
                                     <label className='text-gray-200 text-sm'>Description</label>
-                                    <input
+                                    <textarea
                                         type='text'
+                                        rows="4"
+                                        className='block p-2.5  rounded   '
                                         placeholder='Enter the Description of project'
                                         value={desc}
                                         onChange={(e) => setDesc(e.target.value)}
