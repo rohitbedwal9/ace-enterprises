@@ -121,9 +121,9 @@ export const Projects = () => {
   };
 
   return (
-    <div className="py-5 md:px-20">
+    <div  className="py-5 md:px-20">
 
-      <div className="flex md:flex-row gap-4 flex-col mx-5 md:mx-10 items-center">
+      <div data-aos="fade-in"  className="flex md:flex-row gap-4 flex-col mx-5 md:mx-10 items-center">
         <div className="flex flex-col gap-4 p-4 md:p-10 align-center md:w-[70%]">
           <p className="text-xl md:text-2xl font-bold text-gray-800 ">
             What we do
@@ -148,7 +148,7 @@ export const Projects = () => {
         </div>
       </div>
 
-      <div className=" flex-wrap h-100 flex md:flex-row flex-col  justify-center items-center">
+      <div data-aos="fade-in"  className=" flex-wrap h-100 flex md:flex-row flex-col  justify-center items-center">
         {projects &&
           projects.map((project, index) => (
             <Card key={index} project={project} onhandleClick={onhandleClick} />

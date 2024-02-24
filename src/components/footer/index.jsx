@@ -8,9 +8,9 @@ import { IoMdSend } from 'react-icons/io';
 
 export const Footer = () => {
   return (
-    <main className="pt-4 sm:pt-14 h-50 bg-gray-900 text-white shadow-lg w-full flex flex-col gap-2 sm:gap-0 pb-10">
+    <main data-aos="fade-in" className="pt-4 sm:pt-14 h-50 bg-gray-900 text-white shadow-lg w-full flex flex-col gap-2 sm:gap-0 pb-10">
       <div className="flex flex-col sm:flex-row sm:justify-evenly gap-6 px-10 sm:0">
-        <div className="flex flex-col justify-center gap-2 self-start ">
+        <div data-aos="fade-in"  className="flex flex-col justify-center gap-2 self-start ">
           <div className="logo text-2xl sm:text-3xl font-semibold text-yellow-500">
             Ace-Enterprises
           </div>
@@ -23,7 +23,7 @@ export const Footer = () => {
             <Link href="tel:+919897031600">+919897031600 (M)</Link>
           </div>
         </div>
-        <div className="flex md:w-[20%] w-[80%] justify-between ">
+        <div data-aos="fade-in"  className="flex md:w-[20%] w-[80%] justify-between ">
           <div>
             <div className="text-xl sm:text-2xl font-bold text-yellow-500">
               Menu
@@ -36,7 +36,7 @@ export const Footer = () => {
               <Link href="/contact">Contact</Link>
             </div>
           </div>
-          <div>
+          <div data-aos="fade-in">
             <div className="text-xl sm:text-2xl font-bold text-yellow-500">
               Projects
             </div>
@@ -49,7 +49,7 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div data-aos="fade-in">
           <div className="text-xl sm:text-2xl font-bold text-yellow-500">
             Get Updates
           </div>
@@ -71,7 +71,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row sm:justify-between items-center sm:mx-44 p-4 mt-6 text-sm sm:text-md border-t-2 border-white  border-dotted ">
+      <div data-aos="fade-in"  className="flex flex-col sm:flex-row sm:justify-between items-center sm:mx-44 p-4 mt-6 text-sm sm:text-md border-t-2 border-white  border-dotted ">
         <span>© 2024 Ace-Enterprises</span>
         <span className="">Privacy Policy</span>
       </div>

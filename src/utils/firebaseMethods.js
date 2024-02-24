@@ -1,19 +1,17 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { ref, set, update, onValue } from "firebase/database";
-import { ref as sRef, listAll } from "firebase/storage";
-import { auth, database, storage } from "./firebase";
+import { auth, database } from "./firebase";
+import moment from 'moment';
 
 const defaultImg = 'https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fuser-200.png?alt=media&token=9d3a5b25-6552-422b-887b-860c22df8529'
 
 export const register = async (form) => {
 
-
-
     try {
         const userData = await createUserWithEmailAndPassword(auth, form.email, form.password)
         const data = userData.user
         console.log(data)
-        let time = new Date().toLocaleDateString(undefined, { timeZone: 'Asia/Kolkata' })
+        let time = moment().format('l HH:MM')
        
         await set(ref(database, 'users/' + data.uid), {
             name: form.username,
@@ -51,7 +49,7 @@ export const login = async (form) => {
         const userData = await signInWithEmailAndPassword(auth, form.email, form.password)
         const data = userData.user
 
-        let time = new Date().toLocaleDateString(undefined, { timeZone: 'Asia/Kolkata' })
+        let time = moment().format('l HH:MM')
 
         await update(ref(database, 'users/' + data.uid), {
             last_login: time
@@ -100,7 +98,7 @@ export const google = async () => {
         const data = userData.user
 
         const dbref = ref(database, "users/" + data.uid);
-        let time = new Date().toLocaleDateString(undefined, { timeZone: 'Asia/Kolkata' })
+        let time = moment().format('l HH:MM')
 
         onValue(dbref, (snapshot) => {
             if (snapshot.exists()) {
@@ -121,9 +119,6 @@ export const google = async () => {
             }
         })
 
-
-
-
     } catch (error) {
         throw error.message
     }
@@ -136,41 +131,3 @@ export const saveDownloader = async (user) => {
         is_download: true
     });
 }
-
-// export const ReadData = async (i) => {
-//     console.log("i", i)
-//     let index = i === '' ? '' : i;
-//     console.log("index", index)
-//     const dbRef = ref(getDatabase());
-//     get(child(dbRef, `items/${index}`)).then((snapshot) => {
-
-//         if (snapshot.exists()) {
-//             console.log("helo", snapshot.val());
-
-//         } else {
-//             console.log("No data available");
-//         }
-//         return snapshot.val()
-//     }).catch((error) => {
-//         console.error(error);
-//     });
-
-// }
-// export const showFiles = (folder) => {
-//     const filesRef = sRef(storage, `${folder}/`);
-
-//     // Find all the prefixes and items.
-//     listAll(filesRef)
-//         .then((res) => {
-//             res.prefixes.forEach((folderRef) => {
-//                 // All the prefixes under listRef.
-//                 // You may call listAll() recursively on them.
-//             });
-//             console.log(res.items)
-//             res.items.forEach((itemRef) => {
-
-//             });
-//         }).catch((error) => {
-//             console.log(error.message)
-//         });
-// }

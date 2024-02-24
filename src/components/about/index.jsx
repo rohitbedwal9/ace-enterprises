@@ -3,7 +3,7 @@ import { FaArrowRight } from 'react-icons/fa';
 
 export const About = () => {
   return (
-    <div className="container mt-10 py-10 px-10  md:px-20 ">
+    <div data-aos="fade-in" className="container mt-10 py-10 px-10  md:px-20 ">
       <h1 className="text-xl md:text-3xl font-bold  text-black w-max text-center">
         About Company
       </h1>
