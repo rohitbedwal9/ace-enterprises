@@ -44,7 +44,7 @@ export const Projects = () => {
       : toast.warning(verifyWarning);
 
   useEffect(() => {
- onAuthStateChanged(auth, (currentUser) => {
+    onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.emailVerified) {
         setIsUser(currentUser);
         onValue(ref(database, 'users/' + currentUser.uid), (snapshot) => {
@@ -104,7 +104,7 @@ export const Projects = () => {
             });
 
             download(url, `${project.title}.pdf`);
-           
+
           })
           .catch((error) => {
             console.log(error.message);
@@ -122,7 +122,7 @@ export const Projects = () => {
 
   return (
     <div className="py-5 md:px-20">
-     
+
       <div className="flex md:flex-row gap-4 flex-col mx-5 md:mx-10 items-center">
         <div className="flex flex-col gap-4 p-4 md:p-10 align-center md:w-[70%]">
           <p className="text-xl md:text-2xl font-bold text-gray-800 ">
@@ -154,7 +154,7 @@ export const Projects = () => {
             <Card key={index} project={project} onhandleClick={onhandleClick} />
           ))}
       </div>
-    
+
       <PhoneModal
 
         showModal={showModal}
