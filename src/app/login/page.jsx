@@ -84,7 +84,7 @@ export default function Login() {
       {show ? (
         ''
       ) : (
-        <div className="w-full bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Ftemp-bg.jpg?alt=media&token=67e09f1d-70d9-4591-adba-6c6341026a19')] bg-norepeat bg-cover">
+        <div className="w-full bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Ftemp-bg.avif?alt=media&token=ce29cf09-359d-48d5-91d7-03965bb65572')] bg-norepeat bg-cover">
           <div className="w-full h-screen ">
             <div className="backdrop-blur-sm h-full">
               <div className="nav-mini w-full pl-4 md:pl-16 pt-4  md:pt-6">
