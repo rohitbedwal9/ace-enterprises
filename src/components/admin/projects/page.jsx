@@ -13,7 +13,7 @@ import Modal from '../modal';
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function Projects() {
-  const [showAll, setShowAll] = useState(true);
+ 
   const [projects, setProjects] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [project, setProject] = useState(null);
@@ -30,17 +30,6 @@ export default function Projects() {
     return () => unsubscribe;
   }, []);
 
-  // useEffect(() => {
-
-  //     if (showAll) {
-  //         setShowAll(true)
-  //     }
-
-  // }, [showAll])
-
-  // function handleShow() {
-  //     setShowAll(!showAll)
-  // }
   const handleDelete = async (project) => {
     let x = confirm('Are you sure?');
 

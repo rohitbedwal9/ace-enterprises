@@ -4,9 +4,10 @@ import Image from 'next/image';
 export const Banner = () => {
   return (
     <div className="w-full h-screen bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fconstruction-background2_pnbpfm.avif?alt=media&token=94bf5b2f-f8e7-4915-8258-88b2ad3457b6')] bg-no-repeat bg-cover bg-center md:bg-top">
+
       <div className="backdrop-blur-md h-full">
         <Navbar transparent={true} />
-        <div className="w-full flex flex-col-reverse gap-10 md:gap-20  justify-center items-center md:flex-row  h-[90%]">
+        <div data-aos="fade-in"  className="w-full flex flex-col-reverse gap-10 md:gap-20  justify-center items-center md:flex-row  h-[90%]">
           <div className="content  md:ml-30 md:mb-20  md:mt-24 flex flex-col gap-6 justify-center items-start">
             <h1 className="text-3xl  sm:text-4xl md:text-6xl font-bold  flex flex-col gap-2 justify-center items-start">
               <span className="flex gap-2  md:w-max w-full justify-center items-center">

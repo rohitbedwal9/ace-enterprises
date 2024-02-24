@@ -188,7 +188,7 @@ export default function SignUp() {
                     </div>
                     <div className="ml-3 my-3 text-sm">
                       <label
-                        htmlFor="terms"
+                       
                         className="font-light text-gray-500 dark:text-gray-300"
                       >
                         I accept the{' '}
