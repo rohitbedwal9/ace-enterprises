@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 export const Banner = () => {
   return (
-    <div  className="w-full h-screen bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fconstruction-background2_pnbpfm.jpg?alt=media&token=e17d9b83-8e23-44dc-8248-783b45af56b1')] bg-no-repeat bg-cover bg-center md:bg-top">
+    <div className="w-full h-screen bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fconstruction-background2_pnbpfm.avif?alt=media&token=94bf5b2f-f8e7-4915-8258-88b2ad3457b6')] bg-no-repeat bg-cover bg-center md:bg-top">
       <div className="backdrop-blur-md h-full">
         <Navbar transparent={true} />
         <div data-aos="fade-in"  className="w-full flex flex-col-reverse gap-10 md:gap-20  justify-center items-center md:flex-row  h-[90%]">
@@ -36,7 +36,7 @@ export const Banner = () => {
           </div>
           <div className="image flex justify-center md:ml-28 ">
             <Image
-              src="https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fconstruction-worker.jpg?alt=media&token=9319eac6-a9e4-44f0-b31d-0d0d959e9b27"
+              src="https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fconstruction-worker.avif?alt=media&token=4145d4e4-43d3-4a3e-a093-212abd336c32"
               alt="construction worker"
               width={400}
               height={500}

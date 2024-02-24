@@ -53,8 +53,8 @@ export const Testimonials = () => {
             elementum ultrices, nunc magna lacinia nunc, vitae pellentesque nunc
             nunc nec justo.
           </div>
-          <div data-aos="fade-in" className="flex gap-4 items-center">
-            <div className="w-16 h-16 rounded-full bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fworker-croped_doggdw.jpg?alt=media&token=29aa2c9b-173d-45b4-87f3-c87a8ae59aa9')] bg-cover bg-no-repeat bg-center"></div>
+          <div className="flex gap-4 items-center">
+            <div className="w-16 h-16 rounded-full bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fworker-croped_doggdw.avif?alt=media&token=2f8d23f1-3462-42e4-b9e7-b6c8b9f99b56')] bg-cover bg-no-repeat bg-center"></div>
             <div className="flex flex-col gap-2">
               <div className="text-lg md:text-2xl font-semibold md:font-bold">
                 John Doe
@@ -73,8 +73,8 @@ export const Testimonials = () => {
             elementum ultrices, nunc magna lacinia nunc, vitae pellentesque nunc
             nunc nec justo.
           </div>
-          <div data-aos="fade-in" className="flex gap-4 items-center">
-            <div className="w-20 h-20 rounded-full bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fworker-croped_doggdw.jpg?alt=media&token=29aa2c9b-173d-45b4-87f3-c87a8ae59aa9')] bg-cover bg-no-repeat bg-center"></div>
+          <div className="flex gap-4 items-center">
+            <div className="w-20 h-20 rounded-full bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fworker-croped_doggdw.avif?alt=media&token=2f8d23f1-3462-42e4-b9e7-b6c8b9f99b56')] bg-cover bg-no-repeat bg-center"></div>
             <div className="flex flex-col gap-2">
               <div className="text-lg md:text-2xl font-semibold md:font-bold">
                 John Doe
@@ -94,7 +94,7 @@ export const Testimonials = () => {
             nunc nec justo.
           </div>
           <div className="flex gap-4 items-center">
-            <div className="w-20 h-20 rounded-full bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fworker-croped_doggdw.jpg?alt=media&token=29aa2c9b-173d-45b4-87f3-c87a8ae59aa9')] bg-cover bg-no-repeat bg-center"></div>
+            <div className="w-20 h-20 rounded-full bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fworker-croped_doggdw.avif?alt=media&token=2f8d23f1-3462-42e4-b9e7-b6c8b9f99b56')] bg-cover bg-no-repeat bg-center"></div>
             <div className="flex flex-col gap-2">
               <div className="text-lg md:text-2xl font-semibold md:font-bold">
                 John Doe
