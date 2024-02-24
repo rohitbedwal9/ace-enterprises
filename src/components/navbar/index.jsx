@@ -15,7 +15,7 @@ export const Navbar = ({ transparent }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [dropdownOn, setDropdownOn] = useState(false);
   const [data, setData] = useState({});
-
+  
   const toggle = () => {
     setShowMe(!showMe);
   };
