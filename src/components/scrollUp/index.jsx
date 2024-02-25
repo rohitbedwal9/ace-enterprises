@@ -21,7 +21,7 @@ export const ScrollUp = () => {
   };
   return (
     <div
-      className={`fixed bottom-4 right-4 m-10 rounded-full p-5 outline-none transition-opacity duration-200 ${
+      className={`animate-bounce fixed bottom-4 right-4 m-10 rounded-full p-5 outline-none transition-opacity duration-200 ${
         scrollVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
