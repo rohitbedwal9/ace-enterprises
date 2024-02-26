@@ -151,8 +151,8 @@ export const Projects = () => {
       <div data-aos="fade-in" className=" flex-wrap h-100 flex md:flex-row flex-col  justify-center items-center">
         {projects &&
           projects.map((project, index) => (
-            <div data-aos="fade-in" >
-              <Card key={index} project={project} onhandleClick={onhandleClick} />
+            <div key={index}  data-aos="fade-in" >
+              <Card  project={project} onhandleClick={onhandleClick} />
             </div>
           ))}
       </div>
