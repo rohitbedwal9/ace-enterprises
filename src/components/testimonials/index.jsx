@@ -45,7 +45,7 @@ export const Testimonials = () => {
         Testimonials
       </h1>
       <div data-aos="fade-in" className="flex flex-col md:flex-row gap-10 items-center mx-2 md:mx-0 mt-8 ">
-        <div data-aos="zoom-out-up" className="flex flex-col gap-4 bg-white  p-4 rounded-xl shadow-xl w-30%">
+        <div data-aos="fade-in" className="flex flex-col gap-4 bg-white  p-4 rounded-xl shadow-xl w-30%">
           <div className="text-md md:text-lg font-semibold break-words ">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             pellentesque, nunc ut elementum ultrices, nunc magna lacinia nunc,
@@ -65,7 +65,7 @@ export const Testimonials = () => {
             </div>
           </div>
         </div>
-        <div data-aos="zoom-out-up" className="flex flex-col bg-white p-4 rounded-xl shadow-xl gap-4 w-30%">
+        <div data-aos="fade-in" className="flex flex-col bg-white p-4 rounded-xl shadow-xl gap-4 w-30%">
           <div className="text-md md:text-lg font-semibold">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             pellentesque, nunc ut elementum ultrices, nunc magna lacinia nunc,
@@ -85,7 +85,7 @@ export const Testimonials = () => {
             </div>
           </div>
         </div>
-        <div data-aos="zoom-out-up" className="flex flex-col bg-white p-4 rounded-xl shadow-xl gap-4 w-30%">
+        <div data-aos="fade-in" className="flex flex-col bg-white p-4 rounded-xl shadow-xl gap-4 w-30%">
           <div className="text-md md:text-lg font-semibold">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             pellentesque, nunc ut elementum ultrices, nunc magna lacinia nunc,
@@ -109,7 +109,7 @@ export const Testimonials = () => {
       <h1 data-aos="fade-in"  className="my-10 text-xl font-semibold">
         Our Clients / Partners / Certificates
       </h1>
-      <div data-aos="zoom-out-up"  className="flex flex-wrap md:flex-nowrap md:flex-row gap-10 px-2 justify-center bg-white shadow-xl rounded-xl items-center w-full p-10 md:p-5">
+      <div data-aos="fade-in"  className="flex flex-wrap md:flex-nowrap md:flex-row gap-10 px-2 justify-center bg-white shadow-xl rounded-xl items-center w-full p-10 md:p-5">
         {clientData.map((client) => (
           <Link
             href={client.link}

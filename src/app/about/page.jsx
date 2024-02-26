@@ -40,11 +40,11 @@ export default function About() {
       <Navbar />
       <ScrollUp />
       <div className="banner bg-white  h-full bg-no-repeat mx-auto  flex flex-col items-center  shadow-xl ">
-        <div className=" pb-10 ">
-          <h1 className=" text-2xl sm:text-3xl md:text-4xl font-semibold  text-black w-max mx-auto my-16 ">
+        <div data-aos="fade-in" className=" pb-10 ">
+          <h1  className=" text-2xl sm:text-3xl md:text-4xl font-semibold  text-black w-max mx-auto my-16 ">
             About
           </h1>
-          <div className="flex flex-col  md:flex-row md:px-20 justify-between items-center gap-10">
+          <div data-aos="fade-in"  className="flex flex-col  md:flex-row md:px-20 justify-between items-center gap-10">
             <Image
               src="https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fscott-blake-x-ghf9LjrVg-unsplash_i6ff6c.jpg?alt=media&token=17ccffb7-53c7-43ea-931f-5c3d3aabb5d7"
               width={300}
@@ -52,7 +52,7 @@ export default function About() {
               alt="image"
               className="h-[100%] w-[90%] md:w-[40%] rounded-xl gap-10"
             />
-            <div className="flex flex-col  w-[90%] md:w-[50%] mx-0 md:mx-10">
+            <div data-aos="fade-in"  className="flex flex-col  w-[90%] md:w-[50%] mx-0 md:mx-10">
               <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold">
                 Ace Enterprises
               </h1>
@@ -78,12 +78,12 @@ export default function About() {
         </div>
       </div>
 
-        <div className="flex flex-col justify-center items-center my-10">
+      <div data-aos="fade-in"  className="flex flex-col justify-center items-center my-10">
           <h1 className="my-10 text-2xl sm:text-3xl md:text-4xl font-semibold">
             Founder
           </h1>
           <div className="flex flex-col md:flex-row items-center w-full md:px-10 ">
-            <div className="flex flex-col  w-[90%] md:w-[40%] gap-2 items-center">
+          <div data-aos="fade-in"  className="flex flex-col  w-[90%] md:w-[40%] gap-2 items-center">
               <Image
                 src="https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fabout_zgcfnv.jpg?alt=media&token=6a37d7ed-167d-4a81-85dd-3ee5e0ce6a96"
                 alt="image"
@@ -96,7 +96,7 @@ export default function About() {
                 Founder, Ace Enterprises
               </div>
             </div>
-            <div className="description text-gray-500 text-base  md:px-20 w-[90%] md:w-[60%] flex flex-col items-center mt-4 md:mt-0 ">
+          <div data-aos="fade-in" className="description text-gray-500 text-base  md:px-20 w-[90%] md:w-[60%] flex flex-col items-center mt-4 md:mt-0 ">
             In the auspicious year of 2012, against the backdrop of a burgeoning industry, Mohammad Furqan embarked on a bold odyssey, sowing the seeds of Ace Enterprises with a profound vision for revolutionizing the landscape of civil construction. With an unwavering resolve and a fervent dedication to excellence, he meticulously nurtured Ace Enterprises, cultivating a culture steeped in innovation, integrity, and relentless pursuit of perfection. Mohammad Furqan&apos;s visionary leadership has not only propelled Ace Enterprises to the vanguard of the industry but has also transformed it into a veritable powerhouse of ingenuity and craftsmanship. Each project undertaken under his stewardship bears the hallmarks of his discerning eye and unwavering commitment to quality, earning accolades and admiration from peers and clients alike. As the custodian of Ace Enterprises illustrious legacy, Mohammad Furqan continues to chart a course towards new horizons of success, where the company&apos;s name becomes synonymous with unparalleled achievement and its contributions resonate as enduring testaments to the indomitable spirit of human endeavor.
             </div>
           </div>
@@ -108,6 +108,7 @@ export default function About() {
             {people.map((people) => (
               <div
                 key={people.id}
+                data-aos="fade-in"
                 className="mt-10 shadow-xl flex flex-col items-center gap-5 bg-white rounded-xl p-4 md:w-[29%]"
               >
                 <Image

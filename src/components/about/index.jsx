@@ -3,12 +3,12 @@ import { FaArrowRight } from 'react-icons/fa';
 
 export const About = () => {
   return (
-    <div className="container mt-10 py-10 px-10  md:px-20 ">
-      <h1 data-aos="fade-in"  className="text-xl md:text-3xl font-bold  text-black w-max text-center">
+    <div data-aos="fade-in"  className="container mt-10 py-10 px-10  md:px-20 ">
+      <h1  className="text-xl md:text-3xl font-bold  text-black w-max text-center">
         About Company
       </h1>
       <div className="flex flex-col-reverse md:flex-row justify-between items-center">
-        <div data-aos="zoom-out-up" className="description md:w-[60%] text-sm md:text-lg mt-6">
+        <div data-aos="fade-in" className="description md:w-[60%] text-sm md:text-lg mt-6">
           <p>
             Welcome to Ace Enterprises, a distinguished civil construction
             company that has been setting the standard since 2012. Renowned for
@@ -30,7 +30,7 @@ export const About = () => {
             Read More <FaArrowRight />
           </Link>
         </div>
-        <div data-aos="zoom-out-up" className="mt-10 md:mt-0 w-[80%] md:w-[30%] h-[280px]  md:h-[380px] rounded-xl shadow-xl bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fworker-croped_doggdw.avif?alt=media&token=2f8d23f1-3462-42e4-b9e7-b6c8b9f99b56')] bg-cover bg-no-repeat"></div>
+        <div data-aos="fade-in" className="mt-10 md:mt-0 w-[80%] md:w-[30%] h-[280px]  md:h-[380px] rounded-xl shadow-xl bg-[url('https://firebasestorage.googleapis.com/v0/b/ace-enterprises-af30e.appspot.com/o/images%2Fworker-croped_doggdw.avif?alt=media&token=2f8d23f1-3462-42e4-b9e7-b6c8b9f99b56')] bg-cover bg-no-repeat"></div>
       </div>
     </div>
   );
