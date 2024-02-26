@@ -71,6 +71,7 @@ export default function Login() {
       router.push('/');
     } catch (error) {
       notify(error);
+      console.log(error)
     }
     setLoading(false);
   };

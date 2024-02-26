@@ -8,7 +8,7 @@ export const Services = () => {
     return (
         <div  className='py-5 md:px-20 '>
             <div className='flex md:flex-row gap-4 flex-col m-4 md:m-10 items-center'>
-                <div data-aos="fade-in" className='flex flex-col gap-4 p-4 md:p-10 align-center'>
+                <div data-aos="fade-in"  className='flex flex-col gap-4 p-4 md:p-10 align-center'>
                     <h1 className='text-lg md:text-2xl font-bold w-max text-black px-4 bg-yellow-300'>
                         Our Services
                     </h1>
@@ -21,7 +21,7 @@ export const Services = () => {
                 <div className=' text-center '>
                     <div className='py-5 md:py-10  border-black flex md:flex-row flex-col gap-4 justify-center w-full  items-center'>
 
-                        <div data-aos="fade-up" className=' shadow-lg bg-white p-4 flex flex-col gap-2 rounded-lg md:w-1/3 '>
+                        <div data-aos="fade-in" className=' shadow-lg bg-white p-4 flex flex-col gap-2 rounded-lg md:w-1/3 '>
                             <div className='flex justify-center'>
                                 <div className='  bg-white  rounded-full '>
                                     <div className=' p-4 bg-black rounded-full'>
@@ -41,7 +41,7 @@ export const Services = () => {
                             <div className='mb-2'><Link href='/services' className='p-3 w-full rounded-3xl bg-black text-white hover:bg-gray-600'>Read More</Link></div>
                         </div>
 
-                        <div data-aos="fade-up" className='bg-black text-white border-2 flex flex-col gap-2 p-4  shadow-lg rounded-lg md:w-1/3 '>
+                        <div data-aos="fade-in" className='bg-black text-white border-2 flex flex-col gap-2 p-4  shadow-lg rounded-lg md:w-1/3 '>
                             <div className='flex justify-center'>
                                 <div className='  bg-black  rounded-full '>
                                     <div className='  p-4 bg-white rounded-full'>
@@ -62,7 +62,7 @@ export const Services = () => {
                             <div className='mb-2'><Link href='/services' className='p-3 w-full rounded-3xl bg-white text-black hover:bg-gray-300'>Read More</Link></div>
 
                         </div>
-                        <div data-aos="fade-up" className='bg-yellow-300 p-4 flex flex-col gap-2 rounded-lg shadow-lg md:w-1/3 '>
+                        <div data-aos="fade-in"  className='bg-yellow-300 p-4 flex flex-col gap-2 rounded-lg shadow-lg md:w-1/3 '>
                             <div className='flex justify-center'>
                                 <div className='  bg-black  rounded-full '>
                                     <div className='  p-4 rounded-full'>

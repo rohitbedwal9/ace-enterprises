@@ -13,7 +13,7 @@ import Modal from '../modal';
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function Projects() {
- 
+
   const [projects, setProjects] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [project, setProject] = useState(null);
@@ -41,6 +41,7 @@ export default function Projects() {
       await deleteObject(fileRef);
       const dbref = ref(database, 'projects/' + project.id);
       await remove(dbref);
+      toast.success("Project have been delete successfully")
     }
   };
 
@@ -53,14 +54,14 @@ export default function Projects() {
     toast.info('Please wait project is creating...');
     const imageRef = sRef(storage, `images/project/${id}`);
     const fileRef = sRef(storage, `files/${id}.pdf`);
-
-    uploadBytes(fileRef, file)
-      .then(() => {
-        toast.success('file uploaded');
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+ 
+      uploadBytes(fileRef, file)
+        .then(() => {
+          toast.success('file uploaded');
+        })
+        .catch((error) => {
+          toast.error(error.message);
+        });
     uploadBytes(imageRef, imageUpload)
       .then(() => {
         getDownloadURL(imageRef)
@@ -74,6 +75,7 @@ export default function Projects() {
                 imgURL: url,
                 downloads: project.downloads
               })
+              toast.success("Project have been edit successfully")
             }
             else {
               const dbref = ref(database, 'projects/' + id)
@@ -84,10 +86,8 @@ export default function Projects() {
                 downloads: 0,
                 id: id
               })
+              toast.success("Project have been created successfully")
             }
-
-            toast.dismiss()
-            toast.success("Project have created successfully")
           })
           .catch((error) => {
             toast.error(error.message)

@@ -11,12 +11,12 @@ export const register = async (form) => {
         const userData = await createUserWithEmailAndPassword(auth, form.email, form.password)
         const data = userData.user
         console.log(data)
-        let time = moment().format('L HH:MM')
-       
+        let time = moment().format('L')
+
         await set(ref(database, 'users/' + data.uid), {
             name: form.username,
             email: form.email,
-            number: "+91"+form.number,
+            number: "+91" + form.number,
             role: "user",
             profile_picture: defaultImg,
             last_login: time,
@@ -49,7 +49,7 @@ export const login = async (form) => {
         const userData = await signInWithEmailAndPassword(auth, form.email, form.password)
         const data = userData.user
 
-        let time = moment().format('L HH:MM')
+        let time = moment().format('L')
 
         await update(ref(database, 'users/' + data.uid), {
             last_login: time
@@ -59,6 +59,9 @@ export const login = async (form) => {
     } catch (error) {
         if (error.message === 'Firebase: Error (auth/invalid-credential).')
             throw 'Incorrect email or password'
+        else if (error.message === 'Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).') {
+            throw 'Please resetting your password or you can try again later.'
+        }
         else {
             throw error.message
         }
@@ -98,7 +101,7 @@ export const google = async () => {
         const data = userData.user
 
         const dbref = ref(database, "users/" + data.uid);
-        let time = moment().format('L HH:MM')
+        let time = moment().format('L')
 
         onValue(dbref, (snapshot) => {
             if (snapshot.exists()) {
@@ -114,7 +117,7 @@ export const google = async () => {
                     role: "user",
                     profile_picture: data.photoURL,
                     is_download: false,
-                    number:""
+                    number: ""
                 });
             }
         })
