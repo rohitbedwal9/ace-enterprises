@@ -5,6 +5,7 @@ export { ScrollUp } from './scrollUp';
 export { Statics } from './statics';
 export { About } from './about';
 export { Projects } from './projects';
+export { PageHead } from './pageHead';
 export { FormInput } from './formInput';
 export { Services } from './services';
 export { Contact } from './contact';
